@@ -1,0 +1,114 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.microserv'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    compile 'com.alibaba:fastjson:1.2.62'
+    compile 'com.baomidou:mybatis-plus-boot-starter:3.3.1'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'mysql:mysql-connector-java'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+//*****************************分割线******************************//
+
+//闭包，相当与一个代码快,path是一个传参，这个闭包用于根据传入的path，创建相应的目录
+def createDir = {
+    path ->
+        File dir = new File(path)
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+}
+
+//构建一个任务 makeJavaDir，刷新一下就可以在gradle的Tasks的other看到这个任务
+task makeJavaDir() {
+
+    def paths = [ //定义一个数组，数组里的是目录路径
+                  'src/main/java',
+                  'src/main/resources',
+                  'src/test/java',
+                  'src/test/resources'
+    ]
+
+    doFirst {  //doFirst在task之前执行
+        paths.forEach(createDir)  //遍历数组，调用createDir闭包，创建目录
+    }
+}
+
+task makeMainDir() {
+    dependsOn 'makeJavaDir' //依赖任务makeJavaDir
+    def basePath = 'src/main/java/com/microserv/'
+    def paths = [
+            'bbq/apis/assembler',
+            'bbq/apis/apiModel',
+            'bbq/apis/controller',
+            'bbq/application/service',
+            'bbq/application/task',
+            'bbq/domain/common',
+            'bbq/domain/events',
+            'bbq/domain/model',
+            'bbq/domain/factory',
+            'bbq/domain/service',
+            'bbq/infrastructure/persistent/po',
+            'bbq/infrastructure/persistent/repository',
+            'bbq/infrastructure/general/common',
+            'bbq/infrastructure/general/config',
+            'bbq/infrastructure/general/constant',
+            'bbq/infrastructure/general/exception',
+            'bbq/infrastructure/general/security',
+            'bbq/infrastructure/general/toolkit',
+            'bbq/reference/common',
+            'bbq/reference/interfaces',
+            'bbq/reference/domain',
+    ]
+
+    doLast {  //doFirst在task之前执行
+        //遍历数组，调用createDir闭包，创建目录
+        paths.forEach { pat -> createDir(basePath + pat) }
+    }
+}
+task makeTestDir() {
+    dependsOn 'makeJavaDir' //依赖任务makeJavaDir
+    def basePath = 'src/test/java/'
+    def paths = [ //定义一个数组，数组里的是目录路径
+                  'coms.microserv.bbq',
+    ]
+
+    doLast {  //doFirst在task之前执行
+        //遍历数组，调用createDir闭包，创建目录
+        paths.forEach { pat -> createDir(basePath + pat) }
+    }
+}
