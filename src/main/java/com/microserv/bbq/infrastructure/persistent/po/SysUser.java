@@ -1,8 +1,8 @@
-package com.microserv.bbq.generator.code.entity;
+package com.microserv.bbq.infrastructure.persistent.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.microserv.bbq.generator.common.BaseEntity;
+import com.microserv.bbq.infrastructure.persistent.po.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

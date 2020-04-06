@@ -1,6 +1,6 @@
-package com.microserv.bbq.generator.code.mapper;
+package com.microserv.bbq.infrastructure.persistent.repository;
 
-import com.microserv.bbq.generator.code.entity.SysUser;
+import com.microserv.bbq.infrastructure.persistent.po.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

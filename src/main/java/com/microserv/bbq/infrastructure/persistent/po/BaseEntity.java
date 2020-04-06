@@ -1,4 +1,4 @@
-package com.microserv.bbq.generator.common;
+package com.microserv.bbq.infrastructure.persistent.po;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
