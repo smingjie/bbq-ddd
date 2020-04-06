@@ -35,6 +35,7 @@ dependencies {
     compile 'io.swagger:swagger-annotations:1.5.21'
     compile 'io.swagger:swagger-models:1.5.21'
     compile 'cn.hutool:hutool-all:5.2.5'
+    compile 'ma.glasnost.orika:orika-core:1.4.2'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java' 
     compileOnly 'org.projectlombok:lombok'

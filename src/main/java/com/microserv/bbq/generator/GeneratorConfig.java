@@ -1,13 +1,11 @@
 package com.microserv.bbq.generator;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import com.microserv.bbq.generator.common.BaseEntity;
+import com.microserv.bbq.infrastructure.persistent.po.BaseEntity;
 import lombok.Data;
 
 import java.util.ArrayList;

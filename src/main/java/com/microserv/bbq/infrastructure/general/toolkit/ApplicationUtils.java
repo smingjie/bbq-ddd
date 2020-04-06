@@ -12,13 +12,13 @@ import org.springframework.context.ApplicationContextAware;
  */
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ApplicationContextUtils implements ApplicationContextAware {
+public class ApplicationUtils implements ApplicationContextAware {
 
     private static ApplicationContext appctx;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        ApplicationContextUtils.appctx = applicationContext;
+        ApplicationUtils.appctx = applicationContext;
     }
 
     /**
