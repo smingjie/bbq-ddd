@@ -81,17 +81,17 @@ task makeMainDir() {
     def basePath = 'src/main/java/com/microserv/'
     def paths = [
             'bbq/apis/assembler',
-            'bbq/apis/apiModel',
+            'bbq/apis/model',
             'bbq/apis/controller',
             'bbq/application/service',
             'bbq/application/task',
             'bbq/domain/common',
-            'bbq/domain/events',
+            'bbq/domain/event',
             'bbq/domain/model',
             'bbq/domain/factory',
             'bbq/domain/service',
-            'bbq/infrastructure/persistent/po',
-            'bbq/infrastructure/persistent/repository',
+            'bbq/infrastructure/persistence/po',
+            'bbq/infrastructure/persistence/mapper',
             'bbq/infrastructure/general/common',
             'bbq/infrastructure/general/config',
             'bbq/infrastructure/general/constant',
@@ -99,7 +99,7 @@ task makeMainDir() {
             'bbq/infrastructure/general/security',
             'bbq/infrastructure/general/toolkit',
             'bbq/reference/common',
-            'bbq/reference/interfaces',
+            'bbq/reference/facade',
             'bbq/reference/domain',
     ]
 

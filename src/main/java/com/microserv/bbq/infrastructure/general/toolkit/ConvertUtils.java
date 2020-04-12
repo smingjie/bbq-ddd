@@ -149,10 +149,10 @@ public class ConvertUtils {
      * <code>destinationObject</code>.
      *
      * @param sourceObject      the object from which to read the properties
-     * @param destinationObject the object onto which the properties should be mapped
+     * @param targetObject the object onto which the properties should be mapped
      */
-    public static <S, D> void convertOnto(S sourceObject, D destinationObject) {
-         getMapperFacade().map(sourceObject, destinationObject);
+    public static <S, T> void convert(S sourceObject, T targetObject) {
+         getMapperFacade().map(sourceObject, targetObject);
     }
 
 }
