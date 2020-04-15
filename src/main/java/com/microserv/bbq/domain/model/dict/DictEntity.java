@@ -2,9 +2,10 @@ package com.microserv.bbq.domain.model.dict;
 
 import cn.hutool.core.util.StrUtil;
 import com.microserv.bbq.domain.common.ICrud;
-import com.microserv.bbq.domain.repository.RepoContext;
+import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.ConvertUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
+import com.microserv.bbq.infrastructure.persistence.DictDao;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -40,7 +41,8 @@ public class DictEntity implements ICrud<DictEntity> {
     public DictEntity get() {
         if (!StrUtil.isAllBlank(this.id, this.type, this.code)) {
             DictEntity item = Objects.nonNull(this.id) ?
-                    RepoContext.dictRepo.select(this.id) : RepoContext.dictRepo.selectOne(this.type, this.code);
+                    ApplicationUtils.getBean(DictDao.class).select(this.id) :
+                    ApplicationUtils.getBean(DictDao.class).selectOne(this.type, this.code);
             ConvertUtils.convert(item, this);
         }
         return this;
@@ -50,16 +52,16 @@ public class DictEntity implements ICrud<DictEntity> {
     public DictEntity saveOrUpdate() {
         if (Objects.nonNull(this.id)) {
             this.id = SequenceUtils.uuid36();
-            RepoContext.dictRepo.insert(this);
+            ApplicationUtils.getBean(DictDao.class).insert(this);
         } else {
-            RepoContext.dictRepo.update(this);
+            ApplicationUtils.getBean(DictDao.class).update(this);
         }
         return this;
     }
 
     @Override
     public boolean delete() {
-        return RepoContext.dictRepo.delete(this);
+        return ApplicationUtils.getBean(DictDao.class).delete(this);
     }
 
 }

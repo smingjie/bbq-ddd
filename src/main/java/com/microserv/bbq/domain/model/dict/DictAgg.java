@@ -1,6 +1,7 @@
 package com.microserv.bbq.domain.model.dict;
 
-import com.microserv.bbq.domain.repository.RepoContext;
+import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
+import com.microserv.bbq.infrastructure.persistence.DictDao;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -29,7 +30,7 @@ public class DictAgg {
     //----- public method-----//
     public DictAgg fetch() {
         if (Objects.nonNull(this.dictType)) {
-            this.itemList = RepoContext.dictRepo.selectByType(this.dictType.getType());
+            this.itemList = ApplicationUtils.getBean(DictDao.class).selectByType(this.dictType.getType());
             return this;
         }
         return this;
