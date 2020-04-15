@@ -1,13 +1,9 @@
 package com.microserv.bbq.apis.model;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.microserv.bbq.domain.model.dict.DictAgg;
-import com.microserv.bbq.domain.model.dict.DictEntity;
-import com.microserv.bbq.infrastructure.general.toolkit.ConvertUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import ma.glasnost.orika.MapperFactory;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -38,15 +34,6 @@ public class DictTypeVo {
     public DictTypeVo(@NotNull DictAgg agg) {
         this.type = agg.getDictType().getType();
         this.name = agg.getDictType().getName();
-//        this.items = Lists.transform(agg.getItemList(), new Function<DictEntity, DictItem>() {
-//            @Override
-//            public DictItem apply(DictEntity dictEntity) {
-//                return new DictItem()
-//                        .setId(dictEntity.getId())
-//                        .setKey(dictEntity.getCode())
-//                        .setValue(dictEntity.getValue());
-//            }
-//        });
         this.items = Lists.transform(agg.getItemList(), o -> new DictItem()
                 .setId(o.getId()).setKey(o.getCode()).setValue(o.getValue())
         );
