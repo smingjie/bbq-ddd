@@ -55,7 +55,6 @@ public class DictDao implements DictRepo, IDaoAssembler<SysDict, DictEntity> {
 
     @Override
     public boolean insert(DictEntity item) {
-
         return Objects.nonNull(item) && dictMapper.insert(transferDbo(item, SysDict.class)) > 0;
     }
 

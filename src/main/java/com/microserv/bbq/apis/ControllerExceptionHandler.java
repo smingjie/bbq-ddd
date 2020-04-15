@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 
 /**
@@ -25,10 +26,10 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)
     @ResponseBody
     public ResponseJson handle(RuntimeException e) {
-        log.info("统一异常处理过程,运行时异常[{}]：{}",e.getClass(), e.getMessage());
-        if(e instanceof BusinessException){
-            BusinessException ex=(BusinessException)e;
-            log.error("统一异常处理过程,系统业务服务异常-{}：{}",e.getClass(), e.getMessage());
+        log.info("统一异常处理过程,运行时异常[{}]：{}", e.getClass(), e.getMessage());
+        if (e instanceof BusinessException) {
+            BusinessException ex = (BusinessException) e;
+            log.error("统一异常处理过程,系统业务服务异常-{}：{}", e.getClass(), e.getMessage());
             return ResponseJson.error(ex.getCode(), ex.getMessage());
         }
         return ResponseJson.error(ErrorCodeEnum.INTERNAL_SERVER_ERROR);
@@ -40,7 +41,14 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseJson handle(Exception e) {
-        log.error("统一异常处理过程,系统内部服务异常-{}：{}",e.getClass(), e.getMessage());
+        if (e instanceof NoHandlerFoundException) {
+            NoHandlerFoundException ex = (NoHandlerFoundException) e;
+            log.error("统一异常处理过程,请求方法不存在-{}：{}", e.getClass(), e.getMessage());
+            return ResponseJson.error(ErrorCodeEnum.NOT_FOUND.getCode(), ex.getMessage());
+        }
+        log.error("统一异常处理过程,系统内部服务异常-{}：{}", e.getClass(), e.getMessage());
         return ResponseJson.error(ErrorCodeEnum.INTERNAL_SERVER_ERROR);
     }
+
+
 }

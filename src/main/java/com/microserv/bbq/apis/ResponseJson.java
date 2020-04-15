@@ -13,30 +13,29 @@ import java.util.HashMap;
  * @since 2020/4/6
  */
 public final class ResponseJson extends HashMap<String, Object> {
-    private static final Integer DEFAULT_ERROR_CODE = -1;
-    private static final Integer DEFAULT_SUCCESS_CODE = 0;
-    private static final String DEFAULT_SUCCESS_MSG = "success";
+    /**
+     * 默认错误码
+     */
+    private static final int DEFAULT_ERROR_CODE = -1;
 
     /**
      * 默认构造函数私有化
      */
     private ResponseJson() {
-        init(DEFAULT_SUCCESS_CODE, DEFAULT_SUCCESS_MSG);
+        put("code", 0);
+        put("msg", "success");
     }
 
-    private ResponseJson init(Integer code, String msg) {
-        return this.fluentPut("code", code).fluentPut("msg", msg);
-    }
-
-    private ResponseJson setData(Object data) {
-        return this.fluentPut("data", data);
-    }
-
-    private ResponseJson fluentPut(String key, Object value) {
-        put(key, value);
+    /**
+     * 重新设置提示信息
+     *
+     * @param msg 提示信息
+     * @return this object
+     */
+    public ResponseJson setMsg(String msg) {
+        this.put("msg", msg);
         return this;
     }
-
 
     /**
      * 错误-消息返回体设置
@@ -45,8 +44,11 @@ public final class ResponseJson extends HashMap<String, Object> {
      * @param msg  错误提示信息
      * @return this object
      */
-    public static ResponseJson error(Integer code, String msg) {
-        return new ResponseJson().init(code, msg);
+    public static ResponseJson error(int code, String msg) {
+        ResponseJson ans = new ResponseJson();
+        ans.put("code", code);
+        ans.put("msg", msg);
+        return ans;
     }
 
     /**
@@ -65,7 +67,7 @@ public final class ResponseJson extends HashMap<String, Object> {
      * @return this object
      */
     public static ResponseJson error() {
-        return error(ErrorCodeEnum.INTERNAL_SERVER_ERROR.getMessage());
+        return error(ErrorCodeEnum.INTERNAL_SERVER_ERROR.getCode(), ErrorCodeEnum.INTERNAL_SERVER_ERROR.getMessage());
     }
 
     /**
@@ -73,8 +75,8 @@ public final class ResponseJson extends HashMap<String, Object> {
      *
      * @return this object
      */
-    public static ResponseJson error(ErrorCodeEnum errorCodeEnum) {
-        return error(errorCodeEnum.getCode(), errorCodeEnum.getMessage());
+    public static ResponseJson error(ErrorCodeEnum responseEnum) {
+        return error(responseEnum.getCode(), responseEnum.getMessage());
     }
 
     /**
@@ -84,8 +86,10 @@ public final class ResponseJson extends HashMap<String, Object> {
      * @return the object with response data
      */
 
-    public static ResponseJson success(Object data) {
-        return new ResponseJson().setData(data);
+    public static ResponseJson ok(Object data) {
+        ResponseJson ans = new ResponseJson();
+        ans.put("data", data);
+        return ans;
     }
 
     /**
@@ -93,7 +97,7 @@ public final class ResponseJson extends HashMap<String, Object> {
      *
      * @return this object without response data
      */
-    public static ResponseJson success() {
+    public static ResponseJson ok() {
         return new ResponseJson();
     }
 }

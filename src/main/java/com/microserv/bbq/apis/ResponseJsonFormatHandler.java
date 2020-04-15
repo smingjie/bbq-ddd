@@ -16,11 +16,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  */
 @Slf4j
 @ControllerAdvice
-public class ResponseFormatHandler implements ResponseBodyAdvice<Object> {
+public class ResponseJsonFormatHandler implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter methodParameter,
                             Class<? extends HttpMessageConverter<?>> aClass) {
-        // 判断请求是否包含了注解标记
+        // 判断请求是否要包装
         return true;
     }
 
@@ -34,12 +34,12 @@ public class ResponseFormatHandler implements ResponseBodyAdvice<Object> {
         log.info("进入返回体重写过程...");
         if (null == o) {
             //成功执行但无数据返回，返回code，msg
-            return ResponseJson.success();
+            return ResponseJson.ok();
         } else if (o instanceof ResponseJson) {
             //已经在controller封装完成，直接返回
             return o;
         }
         // 尚未包装的成功数据，此处封装code msg data
-        return ResponseJson.success(o);
+        return ResponseJson.ok(o);
     }
 }

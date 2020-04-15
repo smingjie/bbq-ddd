@@ -26,7 +26,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    compile 'com.alibaba:fastjson:1.2.62'
+    compile 'com.alibaba:fastjson:1.2.68'
     compile 'com.baomidou:mybatis-plus-boot-starter:3.3.1'
     compile 'com.baomidou:mybatis-plus-generator:3.3.1'
     compile 'org.apache.velocity:velocity-engine-core:2.2'
