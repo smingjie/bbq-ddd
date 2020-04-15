@@ -1,6 +1,7 @@
 package com.microserv.bbq.apis.controller;
 
 import com.microserv.bbq.apis.model.DictDto;
+import com.microserv.bbq.apis.model.DictTypeVo;
 import com.microserv.bbq.domain.model.dict.DictAgg;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.*;
 public class DictController {
 
     @GetMapping
-    public DictAgg getDictsByType(@RequestParam String type) {
-        return new DictAgg(type).fetch();
+    public DictTypeVo getDictsByType(@RequestParam String type) {
+        DictAgg agg = new DictAgg(type).fetch();
+        return new DictTypeVo(agg);
     }
 
     @GetMapping("/one")

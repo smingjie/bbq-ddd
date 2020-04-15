@@ -5,12 +5,13 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * spring application context util,
  * which is used for obtain beans from ioc container
  */
-
+@Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApplicationUtils implements ApplicationContextAware {
 
