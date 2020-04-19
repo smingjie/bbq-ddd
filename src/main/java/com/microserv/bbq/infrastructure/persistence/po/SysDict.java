@@ -2,7 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.microserv.bbq.infrastructure.persistence.base.BaseEntity;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_dict")
 @ApiModel(value="SysDict对象", description="数据字典表")
-public class SysDict extends BaseEntity {
+public class SysDict extends AbstractBasePo {
 
     private static final long serialVersionUID=1L;
 

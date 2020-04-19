@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.persistence.base;
+package com.microserv.bbq.infrastructure.persistence.common;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * @since 2020/4/5
  */
 @Data
-public abstract class BaseEntity {
+public abstract class AbstractBasePo {
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

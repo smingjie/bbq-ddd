@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import com.microserv.bbq.domain.repository.DictRepo;
-import com.microserv.bbq.infrastructure.persistence.base.IDaoAssembler;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBaseDao;
 import com.microserv.bbq.infrastructure.persistence.mapper.SysDictMapper;
 import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +26,14 @@ import java.util.Objects;
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DictDao implements DictRepo, IDaoAssembler<SysDict, DictEntity> {
+public class DictDao extends AbstractBaseDao<DictEntity, SysDict> implements DictRepo {
     private final SysDictMapper dictMapper;
 
     //-- 仓储实现
     @Override
     public DictEntity select(String id) {
-        SysDict dbo = dictMapper.selectById(id);
-        return transferDomain(dbo, DictEntity.class);
+        SysDict po = dictMapper.selectById(id);
+        return po2domain(po);
     }
 
     @Override
@@ -42,26 +42,26 @@ public class DictDao implements DictRepo, IDaoAssembler<SysDict, DictEntity> {
                 .eq(SysDict::getType, type)
                 .eq(SysDict::getCode, key)
                 .one();
-        return transferDomain(dbo, DictEntity.class);
+        return po2domain(dbo);
     }
 
     @Override
     public List<DictEntity> selectByType(String type) {
-        List<SysDict> dbos = new LambdaQueryChainWrapper<>(dictMapper)
+        List<SysDict> poList = new LambdaQueryChainWrapper<>(dictMapper)
                 .eq(SysDict::getType, type)
                 .list();
-        return transferDomain(dbos, DictEntity.class);
+        return po2domain(poList);
     }
 
     @Override
     public boolean insert(DictEntity item) {
-        return Objects.nonNull(item) && dictMapper.insert(transferDbo(item, SysDict.class)) > 0;
+        return Objects.nonNull(item) && dictMapper.insert(domain2po(item)) > 0;
     }
 
     @Override
     public boolean update(DictEntity item) {
         // 先转换
-        SysDict dbo = transferDbo(item, SysDict.class);
+        SysDict dbo = domain2po(item);
         if (Objects.isNull(dbo)) {
             return false;
         }
@@ -79,7 +79,7 @@ public class DictDao implements DictRepo, IDaoAssembler<SysDict, DictEntity> {
     @Override
     public boolean delete(DictEntity item) {
         // 先转换
-        SysDict dbo = transferDbo(item, SysDict.class);
+        SysDict dbo = domain2po(item);
 
         if (Objects.isNull(dbo)) {
             return false;

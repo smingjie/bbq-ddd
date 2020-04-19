@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import com.microserv.bbq.infrastructure.persistence.base.BaseEntity;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class GeneratorConfig {
         this.strategyConfig.setEntityTableFieldAnnotationEnable(true);
         this.strategyConfig.setExclude("tb_cfg");
        // this.strategyConfig.setControllerMappingHyphenStyle(true);
-        this.strategyConfig.setSuperEntityClass(BaseEntity.class);// 公共父类
+        this.strategyConfig.setSuperEntityClass(AbstractBasePo.class);// 公共父类
         this.strategyConfig.setSuperEntityColumns(commonColumns); // 写于父类中的公共字段
         //this.strategyConfig.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");  // 公共父类
         //this.strategyConfig.setInclude("表名，多个英文逗号分割".split(","));

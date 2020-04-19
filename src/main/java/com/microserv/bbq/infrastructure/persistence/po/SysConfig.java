@@ -2,7 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.microserv.bbq.infrastructure.persistence.base.BaseEntity;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_config")
 @ApiModel(value="SysConfig对象", description="系统配置信息表")
-public class SysConfig extends BaseEntity {
+public class SysConfig extends AbstractBasePo {
 
     private static final long serialVersionUID=1L;
 

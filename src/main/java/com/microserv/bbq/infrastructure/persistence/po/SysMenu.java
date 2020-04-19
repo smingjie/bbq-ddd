@@ -2,7 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.microserv.bbq.infrastructure.persistence.base.BaseEntity;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_menu")
 @ApiModel(value="SysMenu对象", description="菜单管理")
-public class SysMenu extends BaseEntity {
+public class SysMenu extends AbstractBasePo {
 
     private static final long serialVersionUID=1L;
 
