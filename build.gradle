@@ -26,10 +26,18 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    compile 'com.alibaba:fastjson:1.2.62'
-    compile 'com.baomidou:mybatis-plus-boot-starter:3.3.1'
+    implementation 'com.alibaba:fastjson:1.2.68'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.3.1'
+    implementation 'com.baomidou:mybatis-plus-generator:3.3.1'
+    implementation 'org.apache.velocity:velocity-engine-core:2.2'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'io.swagger:swagger-annotations:1.5.21'
+    implementation 'io.swagger:swagger-models:1.5.21'
+    implementation 'cn.hutool:hutool-all:5.2.5'
+    implementation 'ma.glasnost.orika:orika-core:1.4.2'
     runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'mysql:mysql-connector-java' 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
@@ -73,17 +81,17 @@ task makeMainDir() {
     def basePath = 'src/main/java/com/microserv/'
     def paths = [
             'bbq/apis/assembler',
-            'bbq/apis/apiModel',
+            'bbq/apis/model',
             'bbq/apis/controller',
             'bbq/application/service',
             'bbq/application/task',
             'bbq/domain/common',
-            'bbq/domain/events',
+            'bbq/domain/event',
             'bbq/domain/model',
             'bbq/domain/factory',
             'bbq/domain/service',
-            'bbq/infrastructure/persistent/po',
-            'bbq/infrastructure/persistent/repository',
+            'bbq/infrastructure/persistence/po',
+            'bbq/infrastructure/persistence/mapper',
             'bbq/infrastructure/general/common',
             'bbq/infrastructure/general/config',
             'bbq/infrastructure/general/constant',
@@ -91,7 +99,7 @@ task makeMainDir() {
             'bbq/infrastructure/general/security',
             'bbq/infrastructure/general/toolkit',
             'bbq/reference/common',
-            'bbq/reference/interfaces',
+            'bbq/reference/facade',
             'bbq/reference/domain',
     ]
 
