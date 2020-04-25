@@ -14,26 +14,21 @@ import java.util.List;
  * @author jockeys
  * @since 2020/4/19
  */
-@Getter
-@Setter
-public abstract class AbstractBaseDao<D, P> {
+public interface IBaseDao<D, P> {
 
-    private Class<D> sourceClass;
-    private Class<P> targetClass;
-
-    protected P domain2po(D domain) {
+    default P domain2po(D domain, Class<P> targetClass) {
         return ModelConvertUtils.convert(domain, targetClass);
     }
 
-    protected List<P> domain2po(List<D> domainList) {
+    default List<P> domain2po(List<D> domainList, Class<P> targetClass) {
         return ModelConvertUtils.convert(targetClass, domainList);
     }
 
-    protected D po2domain(P po) {
+    default D po2domain(P po, Class<D> sourceClass) {
         return ModelConvertUtils.convert(po, sourceClass);
     }
 
-    protected List<D> po2domain(List<P> poList) {
+    default List<D> po2domain(List<P> poList, Class<D> sourceClass) {
         return ModelConvertUtils.convert(sourceClass, poList);
     }
 

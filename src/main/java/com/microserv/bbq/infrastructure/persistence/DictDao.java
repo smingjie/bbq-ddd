@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import com.microserv.bbq.domain.repository.DictRepo;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBaseDao;
+import com.microserv.bbq.infrastructure.persistence.common.IBaseDao;
 import com.microserv.bbq.infrastructure.persistence.mapper.SysDictMapper;
 import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +26,14 @@ import java.util.Objects;
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DictDao extends AbstractBaseDao<DictEntity, SysDict> implements DictRepo {
+public class DictDao implements IBaseDao<DictEntity, SysDict>, DictRepo {
     private final SysDictMapper dictMapper;
 
     //-- 仓储实现
     @Override
     public DictEntity select(String id) {
         SysDict po = dictMapper.selectById(id);
-        return po2domain(po);
+        return po2domain(po, DictEntity.class);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class DictDao extends AbstractBaseDao<DictEntity, SysDict> implements Dic
                 .eq(SysDict::getType, type)
                 .eq(SysDict::getCode, key)
                 .one();
-        return po2domain(dbo);
+        return po2domain(dbo, DictEntity.class);
     }
 
     @Override
@@ -50,18 +50,18 @@ public class DictDao extends AbstractBaseDao<DictEntity, SysDict> implements Dic
         List<SysDict> poList = new LambdaQueryChainWrapper<>(dictMapper)
                 .eq(SysDict::getType, type)
                 .list();
-        return po2domain(poList);
+        return po2domain(poList, DictEntity.class);
     }
 
     @Override
     public boolean insert(DictEntity item) {
-        return Objects.nonNull(item) && dictMapper.insert(domain2po(item)) > 0;
+        return Objects.nonNull(item) && dictMapper.insert(domain2po(item, SysDict.class)) > 0;
     }
 
     @Override
     public boolean update(DictEntity item) {
         // 先转换
-        SysDict dbo = domain2po(item);
+        SysDict dbo = domain2po(item, SysDict.class);
         if (Objects.isNull(dbo)) {
             return false;
         }
@@ -79,7 +79,7 @@ public class DictDao extends AbstractBaseDao<DictEntity, SysDict> implements Dic
     @Override
     public boolean delete(DictEntity item) {
         // 先转换
-        SysDict dbo = domain2po(item);
+        SysDict dbo = domain2po(item, SysDict.class);
 
         if (Objects.isNull(dbo)) {
             return false;
