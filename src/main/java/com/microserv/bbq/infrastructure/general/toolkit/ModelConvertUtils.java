@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * @author jockeys
  * @since 2020/4/6
  */
-public class ConvertUtils {
+public class ModelConvertUtils {
     private static final MapperFactory mapperFactory;
     private static final MapperFacade mapperFacade;
 

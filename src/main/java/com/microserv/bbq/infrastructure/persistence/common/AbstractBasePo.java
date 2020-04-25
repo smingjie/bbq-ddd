@@ -2,6 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.common;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
  * @since 2020/4/5
  */
 @Data
+@Accessors(chain = true)
 public abstract class AbstractBasePo {
 
     @ApiModelProperty(value = "创建时间")

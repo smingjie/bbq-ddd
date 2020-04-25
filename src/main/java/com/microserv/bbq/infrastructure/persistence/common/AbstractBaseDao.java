@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.persistence.common;
 
-import com.microserv.bbq.infrastructure.general.toolkit.ConvertUtils;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelConvertUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,19 +22,19 @@ public abstract class AbstractBaseDao<D, P> {
     private Class<P> targetClass;
 
     protected P domain2po(D domain) {
-        return ConvertUtils.convert(domain, targetClass);
+        return ModelConvertUtils.convert(domain, targetClass);
     }
 
     protected List<P> domain2po(List<D> domainList) {
-        return ConvertUtils.convert(targetClass, domainList);
+        return ModelConvertUtils.convert(targetClass, domainList);
     }
 
     protected D po2domain(P po) {
-        return ConvertUtils.convert(po, sourceClass);
+        return ModelConvertUtils.convert(po, sourceClass);
     }
 
     protected List<D> po2domain(List<P> poList) {
-        return ConvertUtils.convert(sourceClass, poList);
+        return ModelConvertUtils.convert(sourceClass, poList);
     }
 
 }

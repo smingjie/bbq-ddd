@@ -124,7 +124,10 @@ public enum ErrorCodeEnum {
      */
     ROLE_NAME_EXIST(HttpServletResponse.SC_BAD_REQUEST, "角色名称已存在"),
     ROLE_KEY_EXIST(HttpServletResponse.SC_BAD_REQUEST, "角色权限已存在"),
-
+    /**
+     * Data Access
+     */
+    DATE_ACCESS_FAIL(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"仓储服务出了点状况，抱歉")
     ;
 
     //----------------------------------------------------分割线----------------------------------------------------

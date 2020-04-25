@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.model;
 
 import com.microserv.bbq.apis.assembler.IApiAssembler;
 import com.microserv.bbq.domain.model.dict.DictEntity;
-import com.microserv.bbq.infrastructure.general.toolkit.ConvertUtils;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelConvertUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -40,7 +40,7 @@ public class DictDto implements IApiAssembler<DictEntity> {
      * 从实体解析为传输对象
      */
     public DictDto(@NotNull DictEntity entity) {
-        ConvertUtils.convert(entity, this);
+        ModelConvertUtils.convert(entity, this);
     }
 
 }

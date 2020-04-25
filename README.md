@@ -2,18 +2,9 @@
 
 springboot+ddd分层示例工程
 
-## 摘要
-
-* Gradle 6.3：项目构建工具
-* springboot 2.2.6.RELEASE：core
-* Orika 1.4.2：Bean模型映射工具
-* mybatis-plus 3.3.1： mybatis增强工具
-* hutool 5.2.5：通用工具
-
-## 代码目录结构说明
-
 `eg.`后端Java代码工程为例，
 `表现层`在此代码结构中表现为`api层`，对外暴露接口的最上层
+
 ```java
 ├─com.company.microservice
 │    │ 

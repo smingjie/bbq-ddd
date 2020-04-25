@@ -3,6 +3,7 @@ package com.microserv.bbq.apis;
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +32,11 @@ public class ControllerExceptionHandler {
             BusinessException ex = (BusinessException) e;
             log.error("统一异常处理过程,系统业务服务异常-{}：{}", e.getClass(), e.getMessage());
             return ResponseJson.error(ex.getCode(), ex.getMessage());
+        }
+        if (e instanceof DataAccessException) {
+            DataAccessException ex = (DataAccessException) e;
+            log.error("统一异常处理过程,系统仓储服务异常-{}：{}", e.getClass(), e.getMessage());
+            return ResponseJson.error(ErrorCodeEnum.DATE_ACCESS_FAIL);
         }
         return ResponseJson.error(ErrorCodeEnum.INTERNAL_SERVER_ERROR);
     }

@@ -3,7 +3,7 @@ package com.microserv.bbq.domain.model.dict;
 import cn.hutool.core.util.StrUtil;
 import com.microserv.bbq.domain.common.ICrud;
 import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
-import com.microserv.bbq.infrastructure.general.toolkit.ConvertUtils;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelConvertUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import com.microserv.bbq.infrastructure.persistence.DictDao;
 import lombok.Data;
@@ -43,7 +43,7 @@ public class DictEntity implements ICrud<DictEntity> {
             DictEntity item = Objects.nonNull(this.id) ?
                     ApplicationUtils.getBean(DictDao.class).select(this.id) :
                     ApplicationUtils.getBean(DictDao.class).selectOne(this.type, this.code);
-            ConvertUtils.convert(item, this);
+            ModelConvertUtils.convert(item, this);
         }
         return this;
     }
