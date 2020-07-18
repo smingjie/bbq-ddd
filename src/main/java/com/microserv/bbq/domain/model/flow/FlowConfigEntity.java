@@ -1,13 +1,9 @@
 package com.microserv.bbq.domain.model.flow;
 
-import com.microserv.bbq.domain.model.dict.DictAgg;
-import com.microserv.bbq.domain.repository.FlowConfigRepo;
-import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-import java.util.Objects;
 
 /**
  * @author jockeys
@@ -15,6 +11,7 @@ import java.util.Objects;
  */
 @Data
 @Accessors(chain = true)
+@NoArgsConstructor
 public class FlowConfigEntity {
     private String flowId;
     private String flowType;
@@ -25,4 +22,7 @@ public class FlowConfigEntity {
     private String moduleSta;
     private Boolean isEnable;
 
+    public FlowConfigEntity(String flowId) {
+        this.flowId = flowId;
+    }
 }

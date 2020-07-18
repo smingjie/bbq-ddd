@@ -3,6 +3,7 @@ package com.microserv.bbq.apis;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -21,7 +22,9 @@ public class ResponseJsonFormatHandler implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter methodParameter,
                             Class<? extends HttpMessageConverter<?>> aClass) {
         // 判断请求是否要包装
-        return true;
+        Class<?> clazz = methodParameter.getNestedParameterType();
+        return !clazz.isAssignableFrom(ResponseEntity.class)
+                && !ResponseJson.class.getName().equals(clazz.getName());
     }
 
     @Override
@@ -35,9 +38,6 @@ public class ResponseJsonFormatHandler implements ResponseBodyAdvice<Object> {
         if (null == o) {
             //成功执行但无数据返回，返回code，msg
             return ResponseJson.ok();
-        } else if (o instanceof ResponseJson) {
-            //已经在controller封装完成，直接返回
-            return o;
         }
         // 尚未包装的成功数据，此处封装code msg data
         return ResponseJson.ok(o);

@@ -14,7 +14,6 @@ import java.util.List;
 public class FlowConfigNodeEntity {
 
     private String flowNodeId;
-    private String flowId;
     private Integer nodeType;
     private String nodeName;
     private String nodeLastId;

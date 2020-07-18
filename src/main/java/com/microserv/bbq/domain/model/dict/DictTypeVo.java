@@ -9,11 +9,11 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class DictType {
+public class DictTypeVo {
     private String type;
     private String name;
 
-    public DictType(String type) {
+    public DictTypeVo(String type) {
         this.type = type;
     }
 }

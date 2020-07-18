@@ -16,21 +16,20 @@ import java.util.Objects;
  */
 @Data
 @Accessors(chain = true)
-public class DictAgg {
+public class DictAgg extends DictTypeVo {
 
     //----- field -----//
-    private DictType dictType;
     private List<DictEntity> itemList;
 
     //----- constructor -----//
     public DictAgg(String type) {
-        this.dictType = new DictType(type);
+        this.setType(type);
     }
 
     //----- public method-----//
     public DictAgg fetch() {
-        if (Objects.nonNull(this.dictType)) {
-            this.itemList = ApplicationUtils.getBean(DictDao.class).selectByType(this.dictType.getType());
+        if (Objects.nonNull(this.getType())) {
+            this.itemList = ApplicationUtils.getBean(DictDao.class).selectByType(this.getType());
             return this;
         }
         return this;

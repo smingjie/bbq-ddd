@@ -11,7 +11,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class FlowConfigNodeHandleEntity {
     private String id;
-    private String flowNodeId;
     private Integer isGroup;
     private String handleId;
     private String handleName;
