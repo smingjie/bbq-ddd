@@ -23,7 +23,7 @@ public class DictAgg extends DictTypeVo {
 
     //----- constructor -----//
     public DictAgg(String type) {
-        this.setType(type);
+        super(type);
     }
 
     //----- public method-----//

@@ -32,8 +32,8 @@ public class DictTypeVo {
      * todo 解析为传输对象
      */
     public DictTypeVo(@NotNull DictAgg agg) {
-        this.type = agg.getDictType().getType();
-        this.name = agg.getDictType().getName();
+        this.type = agg.getType();
+        this.name = agg.getName();
         this.items = Lists.transform(agg.getItemList(), o -> new DictItem()
                 .setId(o.getId()).setKey(o.getCode()).setValue(o.getValue())
         );
