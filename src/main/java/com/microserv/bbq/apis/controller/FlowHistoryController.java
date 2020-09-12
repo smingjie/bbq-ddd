@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 实例历史记录表 前端控制器
+ * 工作流-实例历史
  * </p>
  *
  * @author mpGenerator
  * @since 2020-04-25
  */
 @RestController
-@RequestMapping("/code/flowInsHistory")
-public class FlowInsHistoryController {
+@RequestMapping("/flow-history")
+public class FlowHistoryController {
 
 }
 
