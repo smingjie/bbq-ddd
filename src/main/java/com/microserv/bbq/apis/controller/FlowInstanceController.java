@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 角色与菜单对应关系 前端控制器
+ * 工作流-实例进程
  * </p>
  *
  * @author mpGenerator
  * @since 2020-04-25
  */
 @RestController
-@RequestMapping("/code/sysRoleMenu")
-public class SysRoleMenuController {
+@RequestMapping("/flow-instance")
+public class FlowInstanceController {
 
 }
 

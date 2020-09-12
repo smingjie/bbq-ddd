@@ -8,10 +8,10 @@ import lombok.Data;
  */
 @Data
 public class UserEntity {
-    private String id;
-    private String name;
-    private String spell;
-    private String wechat;
-    private String phone;
-    private Boolean gender;
+    private String userId;
+    private String username;
+//    private String password;
+    private String email;
+    private String mobile;
+    private Integer status;
 }

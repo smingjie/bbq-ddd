@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class GeneratorConfig {
         this.globalConfig.setOpen(false);
         this.globalConfig.setSwagger2(true);
         // 数据源配置
-        this.dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/bbq?serverTimezone=Asia/Shanghai&useUnicode=true&useSSL=false");
+        this.dataSourceConfig.setUrl("jdbc:mysql://localhost:3306/bbq-ddd?serverTimezone=Asia/Shanghai&useUnicode=true&useSSL=false");
         this.dataSourceConfig.setDriverName("com.mysql.cj.jdbc.Driver");
         this.dataSourceConfig.setUsername("root");
         this.dataSourceConfig.setPassword("123456");
@@ -80,7 +80,7 @@ public class GeneratorConfig {
         this.strategyConfig.setEntityTableFieldAnnotationEnable(true);
         this.strategyConfig.setExclude("tb_cfg");
        // this.strategyConfig.setControllerMappingHyphenStyle(true);
-        this.strategyConfig.setSuperEntityClass(AbstractBasePo.class);// 公共父类
+        this.strategyConfig.setSuperEntityClass(AbstractBasePO.class);// 公共父类
         this.strategyConfig.setSuperEntityColumns(commonColumns); // 写于父类中的公共字段
         //this.strategyConfig.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");  // 公共父类
         //this.strategyConfig.setInclude("表名，多个英文逗号分割".split(","));

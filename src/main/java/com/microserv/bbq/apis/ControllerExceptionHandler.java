@@ -30,12 +30,11 @@ public class ControllerExceptionHandler {
         log.info("统一异常处理过程,运行时异常[{}]：{}", e.getClass(), e.getMessage());
         if (e instanceof BusinessException) {
             BusinessException ex = (BusinessException) e;
-            log.error("统一异常处理过程,系统业务服务异常-{}：{}", e.getClass(), e.getMessage());
+            log.error("系统业务服务异常-{}：{}", e.getClass(), e.getMessage());
             return ResponseJson.error(ex.getCode(), ex.getMessage());
         }
         if (e instanceof DataAccessException) {
-            DataAccessException ex = (DataAccessException) e;
-            log.error("统一异常处理过程,系统仓储服务异常-{}：{}", e.getClass(), e.getMessage());
+            log.error("系统仓储服务异常-{}：{}", e.getClass(), e.getMessage());
             return ResponseJson.error(ErrorCodeEnum.DATE_ACCESS_FAIL);
         }
         return ResponseJson.error(ErrorCodeEnum.INTERNAL_SERVER_ERROR);

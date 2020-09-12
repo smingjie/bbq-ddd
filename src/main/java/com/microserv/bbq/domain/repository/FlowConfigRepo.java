@@ -2,20 +2,52 @@ package com.microserv.bbq.domain.repository;
 
 import com.microserv.bbq.domain.model.flow.FlowConfigAgg;
 
+import java.util.List;
+
 
 /**
  * @author jockeys
  * @since 2020/4/25
  */
 public interface FlowConfigRepo {
-    //--查询
+	//--查询
 
-    FlowConfigAgg selectConfigs(String flowId);
+	FlowConfigAgg.ConfigEntity selectConfigByFlowId(String flowId);
+	String  selectFlowIdByFlowCode(String flowCode);
 
-    //--命令
-    boolean insert(FlowConfigAgg data);
+	List<FlowConfigAgg.NodeEntity> selectNodesByFlowId(String flowId);
 
-    boolean update(FlowConfigAgg data);
+	List<FlowConfigAgg.HandlerEntity> selectHandlersByFlowId(String flowId);
+	//--命令
 
-    boolean delete(FlowConfigAgg data);
+	boolean insert(FlowConfigAgg.ConfigEntity entity);
+	boolean update(FlowConfigAgg.ConfigEntity entity);
+	boolean delete(FlowConfigAgg.ConfigEntity entity);
+
+	boolean insertBatchNodes(List<FlowConfigAgg.NodeEntity> entities);
+	boolean insert(FlowConfigAgg.NodeEntity entity);
+	boolean update(FlowConfigAgg.NodeEntity entity);
+	boolean delete(FlowConfigAgg.NodeEntity entity);
+
+
+	boolean insertBatchHandlers(List<FlowConfigAgg.HandlerEntity> entities);
+	boolean insert(FlowConfigAgg.HandlerEntity entity);
+	boolean update(FlowConfigAgg.HandlerEntity entity);
+	boolean delete(FlowConfigAgg.HandlerEntity entity);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

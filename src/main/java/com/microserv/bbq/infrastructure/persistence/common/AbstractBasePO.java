@@ -7,14 +7,14 @@ import lombok.experimental.Accessors;
 import java.time.LocalDateTime;
 
 /**
- * 数据库持久化对象的父类
+ * 数据库持久化对象的父类 (PO: Persistence Object)
  *
  * @author jockeys
  * @since 2020/4/5
  */
 @Data
 @Accessors(chain = true)
-public abstract class AbstractBasePo {
+public abstract class AbstractBasePO {
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

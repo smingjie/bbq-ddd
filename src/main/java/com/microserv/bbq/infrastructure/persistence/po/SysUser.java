@@ -2,7 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_user")
 @ApiModel(value="SysUser对象", description="系统用户")
-public class SysUser extends AbstractBasePo {
+public class SysUser extends AbstractBasePO {
 
     private static final long serialVersionUID=1L;
 

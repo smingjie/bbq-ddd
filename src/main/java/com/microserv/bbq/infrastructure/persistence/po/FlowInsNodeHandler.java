@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
@@ -21,9 +21,9 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@TableName("flow_ins_node_handle")
-@ApiModel(value="FlowInsNodeHandle对象", description="工作流实例的节点处理者")
-public class FlowInsNodeHandle extends AbstractBasePo {
+@TableName("flow_ins_node_handler")
+@ApiModel(value="FlowInsNodeHandler对象", description="工作流实例的节点处理者")
+public class FlowInsNodeHandler extends AbstractBasePO {
 
     private static final long serialVersionUID=1L;
 
@@ -35,17 +35,15 @@ public class FlowInsNodeHandle extends AbstractBasePo {
     @TableField("ins_node_id")
     private String insNodeId;
 
-    @ApiModelProperty(value = "是否为组类型 0个人 1角色组")
-    @TableField("is_group")
-    private Integer isGroup;
-
     @ApiModelProperty(value = "处理者id")
-    @TableField("handle_id")
-    private String handleId;
+    @TableField("handler_id")
+    private String handlerId;
 
     @ApiModelProperty(value = "处理者名称")
-    @TableField("handle_name")
-    private String handleName;
+    @TableField("handler_name")
+    private String handlerName;
 
-
+    @ApiModelProperty(value = "是否启用")
+    @TableField("enabled")
+    private Boolean enabled;
 }

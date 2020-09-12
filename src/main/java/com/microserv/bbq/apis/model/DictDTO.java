@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.model;
 
 import com.microserv.bbq.apis.assembler.IApiAssembler;
 import com.microserv.bbq.domain.model.dict.DictEntity;
-import com.microserv.bbq.infrastructure.general.toolkit.ModelConvertUtils;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,9 +17,10 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @AllArgsConstructor
-public class DictDto implements IApiAssembler<DictEntity> {
+public class DictDTO implements IApiAssembler<DictEntity> {
 
     private String id;
+
     @NotNull(message = "字典名称不能为空")
     private String name;
 
@@ -39,8 +40,8 @@ public class DictDto implements IApiAssembler<DictEntity> {
     /**
      * 从实体解析为传输对象
      */
-    public DictDto(@NotNull DictEntity entity) {
-        ModelConvertUtils.convert(entity, this);
+    public DictDTO(@NotNull DictEntity entity) {
+        ModelUtils.convert(entity, this);
     }
 
 }

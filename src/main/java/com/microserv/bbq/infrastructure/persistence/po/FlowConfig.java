@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("flow_config")
 @ApiModel(value="FlowConfig对象", description="工作流配置表")
-public class FlowConfig extends AbstractBasePo {
+public class FlowConfig extends AbstractBasePO {
 
     private static final long serialVersionUID=1L;
 
@@ -31,9 +31,9 @@ public class FlowConfig extends AbstractBasePo {
     @TableId("flow_id")
     private String flowId;
 
-    @ApiModelProperty(value = "工作流配置类型")
-    @TableField("flow_type")
-    private String flowType;
+    @ApiModelProperty(value = "工作流配置代码")
+    @TableField("flow_code")
+    private String flowCode;
 
     @ApiModelProperty(value = "工作流配置名称")
     @TableField("flow_name")
@@ -42,6 +42,10 @@ public class FlowConfig extends AbstractBasePo {
     @ApiModelProperty(value = "工作流配置版本，1.0")
     @TableField("flow_version")
     private String flowVersion;
+
+    @ApiModelProperty(value = "业务模块的类别")
+    @TableField("module_type")
+    private String moduleType;
 
     @ApiModelProperty(value = "相关业务模块的主表名")
     @TableField("module_table")
@@ -56,12 +60,12 @@ public class FlowConfig extends AbstractBasePo {
     private String moduleSta;
 
     @ApiModelProperty(value = "是否启用")
-    @TableField("is_enable")
-    private Integer isEnable;
+    @TableField("enabled")
+    private Boolean enabled;
 
     @ApiModelProperty(value = "是否删除")
-    @TableField("is_delete")
-    private Integer isDelete;
+    @TableField("deleted")
+    private Boolean deleted;
 
 
 }

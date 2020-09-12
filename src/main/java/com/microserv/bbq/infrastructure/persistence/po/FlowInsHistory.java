@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -23,7 +25,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("flow_ins_history")
 @ApiModel(value="FlowInsHistory对象", description="实例历史记录表")
-public class FlowInsHistory extends AbstractBasePo {
+public class FlowInsHistory extends AbstractBasePO {
 
     private static final long serialVersionUID=1L;
 
@@ -47,9 +49,17 @@ public class FlowInsHistory extends AbstractBasePo {
     @TableField("record_name")
     private String recordName;
 
+    @ApiModelProperty(value = "记录状态")
+    @TableField("record_sta")
+    private String recordSta;
+
+    @ApiModelProperty(value = "记录状态名称")
+    @TableField("record_sta_name")
+    private String recordStaName;
+
     @ApiModelProperty(value = "是否执行成功")
-    @TableField("is_success")
-    private Integer isSuccess;
+    @TableField("succeed")
+    private Integer succeed;
 
     @ApiModelProperty(value = "处理状态")
     @TableField("handle_status")
@@ -59,6 +69,10 @@ public class FlowInsHistory extends AbstractBasePo {
     @TableField("handle_suggestion")
     private String handleSuggestion;
 
+    @ApiModelProperty(value = "处理时间")
+    @TableField("handle_time")
+    private LocalDateTime handleTime;
+
     @ApiModelProperty(value = "处理者id")
     @TableField("handler_id")
     private String handlerId;
@@ -67,13 +81,9 @@ public class FlowInsHistory extends AbstractBasePo {
     @TableField("handler_name")
     private String handlerName;
 
-    @ApiModelProperty(value = "处理者部门")
-    @TableField("handler_dept")
-    private String handlerDept;
-
     @ApiModelProperty(value = "是否删除")
-    @TableField("is_delete")
-    private Integer isDelete;
+    @TableField("deleted")
+    private Boolean deleted;
 
 
 }

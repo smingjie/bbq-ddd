@@ -2,7 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_dict")
 @ApiModel(value="SysDict对象", description="数据字典表")
-public class SysDict extends AbstractBasePo {
+public class SysDict extends AbstractBasePO {
 
     private static final long serialVersionUID=1L;
 
@@ -54,9 +54,9 @@ public class SysDict extends AbstractBasePo {
     @TableField("remark")
     private String remark;
 
-    @ApiModelProperty(value = "删除标记  -1：已删除  0：正常")
-    @TableField("del_flag")
-    private Integer delFlag;
+    @ApiModelProperty(value = "删除标记 0：正常 1：已删除")
+    @TableField("deleted")
+    private Integer deleted;
 
 
 }

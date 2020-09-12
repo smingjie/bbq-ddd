@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.persistence.mapper;
 
-import com.microserv.bbq.infrastructure.persistence.po.FlowInsNodeHandle;
+import com.microserv.bbq.infrastructure.persistence.po.FlowInsNodeHandler;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author mpGenerator
  * @since 2020-04-25
  */
-public interface FlowInsNodeHandleMapper extends BaseMapper<FlowInsNodeHandle> {
+public interface FlowInsNodeHandlerMapper extends BaseMapper<FlowInsNodeHandler> {
 
 }

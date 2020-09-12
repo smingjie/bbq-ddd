@@ -12,21 +12,21 @@ import java.util.List;
  */
 public interface DictRepo {
 
-    //--查询
+	//--查询
 
-    DictEntity select(String id);
+	DictEntity select(String id);
 
-    DictEntity selectOne(String type, String key);
+	DictEntity selectOne(String type, String key);
 
-    List<DictEntity> selectByType(String type);
+	List<DictEntity> selectByType(String type);
 
+	List<DictEntity> selectByValue(String valueLike);
 
-    //--命令
-    boolean insert(DictEntity item);
+	//--命令
+	boolean insert(DictEntity item);
 
-    boolean update(DictEntity item);
+	boolean update(DictEntity item);
 
-    boolean delete(DictEntity item);
-
+	boolean delete(DictEntity item);
 
 }

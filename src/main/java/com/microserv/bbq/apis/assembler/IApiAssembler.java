@@ -1,7 +1,7 @@
 package com.microserv.bbq.apis.assembler;
 
 
-import com.microserv.bbq.infrastructure.general.toolkit.ModelConvertUtils;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public interface IApiAssembler<M> {
 
 
     default M trans2Domain(Object object, Class<M> targetClazz) {
-        return ModelConvertUtils.convert(object, targetClazz);
+        return ModelUtils.convert(object, targetClazz);
     }
 
     default List<M> trans2Domain(List<?> objects, Class<M> targetClazz) {
-        return ModelConvertUtils.convert(targetClazz, objects);
+        return ModelUtils.convert(targetClazz, objects);
     }
 
 }

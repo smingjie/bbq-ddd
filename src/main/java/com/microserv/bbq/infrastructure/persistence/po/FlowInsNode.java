@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePo;
+import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("flow_ins_node")
 @ApiModel(value="FlowInsNode对象", description="工作流实例的节点信息")
-public class FlowInsNode extends AbstractBasePo {
+public class FlowInsNode extends AbstractBasePO {
 
     private static final long serialVersionUID=1L;
 
@@ -64,12 +64,12 @@ public class FlowInsNode extends AbstractBasePo {
     private String failSta;
 
     @ApiModelProperty(value = "是否已经执行")
-    @TableField("is_execute")
-    private Integer isExecute;
+    @TableField("executed")
+    private Boolean executed;
 
     @ApiModelProperty(value = "是否执行成功")
-    @TableField("is_success")
-    private Integer isSuccess;
+    @TableField("succeed")
+    private Boolean succeed;
 
 
 }
