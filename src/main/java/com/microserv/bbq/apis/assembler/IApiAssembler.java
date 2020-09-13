@@ -15,12 +15,26 @@ import java.util.List;
 public interface IApiAssembler<M> {
 
 
-    default M trans2Domain(Object object, Class<M> targetClazz) {
-        return ModelUtils.convert(object, targetClazz);
-    }
+	/**
+	 * 向下转换为领域模型
+	 *
+	 * @param object      要转换的对象
+	 * @param targetClazz 目标类型
+	 * @return 目标领域对象
+	 */
+	default M trans2Domain(Object object, Class<M> targetClazz) {
+		return ModelUtils.convert(object, targetClazz);
+	}
 
-    default List<M> trans2Domain(List<?> objects, Class<M> targetClazz) {
-        return ModelUtils.convert(targetClazz, objects);
-    }
+	/**
+	 * 向下转换为领域模型
+	 *
+	 * @param objects     要转换的对象集合
+	 * @param targetClazz 目标类型
+	 * @return 目标领域对象集合
+	 */
+	default List<M> trans2Domain(List<?> objects, Class<M> targetClazz) {
+		return ModelUtils.convert(targetClazz, objects);
+	}
 
 }

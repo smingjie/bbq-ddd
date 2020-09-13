@@ -37,7 +37,7 @@ dependencies {
     implementation 'io.swagger:swagger-annotations:1.5.21'
     implementation 'io.swagger:swagger-models:1.5.21'
     implementation 'cn.hutool:hutool-all:5.4.2'
-    implementation 'ma.glasnost.orika:orika-core:1.4.2'
+    implementation 'ma.glasnost.orika:orika-core:1.5.4'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java' 
     compileOnly 'org.projectlombok:lombok'

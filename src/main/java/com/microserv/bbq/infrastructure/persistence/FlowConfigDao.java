@@ -1,5 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.microserv.bbq.domain.model.flow.FlowConfigAgg;
 import com.microserv.bbq.domain.repository.FlowConfigRepo;
@@ -83,6 +85,11 @@ public class FlowConfigDao implements FlowConfigRepo {
 	}
 
 	@Override
+	public boolean deleteConfigByFlowId(String flowId) {
+		return flowConfigMapper.deleteById(flowId) > 0;
+	}
+
+	@Override
 	public boolean insertBatchNodes(List<FlowConfigAgg.NodeEntity> entities) {
 		List<FlowConfigNode> list = ModelUtils.convert(FlowConfigNode.class, entities);
 		list.forEach(flowConfigNodeMapper::insert);
@@ -105,6 +112,13 @@ public class FlowConfigDao implements FlowConfigRepo {
 	}
 
 	@Override
+	public boolean deleteNodesByFlowId(String flowId) {
+		Wrapper<FlowConfigNode> wrapper = Wrappers.lambdaQuery(FlowConfigNode.class)
+				.eq(FlowConfigNode::getFlowId, flowId);
+		return flowConfigNodeMapper.delete(wrapper) > 0;
+	}
+
+	@Override
 	public boolean insertBatchHandlers(List<FlowConfigAgg.HandlerEntity> entities) {
 		List<FlowConfigNodeHandler> list = ModelUtils.convert(FlowConfigNodeHandler.class, entities);
 		list.forEach(flowConfigNodeHandleMapper::insert);
@@ -124,6 +138,11 @@ public class FlowConfigDao implements FlowConfigRepo {
 	@Override
 	public boolean delete(FlowConfigAgg.HandlerEntity entity) {
 		return flowConfigNodeHandleMapper.deleteById(entity.getId()) > 0;
+	}
+
+	@Override
+	public boolean deleteHandlersByFlowId(String flowId) {
+		return flowConfigNodeHandleMapper.deleteListByFlowId(flowId)>0;
 	}
 
 }

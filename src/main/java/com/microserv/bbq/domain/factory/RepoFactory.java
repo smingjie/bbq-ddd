@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.factory;
 
-import com.microserv.bbq.infrastructure.general.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
 
 import java.util.Collection;
@@ -17,16 +17,16 @@ public class RepoFactory {
 	/**
 	 * 根据仓储接口类型获取对应实现且默认取值第一个
 	 *
-	 * @param tClass
-	 * @param <T>
-	 * @return
+	 * @param tClass 目标仓储接口类型
+	 * @param <T>    目标类型
+	 * @return 如果不是指定实现，默认获得第一个实现Bean
 	 */
-	public static <T> T get(Class<T> tClass) {
+	public static <T> T get(Class<? extends T> tClass) {
 
-		Map<String, T> map = ApplicationUtils.getApplicationContext().getBeansOfType(tClass);
-		Collection<T> collection = map.values();
+		Map<String, ? extends T> map = ApplicationUtils.getApplicationContext().getBeansOfType(tClass);
+		Collection<? extends T> collection = map.values();
 		if (collection.isEmpty()) {
-			throw new BusinessException("未找到仓储接口(" + tClass.getName() + ")的实现");
+			throw new PersistException("未找到仓储接口或其指定的实现:" + tClass.getSimpleName() );
 		}
 		return collection.stream().findFirst().get();
 	}

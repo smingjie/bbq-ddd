@@ -2,6 +2,7 @@ package com.microserv.bbq.domain.model.dict;
 
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.DictRepo;
+import com.microserv.bbq.infrastructure.persistence.DictDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class DictService {
 
 	public List<DictEntity> getByValue(String likeValue) {
-	return RepoFactory.get(DictRepo.class).selectByValue(likeValue);
+	DictRepo repo= RepoFactory.get(DictDao.class);
+	return RepoFactory.get(DictDao.class).selectByValue(likeValue);
 	}
 }

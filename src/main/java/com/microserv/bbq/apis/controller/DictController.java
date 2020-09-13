@@ -1,7 +1,7 @@
 package com.microserv.bbq.apis.controller;
 
-import com.microserv.bbq.apis.model.DictDTO;
-import com.microserv.bbq.apis.model.DictTypeVO;
+import com.microserv.bbq.apis.model.dict.DictDTO;
+import com.microserv.bbq.apis.model.dict.DictAggVO;
 import com.microserv.bbq.domain.model.dict.DictAgg;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import com.microserv.bbq.domain.model.dict.DictService;
@@ -26,14 +26,14 @@ public class DictController {
 
 	@ApiOperation(value = "获取一个指定类型的字典集合")
 	@GetMapping("/dict/agg")
-	public DictTypeVO getDictByType(@RequestParam String type) {
+	public DictAggVO getDictByType(@RequestParam String type) {
 		DictAgg agg = DictAgg.of(type);
-		return new DictTypeVO(agg);
+		return new DictAggVO(agg);
 	}
 
 	@ApiOperation(value = "获取一个字典记录详情，根据类型和键")
 	@GetMapping("/dict/one")
-	public DictEntity getDictDetail(@RequestParam String type, @RequestParam String key) {
+	public DictEntity getDictDetailByTypeAndKey(@RequestParam String type, @RequestParam String key) {
 		return new DictEntity().setType(type).setCode(key).get();
 	}
 

@@ -10,6 +10,8 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.util.Objects;
+
 
 /**
  * @author jockeys
@@ -18,28 +20,27 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 @Slf4j
 @ControllerAdvice
 public class ResponseJsonFormatHandler implements ResponseBodyAdvice<Object> {
-    @Override
-    public boolean supports(MethodParameter methodParameter,
-                            Class<? extends HttpMessageConverter<?>> aClass) {
-        // 判断请求是否要包装
-        Class<?> clazz = methodParameter.getNestedParameterType();
-        return !clazz.isAssignableFrom(ResponseEntity.class)
-                && !ResponseJson.class.getName().equals(clazz.getName());
-    }
+	@Override
+	public boolean supports(MethodParameter methodParameter,
+	                        Class<? extends HttpMessageConverter<?>> aClass) {
+		Class<?> clazz = methodParameter.getNestedParameterType();
+		// 判断请求是否要包装
+		// 除去ResponseEntity及其父类型、ResponseJson类型
+		// ResponseJson继承了HashMap此处不用isAssignableFrom方法
+		return !clazz.isAssignableFrom(ResponseEntity.class)
+				&& !ResponseJson.class.getName().equals(clazz.getName());
+	}
 
-    @Override
-    public Object beforeBodyWrite(Object o, MethodParameter methodParameter,
-                                  MediaType mediaType,
-                                  Class<? extends HttpMessageConverter<?>> aClass,
-                                  ServerHttpRequest serverHttpRequest,
-                                  ServerHttpResponse serverHttpResponse) {
+	@Override
+	public Object beforeBodyWrite(Object o, MethodParameter methodParameter,
+	                              MediaType mediaType,
+	                              Class<? extends HttpMessageConverter<?>> aClass,
+	                              ServerHttpRequest serverHttpRequest,
+	                              ServerHttpResponse serverHttpResponse) {
 
-        log.info("进入返回体重写过程...");
-        if (null == o) {
-            //成功执行但无数据返回，返回code，msg
-            return ResponseJson.ok();
-        }
-        // 尚未包装的成功数据，此处封装code msg data
-        return ResponseJson.ok(o);
-    }
+		log.info("进入返回体重写过程...");
+		//成功执行但无数据返回，返回code-msg
+		//尚未包装的成功数据，此处封装code-msg-data
+		return Objects.isNull(o) ? ResponseJson.ok() : ResponseJson.ok(o);
+	}
 }
