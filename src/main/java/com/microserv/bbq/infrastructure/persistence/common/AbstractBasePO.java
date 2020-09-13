@@ -1,18 +1,20 @@
-package com.microserv.bbq.infrastructure.persistence.base;
+package com.microserv.bbq.infrastructure.persistence.common;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
 /**
- * 数据库持久化对象的父类
+ * 数据库持久化对象的父类 (PO: Persistence Object)
  *
  * @author jockeys
  * @since 2020/4/5
  */
 @Data
-public abstract class BaseEntity {
+@Accessors(chain = true)
+public abstract class AbstractBasePO {
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

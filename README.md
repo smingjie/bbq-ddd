@@ -2,18 +2,10 @@
 
 springboot+ddd分层示例工程
 
-## 摘要
+## 代码目录结构
 
-* Gradle 6.3：项目构建工具
-* springboot 2.2.6.RELEASE：core
-* Orika 1.4.2：Bean模型映射工具
-* mybatis-plus 3.3.1： mybatis增强工具
-* hutool 5.2.5：通用工具
+`eg.`后端Java代码工程为例:
 
-## 代码目录结构说明
-
-`eg.`后端Java代码工程为例，
-`表现层`在此代码结构中表现为`api层`，对外暴露接口的最上层
 ```java
 ├─com.company.microservice
 │    │ 
@@ -34,6 +26,7 @@ springboot+ddd分层示例工程
 │    │    │    ├─xxxEntity.java 实体类，充血的领域模型
 │    │    │    └─xxxAgg.java    聚合类，通常表现为实体的聚合，需要有聚合根
 │    │    ├─service      领域服务类，一些不能归属某个具体领域模型的行为
+│    │    ├─repository   仓储接口
 │    │    └─factory      工厂类，负责复杂领域对象创建，封装细节 
 │    │ 
 │    ├─infrastructure  基础设施层
@@ -51,6 +44,34 @@ springboot+ddd分层示例工程
 │        └─application.yml   全局配置文件
 ```
 
+* `表现层`在此代码结构中表现为`api层`，对外暴露接口的最上层
 
+* 注意在领域模型中如何调用仓储接口，在编程实践中已经完全取代`@Autowired`和`@Resource`注入方式。引入了`RepoFactory`在领域层，用来从spring的容器中获取对应的仓储实现Bean，如下所示
 
+  ```java
+  	public static <T> T get(Class<? extends T> tClass) {
+  
+  		Map<String, ? extends T> map = ApplicationUtils.getApplicationContext().getBeansOfType(tClass);
+  		Collection<? extends T> collection = map.values();
+  		if (collection.isEmpty()) {
+  			throw new PersistException("未找到仓储接口或其指定的实现:" + tClass.getSimpleName() );
+  		}
+  		return collection.stream().findFirst().get();
+  	}
+  ```
+
+  * 可指定具体实现类来获取，则直接指定实现类为选择的实现
+  * 若不指定具体实现类，选取spring容器中最先注册的一个Bean实现
+
+  
+
+------
+
+## 补充
+
+本例程提供单表和多表情况下的的三个子域来进行编程实践的，分别是
+
+* 数据字典子域`dict`
+* 用户角色权限通用子域 `user-role-menu`
+* 工作流配置设计`flow-config`
 

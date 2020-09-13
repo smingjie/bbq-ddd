@@ -5,8 +5,11 @@ import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
@@ -19,6 +22,8 @@ import java.util.UUID;
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SequenceUtils {
+    private static final String TIME_PATTERN = "yyyyMMddHHmmssSSS";
+
     /**
      * 获取36字符UUID
      *
@@ -43,11 +48,10 @@ public final class SequenceUtils {
      * @return 20位序列号
      */
     public static String timestampNo() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
-        builder.append(String.format("%03d", new Random(1000)));
-        return builder.toString();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern(TIME_PATTERN);
+        return df.format(LocalDateTime.now()) + RandomStringUtils.randomNumeric(3);
     }
+
 
     /**
      * 获取时间戳序列号（带前缀）

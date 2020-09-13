@@ -11,12 +11,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 转换工具类
+ * 模型转换工具类
  *
  * @author jockeys
  * @since 2020/4/6
  */
-public class ConvertUtils {
+public class ModelUtils {
     private static final MapperFactory mapperFactory;
     private static final MapperFacade mapperFacade;
 
