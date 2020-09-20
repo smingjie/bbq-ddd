@@ -158,6 +158,7 @@ public enum ErrorCodeEnum {
         return null;
     }
 
+    @Override
     public String toString() {
         return MessageFormat.format("{0}(code={1},message={2})", name().toLowerCase(), getCode(), getMessage());
 

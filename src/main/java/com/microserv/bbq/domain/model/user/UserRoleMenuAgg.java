@@ -43,7 +43,7 @@ public class UserRoleMenuAgg extends UserEntity {
 
 
 	public UserRoleMenuAgg getMenuTreeByUserId(String userId) {
-		List<MenuEntity> allMenus = userRoleMenuRepo.selectMenusByUserId(userId);
+		List<MenuEntity> allMenus = userRoleMenuRepo.selectMenuListByUserId(userId);
 
 		this.menuList = createMenuTree(allMenus);
 		return this;
