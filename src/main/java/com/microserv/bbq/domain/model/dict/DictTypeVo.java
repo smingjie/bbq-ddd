@@ -13,10 +13,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class DictTypeVo {
-	/***类型 **/
-	private String type;
-	/***类型名称 **/
-	private String name;
+	private String type; //类型
+	private String name; //类型名称
 
 	public DictTypeVo(String type) {
 		this.type = type;

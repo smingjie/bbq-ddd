@@ -60,13 +60,13 @@ public class FlowConfigDao implements FlowConfigRepo {
 				.eq(FlowConfigNode::getFlowId, flowId)
 				.orderByAsc(FlowConfigNode::getSequence, FlowConfigNode::getCreateTime)
 				.list();
-		return ModelUtils.convert(FlowConfigAgg.NodeEntity.class, nodes);
+		return ModelUtils.convertList( nodes,FlowConfigAgg.NodeEntity.class);
 	}
 
 	@Override
 	public List<FlowConfigAgg.HandlerEntity> selectHandlersByFlowId(String flowId) {
 		List<FlowConfigNodeHandler> handlers = flowConfigNodeHandleMapper.selectListByFlowId(flowId);
-		return ModelUtils.convert(FlowConfigAgg.HandlerEntity.class, handlers);
+		return ModelUtils.convertList( handlers,FlowConfigAgg.HandlerEntity.class);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class FlowConfigDao implements FlowConfigRepo {
 
 	@Override
 	public boolean insertBatchNodes(List<FlowConfigAgg.NodeEntity> entities) {
-		List<FlowConfigNode> list = ModelUtils.convert(FlowConfigNode.class, entities);
+		List<FlowConfigNode> list = ModelUtils.convertList( entities,FlowConfigNode.class);
 		list.forEach(flowConfigNodeMapper::insert);
 		return true;
 	}
@@ -120,7 +120,7 @@ public class FlowConfigDao implements FlowConfigRepo {
 
 	@Override
 	public boolean insertBatchHandlers(List<FlowConfigAgg.HandlerEntity> entities) {
-		List<FlowConfigNodeHandler> list = ModelUtils.convert(FlowConfigNodeHandler.class, entities);
+		List<FlowConfigNodeHandler> list = ModelUtils.convertList( entities,FlowConfigNodeHandler.class);
 		list.forEach(flowConfigNodeHandleMapper::insert);
 		return true;
 	}

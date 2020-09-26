@@ -24,28 +24,36 @@ repositories {
 }
 
 dependencies {
+    // spring
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.jetbrains:annotations:19.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    implementation 'com.alibaba:fastjson:1.2.70'
+//    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+//    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+//        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//    }
+
+    // db and orm(mybatis-plus)
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'mysql:mysql-connector-java'
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.0'
     implementation 'com.baomidou:mybatis-plus-generator:3.4.0'
-    implementation 'org.apache.velocity:velocity-engine-core:2.2'
+    implementation 'org.apache.velocity:velocity-engine-core:2.2' // for mybatis-plus generate code
+
+    // util
+    implementation 'com.alibaba:fastjson:1.2.70'
+    implementation 'cn.hutool:hutool-all:5.4.2'
+    implementation 'ma.glasnost.orika:orika-core:1.5.4' //must
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // swagger
     implementation 'io.springfox:springfox-swagger2:2.9.2'
     implementation 'io.springfox:springfox-swagger-ui:2.9.2'
     implementation 'io.swagger:swagger-annotations:1.5.21'
     implementation 'io.swagger:swagger-models:1.5.21'
-    implementation 'cn.hutool:hutool-all:5.4.2'
-    implementation 'ma.glasnost.orika:orika-core:1.5.4'
-    runtimeOnly 'com.h2database:h2'
-    runtimeOnly 'mysql:mysql-connector-java' 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
 }
 
 test {

@@ -1,15 +1,15 @@
 package com.microserv.bbq.apis.model.dict;
 
-import com.microserv.bbq.domain.model.dict.DictAgg;
+import com.microserv.bbq.domain.model.dict.DictTypeAgg;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +32,8 @@ public class DictAggVO {
 	/**
 	 * todo 解析为传输对象
 	 */
-	public DictAggVO(@NotNull DictAgg agg) {
+	public DictAggVO(  DictTypeAgg agg) {
+		Objects.requireNonNull(agg);
 		this.type = agg.getType();
 		this.name = agg.getName();
 		this.items = agg.getItemList().stream().map(DictItem::new).collect(Collectors.toList());

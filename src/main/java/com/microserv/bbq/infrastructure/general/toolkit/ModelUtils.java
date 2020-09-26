@@ -121,18 +121,28 @@ public class ModelUtils {
         return entity;
     }
 
+//    /**
+//     * 列表转换
+//     *
+//     * @param clazz the clazz
+//     * @param list  the list
+//     */
+//    public static <T> List<T> convert(Class<T> clazz, List<?> list) {
+//        return CollectionUtils.isEmpty(list) ?
+//                Collections.emptyList() :
+//                list.stream().map(e -> convert(e,clazz)).collect(Collectors.toList());
+//    }
     /**
      * 列表转换
      *
      * @param clazz the clazz
      * @param list  the list
      */
-    public static <T> List<T> convert(Class<T> clazz, List<?> list) {
+    public static <T> List<T> convertList(List<?> list,Class<T> clazz) {
         return CollectionUtils.isEmpty(list) ?
                 Collections.emptyList() :
                 list.stream().map(e -> convert(e,clazz)).collect(Collectors.toList());
     }
-
     /**
      * 单个对象转换
      *

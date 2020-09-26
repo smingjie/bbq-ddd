@@ -19,7 +19,7 @@ public interface IBaseDao<D, P> {
 	}
 
 	default List<P> domain2po(List<D> domainList, Class<P> targetClass) {
-		return ModelUtils.convert(targetClass, domainList);
+		return ModelUtils.convertList(domainList,targetClass );
 	}
 
 	default D po2domain(P po, Class<D> sourceClass) {
@@ -27,7 +27,7 @@ public interface IBaseDao<D, P> {
 	}
 
 	default List<D> po2domain(List<P> poList, Class<D> sourceClass) {
-		return ModelUtils.convert(sourceClass, poList);
+		return ModelUtils.convertList( poList,sourceClass);
 	}
 
 }

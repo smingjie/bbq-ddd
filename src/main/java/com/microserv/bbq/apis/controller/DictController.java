@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.controller;
 
 import com.microserv.bbq.apis.model.dict.DictDTO;
 import com.microserv.bbq.apis.model.dict.DictAggVO;
-import com.microserv.bbq.domain.model.dict.DictAgg;
+import com.microserv.bbq.domain.model.dict.DictTypeAgg;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import com.microserv.bbq.domain.model.dict.DictService;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +27,7 @@ public class DictController {
 	@ApiOperation(value = "获取一个指定类型的字典集合")
 	@GetMapping("/dict/agg")
 	public DictAggVO getDictByType(@RequestParam String type) {
-		DictAgg agg = DictAgg.of(type);
+		DictTypeAgg agg = DictTypeAgg.of(type);
 		return new DictAggVO(agg);
 	}
 

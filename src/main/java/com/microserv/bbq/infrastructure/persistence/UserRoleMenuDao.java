@@ -28,14 +28,14 @@ public class UserRoleMenuDao implements UserRoleMenuRepo {
 
 	@Override
 	public List<MenuEntity> selectMenuListByUserId(String userId) {
-		return ModelUtils.convert(MenuEntity.class, menuMapper.selectMenusByUserId(userId));
+		return ModelUtils.convertList( menuMapper.selectMenusByUserId(userId),MenuEntity.class);
 
 	}
 
 
 	@Override
 	public List<RoleEntity> selectRoleListByUserId(String userId) {
-		return ModelUtils.convert(RoleEntity.class, roleMapper.selectRoleListByUserId(userId));
+		return ModelUtils.convertList( roleMapper.selectRoleListByUserId(userId),RoleEntity.class);
 	}
 
 	@Override

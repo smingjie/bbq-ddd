@@ -34,7 +34,7 @@ public interface IApiAssembler<M> {
 	 * @return 目标领域对象集合
 	 */
 	default List<M> trans2Domain(List<?> objects, Class<M> targetClazz) {
-		return ModelUtils.convert(targetClazz, objects);
+		return ModelUtils.convertList( objects,targetClazz);
 	}
 
 }

@@ -33,7 +33,7 @@ public class SwaggerConfig {
 
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("DDD微服务框架")
+                .title("ddd framework called bbq")
                 .description("BBQ-DDD")
                 .termsOfServiceUrl("http://bbq.microserv.com")
                 .version("1.0.0")
