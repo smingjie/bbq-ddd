@@ -211,9 +211,9 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 ![1601096616421](<https://img-blog.csdnimg.cn/20200110164305632.png>)
 
 在该架构中，上层模块可以调用下层模块，反之不行。即
- `interface`     —>`application`|`domain`|`infrastructure` 
- `application`   —>`domain`|`infrastructure` 
- `domain`  —>`infrastructure`                      
+*  `interface`     —>`application`|`domain`|`infrastructure` 
+*  `application`   —>`domain`|`infrastructure` 
+*  `domain`  —>`infrastructure`                      
 
 分层作用
 
