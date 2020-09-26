@@ -194,7 +194,7 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 - 在架构设计上，在`DDD`分层结构中将传统三层架构的 `业务逻辑层` 拆解为 `应用层 ` 和 `领域层` 
   其中Application划分为很薄的一层服务，非核心的逻辑放到此层去实现，核心的业务逻辑表现下沉到 `领域层` 去实现，凝练为更为精确的业务规则集合，通过领域对象去阐述说明。
 
-  ![ddd-layer-diff](.\resource\ddd-layer.png)
+  ![ddd-layer-diff](https://img-blog.csdnimg.cn/20200110163924602.png)
 
 - 在建模方式上，`DDD`分层的建模思维方式有别于传统三层
   传统三层通常是以数据库为起点进行数据库分析设计，而`DDD`则需要以业务领域模型为核心建模（即面向对象建模方式），更能体现对现实世界的抽象。
@@ -208,7 +208,7 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 
 ## 四层架构图 &分层作用
 
-![1601096616421](.\resource\ddd-order.png)
+![1601096616421](<https://img-blog.csdnimg.cn/20200110164305632.png>)
 
 在该架构中，上层模块可以调用下层模块，反之不行。即
 
@@ -278,7 +278,7 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 
 ## 领域建模分析过程图示
 
-![ddd-layer-diff](.\resource\ddd-modeling.png)
+![ddd-modeling](<https://img-blog.csdnimg.cn/2019120622204112.png>)
 
 * **领域**表示正在处理的现实世界中复杂的业务逻辑或规则构成的问题域；
 
