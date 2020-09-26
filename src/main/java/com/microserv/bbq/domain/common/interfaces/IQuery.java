@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.common;
+package com.microserv.bbq.domain.common.interfaces;
 
 /**
  * 接口：查询方法

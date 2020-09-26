@@ -2,6 +2,7 @@ package com.microserv.bbq.domain.model.dict;
 
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.DictRepo;
+import com.microserv.bbq.infrastructure.persistence.extension.annotation.BbqDomainAggregate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -18,32 +19,33 @@ import java.util.Objects;
 @Setter
 @Getter
 @Accessors(chain = true)
+@BbqDomainAggregate
 public class DictTypeAgg extends DictTypeVo {
-    private List<DictEntity> itemList;
+	private List<DictEntity> itemList;
 
-    public DictTypeAgg(String type) {
-        super(type);
-    }
+	public DictTypeAgg(String type) {
+		super(type);
+	}
 
-    private DictTypeAgg fetch() {
-        if (Objects.nonNull(this.getType())) {
-            this.itemList = RepoFactory.get(DictRepo.class).selectByType(this.getType());
+	private DictTypeAgg fetch() {
+		if (Objects.nonNull(this.getType())) {
+			this.itemList = RepoFactory.get(DictRepo.class).selectByType(this.getType());
 
-            return this;
-        }
+			return this;
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    /**
-     * 根据字典类型来获取此类型的字典聚合
-     *
-     * @param type 字典类型
-     * @return 字典类型聚合结果
-     */
-    public static DictTypeAgg of(String type) {
-        return new DictTypeAgg(type).fetch();
-    }
+	/**
+	 * 根据字典类型来获取此类型的字典聚合
+	 *
+	 * @param type 字典类型
+	 * @return 字典类型聚合结果
+	 */
+	public static DictTypeAgg of(String type) {
+		return new DictTypeAgg(type).fetch();
+	}
 }
 
 

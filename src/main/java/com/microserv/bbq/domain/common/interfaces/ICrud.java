@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.common;
+package com.microserv.bbq.domain.common.interfaces;
 
 /**
  * CRUD 接口定义或约束

@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.model.user;
 
-import com.microserv.bbq.domain.common.ICrud;
+import com.microserv.bbq.domain.common.interfaces.ICrud;
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.UserRoleMenuRepo;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;

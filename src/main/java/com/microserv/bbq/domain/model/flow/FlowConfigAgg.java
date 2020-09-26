@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.model.flow;
 
-import com.microserv.bbq.domain.common.ISaveOrUpdate;
+import com.microserv.bbq.domain.common.interfaces.ISaveOrUpdate;
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.FlowConfigRepo;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;

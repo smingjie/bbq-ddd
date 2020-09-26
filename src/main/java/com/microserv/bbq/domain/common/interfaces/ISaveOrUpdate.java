@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.common;
+package com.microserv.bbq.domain.common.interfaces;
 
 /**
  * 接口：新增或更新方法

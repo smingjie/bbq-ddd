@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.model.user;
 
 import cn.hutool.core.util.StrUtil;
-import com.microserv.bbq.domain.common.ICrud;
+import com.microserv.bbq.domain.common.interfaces.ICrud;
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.UserRepo;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
