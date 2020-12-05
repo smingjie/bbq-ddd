@@ -4,7 +4,6 @@ import cn.hutool.core.date.DatePattern;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,7 +43,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 		fastJsonConfig.setDateFormat(DatePattern.NORM_DATETIME_PATTERN);
 
 		//媒体类型
-		List<MediaType> mediaTypeList = Lists.newArrayList(
+		List<MediaType> mediaTypeList = Arrays.asList(
 				MediaType.APPLICATION_JSON,
 				new MediaType("application", "*+json")
 		);

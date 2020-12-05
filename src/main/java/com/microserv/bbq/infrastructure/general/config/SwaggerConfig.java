@@ -21,15 +21,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     private static final String SWAGGER_SCAN_BASE_PACKAGE = "com.microserv.bbq.apis.controller";
 
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .select()
-                .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
-                .paths(PathSelectors.any())
-                .build();
-    }
+        @Bean
+        public Docket createRestApi() {
+            return new Docket(DocumentationType.OAS_30)
+                    .apiInfo(apiInfo())
+                    .select()
+//                    .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                    .apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
+                    .paths(PathSelectors.any())
+                    .build();
+        }
 
     public ApiInfo apiInfo() {
         return new ApiInfoBuilder()
