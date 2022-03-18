@@ -48,7 +48,7 @@ springboot+ddd分层示例工程
 │    │ 
 │    ├─reference  引用层，扩展外部接口包装引用，防止穿插到Domain层腐化领域模型等 
 │    │    ├─ 忽略技术实现，此处的RPC、Http等调用，Domain层一般通过DomainEvent关联 
-│    │
+│    
 │    └─resources  
 │        ├─statics  静态资源
 │        ├─template 系统页面 
