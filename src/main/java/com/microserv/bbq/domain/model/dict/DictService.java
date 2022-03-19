@@ -2,7 +2,7 @@ package com.microserv.bbq.domain.model.dict;
 
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.infrastructure.persistence.DictDao;
-import com.microserv.bbq.infrastructure.persistence.extension.annotation.BbqDomainService;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
  * @author jockeys
  */
 @Service
-@BbqDomainService
+@DomainService
 public class DictService {
 
 	/**

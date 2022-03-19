@@ -2,7 +2,7 @@ package com.microserv.bbq.domain.model.dict;
 
 import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.DictRepo;
-import com.microserv.bbq.infrastructure.persistence.extension.annotation.BbqDomainAggregate;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAggregate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -19,7 +19,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Accessors(chain = true)
-@BbqDomainAggregate
+@DomainAggregate
 public class DictTypeAgg extends DictTypeVo {
 	private List<DictEntity> itemList;
 

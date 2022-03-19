@@ -6,7 +6,7 @@ import com.microserv.bbq.domain.factory.RepoFactory;
 import com.microserv.bbq.domain.repository.DictRepo;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
-import com.microserv.bbq.infrastructure.persistence.extension.annotation.BbqDomainEntity;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -22,7 +22,7 @@ import java.util.Objects;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@BbqDomainEntity
+@DomainEntity
 public class DictEntity implements ICrud<DictEntity> {
     private String  id;          // 唯一id
     private String  name;        // 字典类型名称
