@@ -1,7 +1,7 @@
-package com.microserv.bbq.domain.model.dict;
+package com.microserv.bbq.domain.dict;
 
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.DictRepo;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.dict.repository.DictRepository;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAggregate;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +29,7 @@ public class DictTypeAgg extends DictTypeVo {
 
 	private DictTypeAgg fetch() {
 		if (Objects.nonNull(this.getType())) {
-			this.itemList = RepoFactory.get(DictRepo.class).selectByType(this.getType());
+			this.itemList = RepositoryFactory.get(DictRepository.class).selectByType(this.getType());
 
 			return this;
 		}

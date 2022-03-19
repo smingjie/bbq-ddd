@@ -1,9 +1,9 @@
-package com.microserv.bbq.domain.model.dict;
+package com.microserv.bbq.domain.dict;
 
 import cn.hutool.core.util.StrUtil;
-import com.microserv.bbq.domain.common.interfaces.ICrud;
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.DictRepo;
+import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.dict.repository.DictRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainEntity;
@@ -23,7 +23,7 @@ import java.util.Objects;
 @Accessors(chain = true)
 @NoArgsConstructor
 @DomainEntity
-public class DictEntity implements ICrud<DictEntity> {
+public class DictEntity implements IDomainCRUD<DictEntity> {
     private String  id;          // 唯一id
     private String  name;        // 字典类型名称
     private String  type;        // 字典类型
@@ -41,7 +41,7 @@ public class DictEntity implements ICrud<DictEntity> {
      */
     @Override
     public boolean delete() {
-        return RepoFactory.get(DictRepo.class).delete(this);
+        return RepositoryFactory.get(DictRepository.class).delete(this);
     }
 
     /**
@@ -51,9 +51,9 @@ public class DictEntity implements ICrud<DictEntity> {
     public DictEntity saveOrUpdate() {
         if (Objects.nonNull(this.id)) {
             this.id = SequenceUtils.uuid32();
-            RepoFactory.get(DictRepo.class).insert(this);
+            RepositoryFactory.get(DictRepository.class).insert(this);
         } else {
-            RepoFactory.get(DictRepo.class).update(this);
+            RepositoryFactory.get(DictRepository.class).update(this);
         }
 
         return this;
@@ -68,8 +68,8 @@ public class DictEntity implements ICrud<DictEntity> {
     public DictEntity get() {
         if (!StrUtil.isAllBlank(this.id, this.type, this.code)) {
             DictEntity item = Objects.nonNull(this.id)
-                              ? RepoFactory.get(DictRepo.class).select(this.id)
-                              : RepoFactory.get(DictRepo.class).selectOne(this.type, this.code);
+                              ? RepositoryFactory.get(DictRepository.class).select(this.id)
+                              : RepositoryFactory.get(DictRepository.class).selectOne(this.type, this.code);
 
             ModelUtils.convert(item, this);
         }

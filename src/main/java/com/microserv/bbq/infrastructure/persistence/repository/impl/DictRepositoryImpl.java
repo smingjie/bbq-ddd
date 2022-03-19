@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.base.IBaseRepositoryImpl;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysDictMapper;
-import com.microserv.bbq.domain.model.dict.DictEntity;
-import com.microserv.bbq.domain.repository.DictRepo;
+import com.microserv.bbq.domain.dict.DictEntity;
+import com.microserv.bbq.domain.dict.repository.DictRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ import java.util.Objects;
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DictRepositoryImpl implements IBaseRepositoryImpl<DictEntity, SysDict>, DictRepo {
+public class DictRepositoryImpl implements IBaseRepositoryImpl<DictEntity, SysDict>, DictRepository {
 	private final SysDictMapper dictMapper;
 
 	//-- 仓储实现

@@ -1,9 +1,9 @@
-package com.microserv.bbq.domain.model.user;
+package com.microserv.bbq.domain.user;
 
 import cn.hutool.core.util.StrUtil;
-import com.microserv.bbq.domain.common.interfaces.ICrud;
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.UserRepo;
+import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.user.repository.UserRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
@@ -15,8 +15,8 @@ import java.util.Objects;
  * @since 2020/4/12
  */
 @Data
-public class UserEntity implements ICrud<UserEntity> {
-    private static UserRepo userRepo = RepoFactory.get(UserRepo.class);
+public class UserEntity implements IDomainCRUD<UserEntity> {
+    private static UserRepository userRepo = RepositoryFactory.get(UserRepository.class);
 
     // field
     private String userId;

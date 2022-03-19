@@ -1,8 +1,8 @@
-package com.microserv.bbq.domain.model.user;
+package com.microserv.bbq.domain.rbac;
 
-import com.microserv.bbq.domain.common.interfaces.ICrud;
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.UserRoleMenuRepo;
+import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -15,9 +15,9 @@ import lombok.experimental.Accessors;
 @Data
 @ApiModel
 @Accessors(chain = true)
-public class MenuEntity implements ICrud<MenuEntity> {
+public class MenuEntity implements IDomainCRUD<MenuEntity> {
 
-	private static UserRoleMenuRepo userRoleMenuRepo = RepoFactory.get(UserRoleMenuRepo.class);
+	private static UserRoleMenuRepository userRoleMenuRepo = RepositoryFactory.get(UserRoleMenuRepository.class);
 	//field
 	private String menuId;
 	private String parentId;

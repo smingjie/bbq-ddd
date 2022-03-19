@@ -2,9 +2,9 @@ package com.microserv.bbq.apis.controller;
 
 import com.microserv.bbq.apis.model.dict.DictAggVO;
 import com.microserv.bbq.apis.model.dict.DictDTO;
-import com.microserv.bbq.domain.model.dict.DictEntity;
-import com.microserv.bbq.domain.model.dict.DictService;
-import com.microserv.bbq.domain.model.dict.DictTypeAgg;
+import com.microserv.bbq.domain.dict.DictEntity;
+import com.microserv.bbq.domain.dict.DictService;
+import com.microserv.bbq.domain.dict.DictTypeAgg;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

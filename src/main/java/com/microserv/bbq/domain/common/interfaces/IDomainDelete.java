@@ -4,8 +4,8 @@ package com.microserv.bbq.domain.common.interfaces;
  * 接口：删除方法
  *
  * @author jockeys
- * @since 2020/4/6
+ * @since 2022/3/19
  */
-public interface IDelete {
+public interface IDomainDelete {
     boolean delete();
 }

@@ -1,6 +1,6 @@
-package com.microserv.bbq.domain.repository;
+package com.microserv.bbq.domain.flow.repository;
 
-import com.microserv.bbq.domain.model.flow.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.FlowConfigAgg;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author jockeys
  * @since 2020/4/25
  */
-public interface FlowConfigRepo {
+public interface FlowConfigRepository {
 	//--查询
 
 	FlowConfigAgg.ConfigEntity selectConfigByFlowId(String flowId);

@@ -3,9 +3,9 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl;
 import com.microserv.bbq.infrastructure.persistence.po.SysMenu;
 import com.microserv.bbq.infrastructure.persistence.po.SysRole;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysMenuMapper;
-import com.microserv.bbq.domain.model.user.MenuEntity;
-import com.microserv.bbq.domain.model.user.RoleEntity;
-import com.microserv.bbq.domain.repository.UserRoleMenuRepo;
+import com.microserv.bbq.domain.rbac.MenuEntity;
+import com.microserv.bbq.domain.rbac.RoleEntity;
+import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysRoleMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class UserRoleMenuRepositoryImpl implements UserRoleMenuRepo {
+public class UserRoleMenuRepositoryImpl implements UserRoleMenuRepository {
     private final SysMenuMapper menuMapper;
     private final SysRoleMapper roleMapper;
 

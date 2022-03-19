@@ -4,14 +4,13 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
+import com.microserv.bbq.domain.user.UserEntity;
+import com.microserv.bbq.domain.user.repository.UserRepository;
+import com.microserv.bbq.infrastructure.persistence.po.SysUser;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.base.IBaseRepositoryImpl;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysUserMapper;
-import com.microserv.bbq.domain.model.user.UserEntity;
-import com.microserv.bbq.domain.repository.UserRepo;
-import com.microserv.bbq.infrastructure.persistence.po.SysUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
@@ -23,8 +22,8 @@ import java.util.Objects;
  */
 @Slf4j
 @Repository
-@RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class UserRepositoryImpl implements IBaseRepositoryImpl<UserEntity, SysUser>, UserRepo {
+@RequiredArgsConstructor
+public class UserRepositoryImpl implements IBaseRepositoryImpl<UserEntity, SysUser>, UserRepository {
     private final SysUserMapper userMapper;
 
     @Override

@@ -1,7 +1,8 @@
-package com.microserv.bbq.domain.model.user;
+package com.microserv.bbq.domain.rbac;
 
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.UserRoleMenuRepo;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
+import com.microserv.bbq.domain.user.UserEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class UserRoleMenuAgg extends UserEntity {
-	private static UserRoleMenuRepo userRoleMenuRepo = RepoFactory.get(UserRoleMenuRepo.class);
+	private static UserRoleMenuRepository userRoleMenuRepo = RepositoryFactory.get(UserRoleMenuRepository.class);
 	List<MenuTreeItem> menuList;
 	List<RoleEntity> roleList;
 

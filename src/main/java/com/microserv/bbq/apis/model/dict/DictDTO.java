@@ -1,6 +1,6 @@
 package com.microserv.bbq.apis.model.dict;
 
-import com.microserv.bbq.domain.model.dict.DictEntity;
+import com.microserv.bbq.domain.dict.DictEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.apis.assembler.IApiAssembler;
 import io.swagger.annotations.ApiModel;

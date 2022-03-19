@@ -9,8 +9,8 @@ import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNodeHandler;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigNodeHandlerMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigNodeMapper;
-import com.microserv.bbq.domain.model.flow.FlowConfigAgg;
-import com.microserv.bbq.domain.repository.FlowConfigRepo;
+import com.microserv.bbq.domain.flow.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class FlowConfigRepositoryImpl implements FlowConfigRepo {
+public class FlowConfigRepositoryImpl implements FlowConfigRepository {
 
     private final FlowConfigMapper flowConfigMapper;
     private final FlowConfigNodeMapper flowConfigNodeMapper;

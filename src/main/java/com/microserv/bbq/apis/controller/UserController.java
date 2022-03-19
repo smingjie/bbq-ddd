@@ -1,7 +1,7 @@
 package com.microserv.bbq.apis.controller;
 
 
-import com.microserv.bbq.domain.model.user.UserEntity;
+import com.microserv.bbq.domain.user.UserEntity;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

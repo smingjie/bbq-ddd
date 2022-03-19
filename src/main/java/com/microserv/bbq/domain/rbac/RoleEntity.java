@@ -1,8 +1,8 @@
-package com.microserv.bbq.domain.model.user;
+package com.microserv.bbq.domain.rbac;
 
-import com.microserv.bbq.domain.common.interfaces.ICrud;
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.UserRoleMenuRepo;
+import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -13,8 +13,8 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class RoleEntity implements ICrud<RoleEntity> {
-	private static UserRoleMenuRepo userRoleMenuRepo = RepoFactory.get(UserRoleMenuRepo.class);
+public class RoleEntity implements IDomainCRUD<RoleEntity> {
+	private static UserRoleMenuRepository userRoleMenuRepo = RepositoryFactory.get(UserRoleMenuRepository.class);
 	private String roleId;
 	private String roleCode;
 	private String roleName;

@@ -1,12 +1,12 @@
-package com.microserv.bbq.domain.repository;
+package com.microserv.bbq.domain.user.repository;
 
-import com.microserv.bbq.domain.model.user.UserEntity;
+import com.microserv.bbq.domain.user.UserEntity;
 
 /**
  * @author jockeys
  * @date 2020/9/13
  */
-public interface UserRepo {
+public interface UserRepository {
 
 	//--查询
 

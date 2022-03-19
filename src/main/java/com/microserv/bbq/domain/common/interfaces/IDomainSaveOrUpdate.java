@@ -3,10 +3,10 @@ package com.microserv.bbq.domain.common.interfaces;
 /**
  * 接口：新增或更新方法
  *
- * @author jockeys
- * @since 2020/4/6
+ * @author mingjie
+ * @since 2021/3/19
  */
 @FunctionalInterface
-public interface ISaveOrUpdate<M> {
-    M saveOrUpdate();
+public interface IDomainSaveOrUpdate<DO> {
+    DO saveOrUpdate();
 }

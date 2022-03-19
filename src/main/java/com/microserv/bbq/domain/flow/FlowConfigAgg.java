@@ -1,8 +1,8 @@
-package com.microserv.bbq.domain.model.flow;
+package com.microserv.bbq.domain.flow;
 
-import com.microserv.bbq.domain.common.interfaces.ISaveOrUpdate;
-import com.microserv.bbq.domain.factory.RepoFactory;
-import com.microserv.bbq.domain.repository.FlowConfigRepo;
+import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
+import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +19,8 @@ import java.util.Objects;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class FlowConfigAgg implements ISaveOrUpdate<FlowConfigAgg> {
-    private static FlowConfigRepo flowConfigRepo = RepoFactory.get(FlowConfigRepo.class);
+public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
+    private static FlowConfigRepository flowConfigRepo = RepositoryFactory.get(FlowConfigRepository.class);
 
     /**
      * 配置信息

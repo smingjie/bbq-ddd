@@ -1,6 +1,6 @@
-package com.microserv.bbq.domain.repository;
+package com.microserv.bbq.domain.dict.repository;
 
-import com.microserv.bbq.domain.model.dict.DictEntity;
+import com.microserv.bbq.domain.dict.DictEntity;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @author jockeys
  * @since 2020/4/11
  */
-public interface DictRepo {
+public interface DictRepository {
 
 	//--查询
 

@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.factory;
+package com.microserv.bbq.domain.common.factory;
 
 import com.microserv.bbq.infrastructure.general.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
@@ -10,9 +10,9 @@ import java.util.Map;
  * 仓储工厂用来统一获取仓储实现
  *
  * @author jockeys
- * @date 2020/9/12
+ * @date 2022/03/19
  */
-public class RepoFactory {
+public class RepositoryFactory {
 
 	/**
 	 * 根据仓储接口类型获取对应实现且默认取值第一个

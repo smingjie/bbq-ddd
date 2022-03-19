@@ -1,7 +1,7 @@
-package com.microserv.bbq.domain.repository;
+package com.microserv.bbq.domain.rbac.repository;
 
-import com.microserv.bbq.domain.model.user.MenuEntity;
-import com.microserv.bbq.domain.model.user.RoleEntity;
+import com.microserv.bbq.domain.rbac.MenuEntity;
+import com.microserv.bbq.domain.rbac.RoleEntity;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author jockeys
  * @date 2020/9/13
  */
-public interface UserRoleMenuRepo {
+public interface UserRoleMenuRepository {
 	List<MenuEntity> selectMenuListByUserId(String userId);
 	List<RoleEntity> selectRoleListByUserId(String userId);
 
