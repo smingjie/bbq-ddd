@@ -76,6 +76,7 @@ public enum ErrorCodeEnum {
     /**
      * User
      */
+    USER_NOT_LOGIN_ERROR(HttpServletResponse.SC_BAD_REQUEST, "用户未登录"),
     USER_OLD_PASSWORD_ERROR(HttpServletResponse.SC_BAD_REQUEST, "修改密码失败，旧密码错误"),
     USER_AVATAR_NOT_EMPTY(HttpServletResponse.SC_BAD_REQUEST, "用户头像不能为空"),
     USER_AVATAR_UPLOAD_FAIL(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "用户头像上传失败"),
