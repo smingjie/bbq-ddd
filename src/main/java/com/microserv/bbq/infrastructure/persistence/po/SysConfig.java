@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_config")
 @ApiModel(value = "SysConfig对象", description = "系统配置信息表")
-public class SysConfig {
+public class SysConfig extends AbstractBasePO{
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.persistence.mapper;
+package com.microserv.bbq.infrastructure.persistence.repository.impl.mapper;
 
 import com.microserv.bbq.infrastructure.persistence.po.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

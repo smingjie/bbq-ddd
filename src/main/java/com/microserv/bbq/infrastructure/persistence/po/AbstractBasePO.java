@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.persistence.common;
+package com.microserv.bbq.infrastructure.persistence.po;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

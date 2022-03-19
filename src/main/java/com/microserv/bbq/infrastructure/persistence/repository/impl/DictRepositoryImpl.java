@@ -1,15 +1,15 @@
-package com.microserv.bbq.infrastructure.persistence;
+package com.microserv.bbq.infrastructure.persistence.repository.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
+import com.microserv.bbq.infrastructure.persistence.po.SysDict;
+import com.microserv.bbq.infrastructure.persistence.repository.impl.base.IBaseRepositoryImpl;
+import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysDictMapper;
 import com.microserv.bbq.domain.model.dict.DictEntity;
 import com.microserv.bbq.domain.repository.DictRepo;
-import com.microserv.bbq.infrastructure.persistence.common.IBaseDao;
-import com.microserv.bbq.infrastructure.persistence.mapper.SysDictMapper;
-import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,15 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Data Access Object
+ * Dict领域的仓储实现
  *
- * @author jockeys
- * @since 2020/4/11
+ * @author mingjie
+ * @since 2022/03/19
  */
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class DictDao implements IBaseDao<DictEntity, SysDict>, DictRepo {
+public class DictRepositoryImpl implements IBaseRepositoryImpl<DictEntity, SysDict>, DictRepo {
 	private final SysDictMapper dictMapper;
 
 	//-- 仓储实现

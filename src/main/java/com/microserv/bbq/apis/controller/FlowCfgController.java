@@ -1,8 +1,8 @@
 package com.microserv.bbq.apis.controller;
 
 
-import com.microserv.bbq.apis.model.flow.FlowConfigDTO;
 import com.microserv.bbq.domain.model.flow.FlowConfigAgg;
+import com.microserv.bbq.apis.model.flow.FlowConfigDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 

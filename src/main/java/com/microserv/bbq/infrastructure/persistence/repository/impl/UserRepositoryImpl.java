@@ -1,13 +1,13 @@
-package com.microserv.bbq.infrastructure.persistence;
+package com.microserv.bbq.infrastructure.persistence.repository.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
+import com.microserv.bbq.infrastructure.persistence.repository.impl.base.IBaseRepositoryImpl;
+import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysUserMapper;
 import com.microserv.bbq.domain.model.user.UserEntity;
 import com.microserv.bbq.domain.repository.UserRepo;
-import com.microserv.bbq.infrastructure.persistence.common.IBaseDao;
-import com.microserv.bbq.infrastructure.persistence.mapper.SysUserMapper;
 import com.microserv.bbq.infrastructure.persistence.po.SysUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,15 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
-
 /**
- * @author jockeys
- * @date 2020/9/13
+ * User领域的仓储实现
+ *
+ * @author mingjie
+ * @since 2022/03/19
  */
 @Slf4j
 @Repository
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
-public class UserDao implements IBaseDao<UserEntity, SysUser>, UserRepo {
+public class UserRepositoryImpl implements IBaseRepositoryImpl<UserEntity, SysUser>, UserRepo {
     private final SysUserMapper userMapper;
 
     @Override

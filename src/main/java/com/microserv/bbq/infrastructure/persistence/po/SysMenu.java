@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_menu")
 @ApiModel(value = "SysMenu对象", description = "菜单管理")
-public class SysMenu {
+public class SysMenu extends AbstractBasePO{
 
 	private static final long serialVersionUID = 1L;
 

@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-@MapperScan({"com.microserv.bbq.infrastructure.persistence.mapper"})
+@MapperScan({"com.microserv.bbq.infrastructure.persistence.repo.mapper"})
 public class MybatisPlusConfig {
 }

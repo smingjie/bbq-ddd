@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_user_role")
 @ApiModel(value = "SysUserRole对象", description = "用户与角色关系表")
-public class SysUserRole {
+public class SysUserRole extends AbstractBasePO{
 
 	private static final long serialVersionUID = 1L;
 

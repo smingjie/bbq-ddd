@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * 角色与菜单对应关系
@@ -20,7 +22,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("sys_role_menu")
 @ApiModel(value = "SysRoleMenu对象", description = "角色与菜单对应关系")
-public class SysRoleMenu {
+public class SysRoleMenu  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

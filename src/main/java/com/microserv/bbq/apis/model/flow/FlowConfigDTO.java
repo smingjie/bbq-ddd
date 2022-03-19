@@ -1,9 +1,6 @@
 package com.microserv.bbq.apis.model.flow;
 
 import com.microserv.bbq.domain.model.flow.FlowConfigAgg;
-import com.microserv.bbq.domain.model.flow.FlowConfigAgg.ConfigEntity;
-import com.microserv.bbq.domain.model.flow.FlowConfigAgg.HandlerEntity;
-import com.microserv.bbq.domain.model.flow.FlowConfigAgg.NodeEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
@@ -35,7 +32,7 @@ public class FlowConfigDTO {
     private String  moduleSta;
     List<NodeDTO>   nodes;    // 节点集合
 
-    public FlowConfigDTO fetchNodes(List<NodeEntity> nodeEntities, List<HandlerEntity> handlers) {
+    public FlowConfigDTO fetchNodes(List<FlowConfigAgg.NodeEntity> nodeEntities, List<FlowConfigAgg.HandlerEntity> handlers) {
         if ((nodeEntities != null) &&!nodeEntities.isEmpty()) {
             this.nodes = nodeEntities.stream().map(o -> NodeDTO.of(o, handlers)).collect(Collectors.toList());
         }
@@ -64,9 +61,9 @@ public class FlowConfigDTO {
             return null;
         }
 
-        ConfigEntity        configEntity    = ModelUtils.convert(dto, ConfigEntity.class);
-        List<NodeEntity>    nodeEntities    = new ArrayList<>();
-        List<HandlerEntity> handlerEntities = new ArrayList<>();
+        FlowConfigAgg.ConfigEntity configEntity    = ModelUtils.convert(dto, FlowConfigAgg.ConfigEntity.class);
+        List<FlowConfigAgg.NodeEntity>    nodeEntities    = new ArrayList<>();
+        List<FlowConfigAgg.HandlerEntity> handlerEntities = new ArrayList<>();
 
         if (configEntity.getFlowId() == null) {
             configEntity.setFlowId(SequenceUtils.uuid32());
@@ -74,12 +71,12 @@ public class FlowConfigDTO {
 
         if ((dto.getNodes() != null) &&!dto.getNodes().isEmpty()) {
             dto.getNodes().forEach(o -> {
-                    nodeEntities.add(ModelUtils.convert(o, NodeEntity.class).setFlowId(dto.getFlowId()));
+                    nodeEntities.add(ModelUtils.convert(o, FlowConfigAgg.NodeEntity.class).setFlowId(dto.getFlowId()));
 
                     if ((o.getHandlers() != null) &&!o.getHandlers().isEmpty()) {
                         handlerEntities.addAll(o.getHandlers()
                                                 .stream()
-                                                .map(e -> ModelUtils.convert(e, HandlerEntity.class))
+                                                .map(e -> ModelUtils.convert(e, FlowConfigAgg.HandlerEntity.class))
                                                 .collect(Collectors.toList()));
                     }
                 });
@@ -124,7 +121,7 @@ public class FlowConfigDTO {
         // 处理人
         private List<HandlerDTO> handlers;
 
-        public NodeDTO fetchHandlers(List<HandlerEntity> handlers, String nodeId) {
+        public NodeDTO fetchHandlers(List<FlowConfigAgg.HandlerEntity> handlers, String nodeId) {
             if ((handlers != null) &&!handlers.isEmpty()) {
                 this.handlers = handlers.stream()
                                         .filter(o -> o.getFlowNodeId().equals(nodeId))
@@ -135,7 +132,7 @@ public class FlowConfigDTO {
             return this;
         }
 
-        public static NodeDTO of(NodeEntity node, List<HandlerEntity> handlers) {
+        public static NodeDTO of(FlowConfigAgg.NodeEntity node, List<FlowConfigAgg.HandlerEntity> handlers) {
             if (node == null) {
                 return null;
             }

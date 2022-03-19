@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import com.microserv.bbq.infrastructure.persistence.common.AbstractBasePO;
+import com.microserv.bbq.infrastructure.persistence.po.AbstractBasePO;
 import lombok.Data;
 
 import java.util.ArrayList;

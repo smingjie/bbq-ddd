@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.persistence.extension;
+package com.microserv.bbq.infrastructure.persistence.repository.impl.handler;
 
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author mingjie
+ * @date 2022年3月19日22:03:43
+ */
 @Component
 @Slf4j
 public class MyMetaObjectHandler implements MetaObjectHandler {
