@@ -1,7 +1,6 @@
 package com.microserv.bbq.infrastructure.general.constant;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.MessageFormat;
@@ -13,7 +12,6 @@ import java.text.MessageFormat;
  * @since 2020/4/6
  */
 @Getter
-@RequiredArgsConstructor
 public enum ErrorCodeEnum {
     /**
      * 400
@@ -127,18 +125,26 @@ public enum ErrorCodeEnum {
     /**
      * Data Access
      */
-    DATE_ACCESS_FAIL(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"仓储服务出了点状况，抱歉")
-    ;
+    DATE_ACCESS_FAIL(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "仓储服务出了点状况，抱歉");
 
     //----------------------------------------------------分割线----------------------------------------------------
     /**
      * http状态码
      */
-    private final int code;
+    private final String code;
     /**
      * 错误信息提示
      */
     private final String message;
+
+    ErrorCodeEnum(int code, String message) {
+        this(String.valueOf(code), message);
+    }
+
+    ErrorCodeEnum(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
     /**
      * for example: JSON_FORMAT_ERROR

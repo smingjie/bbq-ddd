@@ -10,11 +10,11 @@ import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
  */
 public class BusinessException extends RuntimeException {
     private static final long serialVersionUID = 1L;
-    private static final int DEFAULT_CODE = 500;
+    private static final String DEFAULT_CODE = "500";
     /**
      * 错误码
      */
-    protected int code = DEFAULT_CODE;
+    protected String code = DEFAULT_CODE;
 
     /**
      * 错误枚举-初始化
@@ -37,7 +37,7 @@ public class BusinessException extends RuntimeException {
         super(message, cause);
     }
 
-    public int getCode() {
+    public String getCode() {
         return this.code;
     }
 }

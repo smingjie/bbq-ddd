@@ -38,9 +38,9 @@ public class ResponseJsonFormatHandler implements ResponseBodyAdvice<Object> {
 	                              ServerHttpRequest serverHttpRequest,
 	                              ServerHttpResponse serverHttpResponse) {
 
-		log.info("进入返回体重写过程...");
+		log.debug("进入返回体重写过程...");
 		//成功执行但无数据返回，返回code-msg
 		//尚未包装的成功数据，此处封装code-msg-data
-		return Objects.isNull(o) ? ResponseJson.ok() : ResponseJson.ok(o);
+		return Objects.isNull(o) ? ResponseJson.success() : ResponseJson.success(o);
 	}
 }
