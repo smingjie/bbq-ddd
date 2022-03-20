@@ -7,8 +7,8 @@ import com.microserv.bbq.apis.assembler.UserApiAssembler;
 import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.domain.user.service.UserDomainService;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +22,10 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserDomainService userDomainService;
-    @Autowired
-    private UserApiAssembler userApiAssembler;
+    private final UserDomainService userDomainService;
+    private final UserApiAssembler userApiAssembler;
 
     @ApiOperation(value = "获取用户的基本信息")
     @GetMapping("/users/{userId}/info")

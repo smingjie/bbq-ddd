@@ -12,7 +12,7 @@ import java.util.List;
  * @author mingjie
  * @date 2022/3/20
  */
-public interface IDomainAssembler<DO, PO> {
+public interface IPoDomainAssembler<DO, PO> {
 
 
     /**
@@ -22,7 +22,7 @@ public interface IDomainAssembler<DO, PO> {
      * @param poClass 目标持久化模型类名
      * @return 目标持久化对象
      */
-    default PO oneDomain2po(DO domain, Class<PO> poClass) {
+    default PO domain2po(DO domain, Class<PO> poClass) {
         if(domain==null){
             return null;
         }
@@ -36,7 +36,7 @@ public interface IDomainAssembler<DO, PO> {
      * @param domainClass 目标领域模型类名
      * @return 目标领域对象
      */
-    default DO onePo2domain(PO po, Class<DO> domainClass) {
+    default DO po2domain(PO po, Class<DO> domainClass) {
         if(po==null){
             return null;
         }
@@ -50,7 +50,7 @@ public interface IDomainAssembler<DO, PO> {
      * @param poClass    目标持久化对象类名
      * @return 目标持久化对象集合
      */
-    default List<PO> multiDomain2po(List<DO> domainList, Class<PO> poClass) {
+    default List<PO> domain2po(List<DO> domainList, Class<PO> poClass) {
         return ModelUtils.convertList(domainList, poClass);
     }
 
@@ -61,7 +61,7 @@ public interface IDomainAssembler<DO, PO> {
      * @param domainClass 目标领域模型类名
      * @return 目标领域模型集合
      */
-    default List<DO> multiPo2domain(List<PO> poList, Class<DO> domainClass) {
+    default List<DO> po2domain(List<PO> poList, Class<DO> domainClass) {
         return ModelUtils.convertList(poList, domainClass);
     }
 }

@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.apimodel.dict;
 
 import com.microserv.bbq.domain.dict.DictEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
-import com.microserv.bbq.infrastructure.general.extension.assembler.IApiAssembler;
+import com.microserv.bbq.infrastructure.general.extension.assembler.IApiDomainAssembler;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @ApiModel
-public class DictDTO implements IApiAssembler<DictEntity> {
+public class DictDTO implements IApiDomainAssembler<DictEntity> {
 	@ApiModelProperty(value = "id主键，更新的可选项")
 	private String id;
 	@ApiModelProperty(value = "字典名称", required = true)

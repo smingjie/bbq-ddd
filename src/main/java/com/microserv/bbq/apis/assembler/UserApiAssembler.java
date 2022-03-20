@@ -1,16 +1,16 @@
 package com.microserv.bbq.apis.assembler;
 
 import com.microserv.bbq.domain.user.entity.UserEntity;
-import com.microserv.bbq.infrastructure.general.extension.assembler.IApiAssembler;
-import org.springframework.stereotype.Component;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAssembler;
+import com.microserv.bbq.infrastructure.general.extension.assembler.IApiDomainAssembler;
 
 /**
- * ~
+ * API层装配器-用户域
  *
  * @author mingjie
  * @date 2022/3/20
  */
-@Component
-public class UserApiAssembler implements IApiAssembler<UserEntity> {
+@DomainAssembler
+public class UserApiAssembler implements IApiDomainAssembler<UserEntity> {
 
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * @author jockeys
  * @since 2020/4/11
  */
-public interface IApiAssembler<M> {
+public interface IApiDomainAssembler<M> {
 
 
 	/**

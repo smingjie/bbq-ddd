@@ -132,17 +132,19 @@ public class ModelUtils {
 //                Collections.emptyList() :
 //                list.stream().map(e -> convert(e,clazz)).collect(Collectors.toList());
 //    }
+
     /**
      * 列表转换
      *
      * @param clazz the clazz
      * @param list  the list
      */
-    public static <T> List<T> convertList(List<?> list,Class<T> clazz) {
+    public static <T> List<T> convertList(List<?> list, Class<T> clazz) {
         return CollectionUtils.isEmpty(list) ?
                 Collections.emptyList() :
-                list.stream().map(e -> convert(e,clazz)).collect(Collectors.toList());
+                list.stream().map(e -> convert(e, clazz)).collect(Collectors.toList());
     }
+
     /**
      * 单个对象转换
      *
@@ -150,7 +152,7 @@ public class ModelUtils {
      * @param source      源对象
      * @return 转换后的目标对象
      */
-    public static <T> T convert(Object source,Class<T> targetClass) {
+    public static <T> T convert(Object source, Class<T> targetClass) {
         return getMapperFacade().map(source, targetClass);
     }
 
@@ -158,11 +160,11 @@ public class ModelUtils {
      * Maps the properties of <code>sourceObject</code> onto
      * <code>destinationObject</code>.
      *
-     * @param sourceObject      the object from which to read the properties
+     * @param sourceObject the object from which to read the properties
      * @param targetObject the object onto which the properties should be mapped
      */
     public static <S, T> void convert(S sourceObject, T targetObject) {
-         getMapperFacade().map(sourceObject, targetObject);
+        getMapperFacade().map(sourceObject, targetObject);
     }
 
 }

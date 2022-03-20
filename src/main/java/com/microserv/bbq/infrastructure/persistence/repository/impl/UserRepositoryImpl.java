@@ -60,14 +60,14 @@ public class UserRepositoryImpl implements UserRepository {
             throw new PersistException("保存插入实体时，用户实体不能为空");
         }
 
-        SysUser sysUser = sysUserAssembler.oneDomain2po(item, SysUser.class);
+        SysUser sysUser = sysUserAssembler.domain2po(item, SysUser.class);
         return sysUserMapper.insert(sysUser) > 0;
     }
 
     @Override
     public UserEntity selectById(String id) {
         SysUser sysUser = sysUserMapper.selectById(id);
-        return sysUserAssembler.onePo2domain(sysUser, UserEntity.class);
+        return sysUserAssembler.po2domain(sysUser, UserEntity.class);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UserRepositoryImpl implements UserRepository {
         SysUser sysUser = ChainWrappers.lambdaQueryChain(sysUserMapper)
                 .eq(SysUser::getUsername, username)
                 .one();
-        return sysUserAssembler.onePo2domain(sysUser, UserEntity.class);
+        return sysUserAssembler.po2domain(sysUser, UserEntity.class);
 
     }
 
@@ -104,7 +104,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 
         // 2 模型转换
-        SysUser updatePO = sysUserAssembler.oneDomain2po(item, SysUser.class);
+        SysUser updatePO = sysUserAssembler.domain2po(item, SysUser.class);
         updatePO.setCreateBy(SecurityContext.tryGetLoginUserId());
         updatePO.setUpdateTime(LocalDateTime.now());
 
