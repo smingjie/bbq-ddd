@@ -1,6 +1,7 @@
-package com.microserv.bbq.apis;
+package com.microserv.bbq.infrastructure.general.response;
 
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
+import lombok.Getter;
 
 import java.io.Serializable;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
  * @author jockeys
  * @since 2020/4/6
  */
+@Getter
 public final class ResponseJson<T> implements Serializable {
     /** 状态码 */
     private String code;
@@ -38,17 +40,6 @@ public final class ResponseJson<T> implements Serializable {
 
     private ResponseJson(String code, String msg) {
         this(code, msg, null);
-    }
-
-    /**
-     * 重新设置提示信息
-     *
-     * @param msg 提示信息
-     * @return this object
-     */
-    public ResponseJson<T> setMsg(String msg) {
-        this.msg = msg;
-        return this;
     }
 
     /**

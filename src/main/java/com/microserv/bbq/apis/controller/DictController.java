@@ -1,7 +1,7 @@
 package com.microserv.bbq.apis.controller;
 
-import com.microserv.bbq.apis.model.dict.DictAggVO;
-import com.microserv.bbq.apis.model.dict.DictDTO;
+import com.microserv.bbq.apis.apimodel.dict.DictAggVO;
+import com.microserv.bbq.apis.apimodel.dict.DictDTO;
 import com.microserv.bbq.domain.dict.DictEntity;
 import com.microserv.bbq.domain.dict.DictService;
 import com.microserv.bbq.domain.dict.DictTypeAgg;

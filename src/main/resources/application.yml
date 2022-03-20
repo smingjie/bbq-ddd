@@ -56,7 +56,7 @@ mybatis-plus:
       #表名下划线命名默认true
       table-underline: true
       #id类型
-      id-type: auto
+      id-type: input
       #逻辑已删除值,(逻辑删除下有效) 需要注入逻辑策略LogicSqlInjector 以@Bean方式注入
       logic-not-delete-value: 0
       #逻辑未删除值,(逻辑删除下有效)

@@ -1,4 +1,4 @@
-package com.microserv.bbq.apis.model.dict;
+package com.microserv.bbq.apis.apimodel.dict;
 
 import com.microserv.bbq.domain.dict.DictEntity;
 import com.microserv.bbq.domain.dict.DictTypeAgg;

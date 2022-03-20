@@ -1,5 +1,6 @@
 package com.microserv.bbq.infrastructure.general.security;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,9 +21,11 @@ public class LoginUserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String loginUserBase64String = request.getHeader(HEADER_LOGIN_USER);
-        String loginUserString = new String(Base64.getDecoder().decode(loginUserBase64String), StandardCharsets.UTF_8);
-        LoginUser loginUser = JSON.parseObject(loginUserString, LoginUser.class);
-        SecurityContext.set(loginUser);
+        if (StrUtil.isNotBlank(loginUserBase64String)) {
+            String loginUserString = new String(Base64.getDecoder().decode(loginUserBase64String), StandardCharsets.UTF_8);
+            LoginUser loginUser = JSON.parseObject(loginUserString, LoginUser.class);
+            SecurityContext.set(loginUser);
+        }
         return true;
     }
 

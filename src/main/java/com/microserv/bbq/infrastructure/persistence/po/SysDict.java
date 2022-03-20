@@ -21,10 +21,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("sys_dict")
-@ApiModel(value="SysDict对象", description="数据字典表")
+@ApiModel(value = "SysDict对象", description = "数据字典表")
 public class SysDict extends AbstractBasePO {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId("id")
     private String id;
@@ -55,7 +55,7 @@ public class SysDict extends AbstractBasePO {
 
     @ApiModelProperty(value = "删除标记 0：正常 1：已删除")
     @TableField("deleted")
-    private Integer deleted;
+    private Boolean deleted;
 
 
 }

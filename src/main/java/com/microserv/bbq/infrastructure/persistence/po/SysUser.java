@@ -38,9 +38,9 @@ public class SysUser extends AbstractBasePO {
     @TableField("password")
     private String password;
 
-    @ApiModelProperty(value = "邮箱")
-    @TableField("email")
-    private String email;
+    @ApiModelProperty(value = "姓名")
+    @TableField("name")
+    private String name;
 
     @ApiModelProperty(value = "手机号")
     @TableField("mobile")
@@ -48,7 +48,7 @@ public class SysUser extends AbstractBasePO {
 
     @ApiModelProperty(value = "状态  0：禁用  1：正常")
     @TableField("status")
-    private Integer status;
+    private Boolean status;
 
 
 }

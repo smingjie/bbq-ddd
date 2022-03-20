@@ -1,5 +1,7 @@
 package com.microserv.bbq.infrastructure.general.extension.annotation.ddd;
 
+import org.springframework.stereotype.Repository;
+
 import java.lang.annotation.*;
 
 /**
@@ -9,8 +11,9 @@ import java.lang.annotation.*;
  * @date 2022/3/19
  */
 @DDDAnnotation
-@Retention(RetentionPolicy.SOURCE)  //设置SOURCE相当与注释作用
 @Documented
-@Target(value = {ElementType.TYPE,ElementType.FIELD})
+@Repository
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value = {ElementType.TYPE})
 public @interface DomainRepository {
 }

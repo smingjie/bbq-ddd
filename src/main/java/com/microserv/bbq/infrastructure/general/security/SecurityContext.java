@@ -42,7 +42,9 @@ public final class SecurityContext {
     }
 
     public static void clear() {
-        securityUserThreadLocal.remove();
+        if (securityUserThreadLocal.get() != null) {
+            securityUserThreadLocal.remove();
+        }
     }
 
 }

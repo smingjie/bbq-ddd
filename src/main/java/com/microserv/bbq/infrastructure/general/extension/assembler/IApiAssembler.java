@@ -1,4 +1,4 @@
-package com.microserv.bbq.apis.assembler;
+package com.microserv.bbq.infrastructure.general.extension.assembler;
 
 
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

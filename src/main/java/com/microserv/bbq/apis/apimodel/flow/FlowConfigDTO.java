@@ -1,4 +1,4 @@
-package com.microserv.bbq.apis.model.flow;
+package com.microserv.bbq.apis.apimodel.flow;
 
 import com.microserv.bbq.domain.flow.FlowConfigAgg;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

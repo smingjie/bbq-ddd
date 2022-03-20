@@ -1,4 +1,4 @@
-package com.microserv.bbq.apis;
+package com.microserv.bbq.infrastructure.general.response;
 
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;

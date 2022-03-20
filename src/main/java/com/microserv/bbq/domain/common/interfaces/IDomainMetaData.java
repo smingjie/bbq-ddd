@@ -1,6 +1,10 @@
 package com.microserv.bbq.domain.common.interfaces;
 
+import java.time.LocalDateTime;
+
 /**
+ * 领域对象 元数据获取
+ *
  * @author mingjie
  * @date 2022/3/19
  */
@@ -13,7 +17,7 @@ public interface IDomainMetaData {
     /**
      * 获取创建时间戳
      */
-    String getCreateTime();
+    LocalDateTime getCreateTime();
 
 
     /**
@@ -24,6 +28,6 @@ public interface IDomainMetaData {
     /**
      * 获取更新时间
      */
-    String getUpdateTime();
+    LocalDateTime getUpdateTime();
 
 }

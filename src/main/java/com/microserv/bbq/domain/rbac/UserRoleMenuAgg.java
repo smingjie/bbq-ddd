@@ -2,7 +2,7 @@ package com.microserv.bbq.domain.rbac;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
 import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
-import com.microserv.bbq.domain.user.UserEntity;
+import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

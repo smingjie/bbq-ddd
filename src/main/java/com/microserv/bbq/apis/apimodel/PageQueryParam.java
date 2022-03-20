@@ -1,4 +1,4 @@
-package com.microserv.bbq.apis.model;
+package com.microserv.bbq.apis.apimodel;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
