@@ -6,6 +6,7 @@ import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import com.microserv.bbq.domain.user.repository.UserRepository;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
@@ -22,8 +23,9 @@ import java.util.Objects;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
+@DomainEntity
 public class UserEntity implements IDomainCRUD<UserEntity>, IDomainMetaData {
-    private static UserRepository userRepository = RepositoryFactory.get(UserRepository.class);
+    private static final UserRepository userRepository = RepositoryFactory.get(UserRepository.class);
 
     // field
     private String userId;

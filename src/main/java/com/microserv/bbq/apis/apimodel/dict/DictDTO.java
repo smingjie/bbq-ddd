@@ -1,15 +1,16 @@
 package com.microserv.bbq.apis.apimodel.dict;
 
-import com.microserv.bbq.domain.dict.DictEntity;
+import com.microserv.bbq.domain.dict.entity.DictEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
-import com.microserv.bbq.infrastructure.general.extension.assembler.IApiDomainAssembler;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 数据字典数据传输对象
@@ -20,7 +21,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @ApiModel
-public class DictDTO implements IApiDomainAssembler<DictEntity> {
+@Accessors(chain = true)
+public class DictDTO implements Serializable {
 	@ApiModelProperty(value = "id主键，更新的可选项")
 	private String id;
 	@ApiModelProperty(value = "字典名称", required = true)
