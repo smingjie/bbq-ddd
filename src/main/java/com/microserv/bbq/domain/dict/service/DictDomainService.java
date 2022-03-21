@@ -1,6 +1,7 @@
 package com.microserv.bbq.domain.dict.service;
 
 import com.microserv.bbq.domain.dict.entity.DictEntity;
+import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainService;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,10 @@ public class DictDomainService {
 	 */
 	public List<DictEntity> getByValue(String likeValue) {
 		return dictRepository.searchByValue(likeValue);
+	}
+
+
+	public List<DictTypeEntity> getTypes(String searchTypeName){
+		return dictRepository.searchByTypeName(searchTypeName);
 	}
 }

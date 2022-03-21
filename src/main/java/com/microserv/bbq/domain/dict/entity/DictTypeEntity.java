@@ -19,4 +19,9 @@ public class DictTypeEntity {
     public DictTypeEntity(String type) {
         this.type = type;
     }
+
+    public DictTypeEntity(String type, String name) {
+        this.type = type;
+        this.name = name;
+    }
 }

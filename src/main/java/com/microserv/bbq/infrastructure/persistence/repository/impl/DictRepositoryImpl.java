@@ -3,10 +3,13 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.microserv.bbq.domain.dict.entity.DictEntity;
+import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
+import com.microserv.bbq.domain.dict.valueobject.DictValueVObj;
 import com.microserv.bbq.infrastructure.general.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.security.SecurityContext;
 import com.microserv.bbq.infrastructure.persistence.assembler.SysDictAssembler;
@@ -18,8 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Dict领域的仓储实现
@@ -56,6 +62,19 @@ public class DictRepositoryImpl implements DictRepository {
                 .like(SysDict::getValue, valueLike)
                 .list();
         return sysDictAssembler.po2domain(poList, DictEntity.class);
+    }
+
+    @Override
+    public List<DictTypeEntity> searchByTypeName(String typeNameLike) {
+        List<SysDict> poList = ChainWrappers.lambdaQueryChain(sysDictMapper)
+                .select(SysDict::getType,SysDict::getName)
+                .like(SysDict::getName, typeNameLike)
+                .list();
+        if(CollectionUtils.isEmpty(poList)){
+            return Collections.emptyList();
+        }
+        return poList.stream().map(sysDictAssembler::convert2DictTypeEntity)
+                .distinct().collect(Collectors.toList())       ;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.assembler;
 
 import com.microserv.bbq.domain.dict.entity.DictEntity;
+import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAssembler;
 import com.microserv.bbq.infrastructure.general.extension.assembler.IPoDomainAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.SysDict;
@@ -13,4 +14,8 @@ import com.microserv.bbq.infrastructure.persistence.po.SysDict;
  */
 @DomainAssembler
 public class SysDictAssembler  implements IPoDomainAssembler<DictEntity, SysDict> {
+
+    public DictTypeEntity convert2DictTypeEntity(SysDict sysDict){
+        return sysDict==null?null:new DictTypeEntity(sysDict.getType(),sysDict.getName());
+    }
 }

@@ -1,6 +1,7 @@
 package com.microserv.bbq.domain.dict.repository;
 
 import com.microserv.bbq.domain.dict.entity.DictEntity;
+import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
 
 import java.util.List;
 
@@ -12,21 +13,23 @@ import java.util.List;
  */
 public interface DictRepository {
 
-	//--查询
+    //--查询
 
-	DictEntity selectById(String id);
+    DictEntity selectById(String id);
 
-	DictEntity selectByTypeAndCode(String type, String key);
+    DictEntity selectByTypeAndCode(String type, String key);
 
-	List<DictEntity> selectByType(String type);
+    List<DictEntity> selectByType(String type);
 
-	List<DictEntity> searchByValue(String valueLike);
+    List<DictEntity> searchByValue(String valueLike);
 
-	//--命令
-	boolean insert(DictEntity item);
+    List<DictTypeEntity> searchByTypeName(String typeNameLike);
 
-	boolean update(DictEntity item);
+    //--命令
+    boolean insert(DictEntity item);
 
-	boolean delete(DictEntity item);
+    boolean update(DictEntity item);
+
+    boolean delete(DictEntity item);
 
 }

@@ -8,34 +8,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 数据字典数据传输对象
+ * 数据字典更新参数
  *
  * @author jockeys
- * @since 2020/2/4
+ * @since 2021/3/21
  */
 @Data
 @AllArgsConstructor
 @ApiModel
 @Accessors(chain = true)
-public class DictDTO implements Serializable {
-	@ApiModelProperty(value = "id主键，更新的可选项")
+public class DictUpdateParam implements Serializable {
+	@ApiModelProperty(value = "id主键",hidden = true)
 	private String id;
-	@ApiModelProperty(value = "字典名称", required = true)
-	@NotNull(message = "字典名称不能为空")
+	@ApiModelProperty(value = "字典名称") 
 	private String name;
-	@ApiModelProperty(value = "字典类型", required = true)
-	@NotNull(message = "字典类型不能为空")
+	@ApiModelProperty(value = "字典类型") 
 	private String type;
-	@ApiModelProperty(value = "字典码", required = true)
-	@NotBlank(message = "字典码不能为空")
+	@ApiModelProperty(value = "字典码")
 	private String code;
-	@ApiModelProperty(value = "字典值", required = true)
-	@NotBlank(message = "字典值不能为空")
+	@ApiModelProperty(value = "字典值")
 	private String value;
 	@ApiModelProperty(value = "排序")
 	private Integer orderNum;
@@ -45,7 +40,7 @@ public class DictDTO implements Serializable {
 	/**
 	 * 从实体解析为传输对象
 	 */
-	public DictDTO(@NotNull DictEntity entity) {
+	public DictUpdateParam(@NotNull DictEntity entity) {
 		ModelUtils.convert(entity, this);
 	}
 }

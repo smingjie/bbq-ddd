@@ -27,9 +27,6 @@ public class DictAggVO {
     @ApiModelProperty(value = "根据聚合根聚合的字典集合，记录包括id,key,value")
     private List<DictItemVO> items;
 
-    /**
-     * todo 解析为传输对象
-     */
     public DictAggVO(DictTypeAgg agg) {
         Objects.requireNonNull(agg);
         this.type = agg.getType();
