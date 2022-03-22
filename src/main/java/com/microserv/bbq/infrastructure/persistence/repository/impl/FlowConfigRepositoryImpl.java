@@ -9,7 +9,7 @@ import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNodeHandler;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigNodeHandlerMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigNodeMapper;
-import com.microserv.bbq.domain.flow.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.RequiredArgsConstructor;

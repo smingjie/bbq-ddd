@@ -1,6 +1,6 @@
 package com.microserv.bbq.apis.apimodel.flow;
 
-import com.microserv.bbq.domain.flow.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;

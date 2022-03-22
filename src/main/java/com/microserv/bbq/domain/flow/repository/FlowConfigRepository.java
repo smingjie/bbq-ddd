@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.flow.repository;
 
-import com.microserv.bbq.domain.flow.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
 
 import java.util.List;
 
