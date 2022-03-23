@@ -23,16 +23,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class FlowConfigDTO {
-    private String  flowId;
-    private String  flowCode;
-    private String  flowType;
-    private String  flowName;
-    private String  flowVersion;
-    private Boolean enabled;
-    private String  moduleType;
-    private String  moduleTable;
-    private String  moduleKey;
-    private String  moduleSta;
+    private String  flowId;       //唯一id
+    private String  flowCode;     //编码
+    private String  flowName;     //名称
+    private String  version;      //版本
+    private Boolean enabled;      //启用状态
+    private String  businessType; //业务类别
+    private String  businessCall; //回调状态更新地址
     List<NodeDTO>   nodes;    // 节点集合
 
     public FlowConfigDTO fetchNodes(List<FlowConfigNodeEntity> nodeEntities, List<FlowConfigHandlerEntity> handlers) {
@@ -97,10 +94,10 @@ public class FlowConfigDTO {
     @Accessors(chain = true)
     @NoArgsConstructor
     public static class HandlerDTO {
-        private String  id;
-        private String  handlerId;
-        private String  handlerName;
-        private Boolean enabled;
+        private String handlerId;       //节点处理人id
+        private String userId;          //用户id
+        private String userName;        //用户名
+        private Boolean enabled;        //启用禁用
     }
 
 
@@ -111,15 +108,15 @@ public class FlowConfigDTO {
     @Accessors(chain = true)
     @NoArgsConstructor
     public static class NodeDTO {
-        private String  flowNodeId;
-        private Integer nodeType;
-        private String  nodeName;
-        private String  nodeLastId;
-        private String  nodeNextId;
-        private String  nodeFailId;
-        private Integer sequence;
-        private String  succSta;
-        private String  failSta;
+        private String  nodeId;            //节点id
+        private String  nodeType;          //节点类型，如首节点，中间节点，尾节点
+        private String  nodeName;          //节点名称
+        private String  nodeLastId;        //上一个节点id,当前节点为首节点时为null
+        private String  nodeNextSuccessId; //下一个节点id（当前同意后跳转节点id），当前节点为尾节点时为null
+        private String  nodeNextFailureId; //下一个节点id（当前驳回后跳转节点id）
+        private String  successSta;        //同意时状态，如nodeName节点审核通过
+        private String  failureSta;        //驳回时状态，如nodeName节点审核不通过
+
 
         // 处理人
         private List<HandlerDTO> handlers;
