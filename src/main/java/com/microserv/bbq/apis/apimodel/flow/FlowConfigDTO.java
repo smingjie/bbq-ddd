@@ -1,6 +1,9 @@
 package com.microserv.bbq.apis.apimodel.flow;
 
 import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
@@ -32,7 +35,7 @@ public class FlowConfigDTO {
     private String  moduleSta;
     List<NodeDTO>   nodes;    // 节点集合
 
-    public FlowConfigDTO fetchNodes(List<FlowConfigAgg.NodeEntity> nodeEntities, List<FlowConfigAgg.HandlerEntity> handlers) {
+    public FlowConfigDTO fetchNodes(List<FlowConfigNodeEntity> nodeEntities, List<FlowConfigHandlerEntity> handlers) {
         if ((nodeEntities != null) &&!nodeEntities.isEmpty()) {
             this.nodes = nodeEntities.stream().map(o -> NodeDTO.of(o, handlers)).collect(Collectors.toList());
         }
@@ -61,9 +64,9 @@ public class FlowConfigDTO {
             return null;
         }
 
-        FlowConfigAgg.ConfigEntity configEntity    = ModelUtils.convert(dto, FlowConfigAgg.ConfigEntity.class);
-        List<FlowConfigAgg.NodeEntity>    nodeEntities    = new ArrayList<>();
-        List<FlowConfigAgg.HandlerEntity> handlerEntities = new ArrayList<>();
+        FlowConfigMainEntity configEntity    = ModelUtils.convert(dto, FlowConfigMainEntity.class);
+        List<FlowConfigNodeEntity>    nodeEntities    = new ArrayList<>();
+        List<FlowConfigHandlerEntity> handlerEntities = new ArrayList<>();
 
         if (configEntity.getFlowId() == null) {
             configEntity.setFlowId(SequenceUtils.uuid32());
@@ -71,12 +74,12 @@ public class FlowConfigDTO {
 
         if ((dto.getNodes() != null) &&!dto.getNodes().isEmpty()) {
             dto.getNodes().forEach(o -> {
-                    nodeEntities.add(ModelUtils.convert(o, FlowConfigAgg.NodeEntity.class).setFlowId(dto.getFlowId()));
+                    nodeEntities.add(ModelUtils.convert(o, FlowConfigNodeEntity.class).setFlowId(dto.getFlowId()));
 
                     if ((o.getHandlers() != null) &&!o.getHandlers().isEmpty()) {
                         handlerEntities.addAll(o.getHandlers()
                                                 .stream()
-                                                .map(e -> ModelUtils.convert(e, FlowConfigAgg.HandlerEntity.class))
+                                                .map(e -> ModelUtils.convert(e, FlowConfigHandlerEntity.class))
                                                 .collect(Collectors.toList()));
                     }
                 });
@@ -121,10 +124,10 @@ public class FlowConfigDTO {
         // 处理人
         private List<HandlerDTO> handlers;
 
-        public NodeDTO fetchHandlers(List<FlowConfigAgg.HandlerEntity> handlers, String nodeId) {
+        public NodeDTO fetchHandlers(List<FlowConfigHandlerEntity> handlers, String nodeId) {
             if ((handlers != null) &&!handlers.isEmpty()) {
                 this.handlers = handlers.stream()
-                                        .filter(o -> o.getFlowNodeId().equals(nodeId))
+                                        .filter(o -> o.getNodeId().equals(nodeId))
                                         .map(e -> ModelUtils.convert(e, HandlerDTO.class))
                                         .collect(Collectors.toList());
             }
@@ -132,15 +135,12 @@ public class FlowConfigDTO {
             return this;
         }
 
-        public static NodeDTO of(FlowConfigAgg.NodeEntity node, List<FlowConfigAgg.HandlerEntity> handlers) {
+        public static NodeDTO of(FlowConfigNodeEntity node, List<FlowConfigHandlerEntity> handlers) {
             if (node == null) {
                 return null;
             }
 
-            return ModelUtils.convert(node, NodeDTO.class).fetchHandlers(handlers, node.getFlowNodeId());
+            return ModelUtils.convert(node, NodeDTO.class).fetchHandlers(handlers, node.getNodeId());
         }
     }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

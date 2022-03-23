@@ -24,47 +24,45 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "FlowConfigNode对象", description = "工作流配置的节点信息")
 public class FlowConfigNode extends AbstractBasePO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "配置节点id")
+    @TableId("node_id")
+    private String nodeId;
 
-	@ApiModelProperty(value = "配置节点id")
-	@TableId("flow_node_id")
-	private String flowNodeId;
+    @ApiModelProperty(value = "工作流配置id")
+    @TableField("flow_id")
+    private String flowId;
 
-	@ApiModelProperty(value = "工作流配置id")
-	@TableField("flow_id")
-	private String flowId;
+    @ApiModelProperty(value = "配置节点类型，0首节点 1中间节点 2尾结点")
+    @TableField("node_type")
+    private Integer nodeType;
 
-	@ApiModelProperty(value = "配置节点类型，0首节点 1中间节点 2尾结点")
-	@TableField("node_type")
-	private Integer nodeType;
+    @ApiModelProperty(value = "工作流节点名称")
+    @TableField("node_name")
+    private String nodeName;
 
-	@ApiModelProperty(value = "工作流节点名称")
-	@TableField("node_name")
-	private String nodeName;
+    @ApiModelProperty(value = "工作流上一个节点（0为首节点）")
+    @TableField("node_last_id")
+    private String nodeLastId;
 
-	@ApiModelProperty(value = "工作流上一个节点（0为首节点）")
-	@TableField("node_last_id")
-	private String nodeLastId;
+    @ApiModelProperty(value = "工作流下一个节点（if success）")
+    @TableField("node_next_success_id")
+    private String nodeNextSuccessId;
 
-	@ApiModelProperty(value = "工作流下一个节点（if success）")
-	@TableField("node_next_id")
-	private String nodeNextId;
+    @ApiModelProperty(value = "工作流失败跳转节点")
+    @TableField("node_next_failure_id")
+    private String nodeNextFailureId;
 
-	@ApiModelProperty(value = "工作流失败跳转节点")
-	@TableField("node_fail_id")
-	private String nodeFailId;
+    @ApiModelProperty(value = "排序")
+    @TableField("sequence")
+    private Integer sequence;
 
-	@ApiModelProperty(value = "排序")
-	@TableField("sequence")
-	private Integer sequence;
+    @ApiModelProperty(value = "成功状态码")
+    @TableField("success_sta")
+    private String successSta;
 
-	@ApiModelProperty(value = "成功状态码")
-	@TableField("succ_sta")
-	private String succSta;
-
-	@ApiModelProperty(value = "失败状态码")
-	@TableField("fail_sta")
-	private String failSta;
-
+    @ApiModelProperty(value = "失败状态码")
+    @TableField("failure_sta")
+    private String failureSta;
 
 }

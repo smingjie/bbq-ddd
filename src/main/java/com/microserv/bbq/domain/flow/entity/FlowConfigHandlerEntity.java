@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 import java.time.LocalDateTime;
 
 /**
- * 流程配置节点处理人记录
+ * 流程配置-节点处理人记录
  *
  * @author mingjie
  * @date 2022/3/21
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class FlowConfigNodeHandlerEntity implements IDomainMetaData {
+public class FlowConfigHandlerEntity implements IDomainMetaData {
 
     private String handlerId;       //节点处理人id
     private String nodeId;          //节点id

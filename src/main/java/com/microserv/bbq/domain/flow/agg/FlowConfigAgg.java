@@ -1,13 +1,17 @@
 package com.microserv.bbq.domain.flow.agg;
 
-import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
+import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAggregate;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAggregateRoot;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -19,49 +23,39 @@ import java.util.Objects;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
+@DomainAggregate
 public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
     private static FlowConfigRepository flowConfigRepo = RepositoryFactory.get(FlowConfigRepository.class);
 
-    /**
-     * 配置信息
-     */
-    private ConfigEntity config;
+    @DomainAggregateRoot
+    private FlowConfigMainEntity config;            //配置信息主记录
+    private List<FlowConfigNodeEntity> nodes;       //配置节点
+    private List<FlowConfigHandlerEntity> handlers; //配置节点处理人
 
-    /**
-     * 配置节点
-     */
-    private List<NodeEntity> nodes;
-
-    /**
-     * 节点处理人
-     */
-    private List<HandlerEntity> handlers;
-
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public FlowConfigAgg saveOrUpdate() {
         if (this.config == null) {
             return null;
         }
-	    try {
-		    ConfigEntity configEntity = flowConfigRepo.selectConfigByFlowId(this.config.getFlowId());
+        try {
+            FlowConfigMainEntity configEntity = flowConfigRepo.selectFlowConfigMainByFlowId(this.config.getFlowId());
 
-		    if (configEntity == null) {    // 新增
-			    flowConfigRepo.insert(this.config);
-			    flowConfigRepo.insertBatchNodes(this.nodes);
-			    flowConfigRepo.insertBatchHandlers(this.handlers);
+            if (configEntity == null) {    // 新增
+                flowConfigRepo.insert(this.config);
+                flowConfigRepo.insertBatchNodes(this.nodes);
+                flowConfigRepo.insertBatchHandlers(this.handlers);
 
-		    } else {
-			    flowConfigRepo.update(this.config);
-			    flowConfigRepo.deleteNodesByFlowId(this.config.getFlowId());
-			    flowConfigRepo.insertBatchNodes(this.nodes);
-			    flowConfigRepo.deleteHandlersByFlowId(this.config.getFlowId());
-			    flowConfigRepo.insertBatchHandlers(this.handlers);
-		    }
-		    return this;
-	    }catch (Exception e){
-	    	throw new BusinessException("工作流部署或更新失败",e);
-	    }
+            } else {
+                flowConfigRepo.update(this.config);
+                flowConfigRepo.deleteNodesByFlowId(this.config.getFlowId());
+                flowConfigRepo.insertBatchNodes(this.nodes);
+                flowConfigRepo.deleteHandlersByFlowId(this.config.getFlowId());
+                flowConfigRepo.insertBatchHandlers(this.handlers);
+            }
+            return this;
+        } catch (Exception e) {
+            throw new BusinessException("工作流部署或更新失败", e);
+        }
     }
 
     public FlowConfigAgg getByCode(String flowCode) {
@@ -74,66 +68,11 @@ public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
 
     public FlowConfigAgg getById(String flowId) {
         if (Objects.nonNull(flowId)) {
-            this.config   = flowConfigRepo.selectConfigByFlowId(flowId);
-            this.nodes    = flowConfigRepo.selectNodesByFlowId(flowId);
-            this.handlers = flowConfigRepo.selectHandlersByFlowId(flowId);
+            this.config = flowConfigRepo.selectFlowConfigMainByFlowId(flowId);
+            this.nodes = flowConfigRepo.selectFlowConfigNodesByFlowId(flowId);
+            this.handlers = flowConfigRepo.selectFlowConfigHandlersByFlowId(flowId);
         }
 
         return this;
     }
-
-    // --------------------定义---------------
-    @Data
-    @Accessors(chain = true)
-    @NoArgsConstructor
-    public static class ConfigEntity {
-        private String  flowId;
-        private String  flowCode;
-        private String  flowType;
-        private String  flowName;
-        private String  flowVersion;
-        private Boolean enabled;
-        private String  moduleType;
-        private String  moduleTable;
-        private String  moduleKey;
-        private String  moduleSta;
-    }
-
-
-    /**
-     * 实体：工作流配置节点处理人
-     */
-    @Data
-    @Accessors(chain = true)
-    @NoArgsConstructor
-    public static class HandlerEntity {
-        private String  id;
-        private String  flowNodeId;
-        private String  handlerId;
-        private String  handlerName;
-        private Boolean enabled;
-    }
-
-
-    /**
-     * 实体：工作流配置节点
-     */
-    @Data
-    @Accessors(chain = true)
-    @NoArgsConstructor
-    public static class NodeEntity {
-        private String  flowNodeId;
-        private String  flowId;
-        private Integer nodeType;
-        private String  nodeName;
-        private String  nodeLastId;
-        private String  nodeNextId;
-        private String  nodeFailId;
-        private Integer sequence;
-        private String  succSta;
-        private String  failSta;
-    }
 }
-
-
-//~ Formatted by Jindent --- http://www.jindent.com

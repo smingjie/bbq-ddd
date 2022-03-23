@@ -89,7 +89,7 @@ public class UserRepositoryImpl implements UserRepository {
 
         return CollectionUtils.isEmpty(userList)
                 ? Collections.emptyList() :
-                userList.stream().map(sysUserAssembler::convert2UserDictVObj).collect(Collectors.toList());
+                userList.stream().map(sysUserAssembler::po2domainUserDictVObj).collect(Collectors.toList());
     }
 
     @Override

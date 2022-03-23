@@ -9,7 +9,6 @@ import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.microserv.bbq.domain.dict.entity.DictEntity;
 import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
-import com.microserv.bbq.domain.dict.valueobject.DictValueVObj;
 import com.microserv.bbq.infrastructure.general.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.security.SecurityContext;
 import com.microserv.bbq.infrastructure.persistence.assembler.SysDictAssembler;
@@ -21,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -73,7 +71,7 @@ public class DictRepositoryImpl implements DictRepository {
         if(CollectionUtils.isEmpty(poList)){
             return Collections.emptyList();
         }
-        return poList.stream().map(sysDictAssembler::convert2DictTypeEntity)
+        return poList.stream().map(sysDictAssembler::po2domainDictTypeEntity)
                 .distinct().collect(Collectors.toList())       ;
     }
 

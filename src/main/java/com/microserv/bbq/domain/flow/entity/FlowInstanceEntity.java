@@ -2,6 +2,7 @@ package com.microserv.bbq.domain.flow.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
  * @date 2022/3/21
  */
 @Data
+@Accessors(chain = true)
 public class FlowInstanceEntity implements IDomainMetaData {
     private String instanceId;       //实例id
     private String flowId;           //流程配置id

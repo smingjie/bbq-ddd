@@ -21,10 +21,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("flow_config")
-@ApiModel(value="FlowConfig对象", description="工作流配置表")
+@ApiModel(value = "FlowConfig对象", description = "工作流配置表")
 public class FlowConfig extends AbstractBasePO {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "工作流配置id")
     @TableId("flow_id")
@@ -39,32 +39,21 @@ public class FlowConfig extends AbstractBasePO {
     private String flowName;
 
     @ApiModelProperty(value = "工作流配置版本，1.0")
-    @TableField("flow_version")
-    private String flowVersion;
-
-    @ApiModelProperty(value = "业务模块的类别")
-    @TableField("module_type")
-    private String moduleType;
-
-    @ApiModelProperty(value = "相关业务模块的主表名")
-    @TableField("module_table")
-    private String moduleTable;
-
-    @ApiModelProperty(value = "相关业务模块的主表的主键列名")
-    @TableField("module_key")
-    private String moduleKey;
-
-    @ApiModelProperty(value = "相关业务模块的主表的状态列名")
-    @TableField("module_sta")
-    private String moduleSta;
-
+    @TableField("version")
+    private String version;
     @ApiModelProperty(value = "是否启用")
     @TableField("enabled")
     private Boolean enabled;
+    @ApiModelProperty(value = "业务模块的类别")
+    @TableField("business_type")
+    private String businessType;
+
+    @ApiModelProperty(value = "相关业务模块回调状态更新地址")
+    @TableField("business_call")
+    private String businessCall;
 
     @ApiModelProperty(value = "是否删除")
     @TableField("deleted")
     private Boolean deleted;
-
 
 }

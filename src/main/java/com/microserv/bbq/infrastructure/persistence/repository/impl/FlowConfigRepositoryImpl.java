@@ -3,21 +3,25 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
+import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
+import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
+import com.microserv.bbq.infrastructure.persistence.assembler.FlowConfigAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfig;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNode;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNodeHandler;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigNodeHandlerMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowConfigNodeMapper;
-import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
-import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
-import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * FlowConfig领域的仓储实现
@@ -27,13 +31,13 @@ import java.util.List;
  */
 @Slf4j
 @Repository
-@RequiredArgsConstructor(onConstructor = @_(@Autowired))
+@RequiredArgsConstructor
 public class FlowConfigRepositoryImpl implements FlowConfigRepository {
 
     private final FlowConfigMapper flowConfigMapper;
     private final FlowConfigNodeMapper flowConfigNodeMapper;
     private final FlowConfigNodeHandlerMapper flowConfigNodeHandleMapper;
-
+    private final FlowConfigAssembler flowConfigAssembler;
 
     List<FlowConfigNode> selectConfigNodes(String flowId) {
         return ChainWrappers.lambdaQueryChain(flowConfigNodeMapper)
@@ -43,9 +47,9 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     }
 
     @Override
-    public FlowConfigAgg.ConfigEntity selectConfigByFlowId(String flowId) {
+    public FlowConfigMainEntity selectFlowConfigMainByFlowId(String flowId) {
         FlowConfig flowConfig = flowConfigMapper.selectById(flowId);
-        return ModelUtils.convert(flowConfig, FlowConfigAgg.ConfigEntity.class);
+        return flowConfigAssembler.po2domain(flowConfig, FlowConfigMainEntity.class);
     }
 
     @Override
@@ -57,32 +61,38 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     }
 
     @Override
-    public List<FlowConfigAgg.NodeEntity> selectNodesByFlowId(String flowId) {
+    public List<FlowConfigNodeEntity> selectFlowConfigNodesByFlowId(String flowId) {
         List<FlowConfigNode> nodes = ChainWrappers.lambdaQueryChain(flowConfigNodeMapper)
                 .eq(FlowConfigNode::getFlowId, flowId)
                 .orderByAsc(FlowConfigNode::getSequence, FlowConfigNode::getCreateTime)
                 .list();
-        return ModelUtils.convertList(nodes, FlowConfigAgg.NodeEntity.class);
+
+        return nodes.stream().map(flowConfigAssembler::po2domain).collect(Collectors.toList());
     }
 
     @Override
-    public List<FlowConfigAgg.HandlerEntity> selectHandlersByFlowId(String flowId) {
+    public List<FlowConfigHandlerEntity> selectFlowConfigHandlersByFlowId(String flowId) {
         List<FlowConfigNodeHandler> handlers = flowConfigNodeHandleMapper.selectListByFlowId(flowId);
-        return ModelUtils.convertList(handlers, FlowConfigAgg.HandlerEntity.class);
+        return handlers.stream().map(flowConfigAssembler::po2domain).collect(Collectors.toList());
     }
 
     @Override
-    public boolean insert(FlowConfigAgg.ConfigEntity entity) {
+    public FlowConfigAgg selectFlowConfigAggByFlowId(String flowId) {
+        return null;
+    }
+
+    @Override
+    public boolean insert(FlowConfigMainEntity entity) {
         return flowConfigMapper.insert(ModelUtils.convert(entity, FlowConfig.class)) > 0;
     }
 
     @Override
-    public boolean update(FlowConfigAgg.ConfigEntity entity) {
+    public boolean update(FlowConfigMainEntity entity) {
         return flowConfigMapper.updateById(ModelUtils.convert(entity, FlowConfig.class)) > 0;
     }
 
     @Override
-    public boolean delete(FlowConfigAgg.ConfigEntity entity) {
+    public boolean delete(FlowConfigMainEntity entity) {
         return flowConfigMapper.deleteById(entity.getFlowId()) > 0;
     }
 
@@ -92,59 +102,64 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     }
 
     @Override
-    public boolean insertBatchNodes(List<FlowConfigAgg.NodeEntity> entities) {
+    public void insertBatchNodes(List<FlowConfigNodeEntity> entities) {
         List<FlowConfigNode> list = ModelUtils.convertList(entities, FlowConfigNode.class);
         list.forEach(flowConfigNodeMapper::insert);
-        return true;
     }
 
     @Override
-    public boolean insert(FlowConfigAgg.NodeEntity entity) {
+    public boolean insert(FlowConfigNodeEntity entity) {
         return flowConfigNodeMapper.insert(ModelUtils.convert(entity, FlowConfigNode.class)) > 0;
     }
 
     @Override
-    public boolean update(FlowConfigAgg.NodeEntity entity) {
+    public boolean update(FlowConfigNodeEntity entity) {
         return flowConfigNodeMapper.updateById(ModelUtils.convert(entity, FlowConfigNode.class)) > 0;
     }
 
     @Override
-    public boolean delete(FlowConfigAgg.NodeEntity entity) {
-        return flowConfigNodeMapper.deleteById(entity.getFlowNodeId()) > 0;
+    public boolean delete(FlowConfigNodeEntity entity) {
+        return flowConfigNodeMapper.deleteById(entity.getNodeId()) > 0;
     }
 
     @Override
-    public boolean deleteNodesByFlowId(String flowId) {
+    public void deleteNodesByFlowId(String flowId) {
         Wrapper<FlowConfigNode> wrapper = Wrappers.lambdaQuery(FlowConfigNode.class)
                 .eq(FlowConfigNode::getFlowId, flowId);
-        return flowConfigNodeMapper.delete(wrapper) > 0;
+        flowConfigNodeMapper.delete(wrapper);
     }
 
     @Override
-    public boolean insertBatchHandlers(List<FlowConfigAgg.HandlerEntity> entities) {
+    public void insertBatchHandlers(List<FlowConfigHandlerEntity> entities) {
         List<FlowConfigNodeHandler> list = ModelUtils.convertList(entities, FlowConfigNodeHandler.class);
         list.forEach(flowConfigNodeHandleMapper::insert);
-        return true;
     }
 
     @Override
-    public boolean insert(FlowConfigAgg.HandlerEntity entity) {
+    public boolean insert(FlowConfigHandlerEntity entity) {
         return flowConfigNodeHandleMapper.insert(ModelUtils.convert(entity, FlowConfigNodeHandler.class)) > 0;
     }
 
     @Override
-    public boolean update(FlowConfigAgg.HandlerEntity entity) {
+    public boolean update(FlowConfigHandlerEntity entity) {
         return flowConfigNodeHandleMapper.updateById(ModelUtils.convert(entity, FlowConfigNodeHandler.class)) > 0;
     }
 
     @Override
-    public boolean delete(FlowConfigAgg.HandlerEntity entity) {
-        return flowConfigNodeHandleMapper.deleteById(entity.getId()) > 0;
+    public boolean delete(FlowConfigHandlerEntity entity) {
+        return flowConfigNodeHandleMapper.deleteById(entity.getHandlerId()) > 0;
     }
 
     @Override
-    public boolean deleteHandlersByFlowId(String flowId) {
-        return flowConfigNodeHandleMapper.deleteListByFlowId(flowId) > 0;
+    public void deleteHandlersByFlowId(String flowId) {
+        flowConfigNodeHandleMapper.deleteListByFlowId(flowId);
+    }
+
+    @Override
+    public FlowConfigAgg saveOrUpdate(FlowConfigAgg agg) {
+        String flowId=agg.getConfig().getFlowId();
+        // todo
+        return selectFlowConfigAggByFlowId(flowId);
     }
 
 }

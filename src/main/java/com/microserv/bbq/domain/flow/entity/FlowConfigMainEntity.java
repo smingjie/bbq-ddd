@@ -2,17 +2,19 @@ package com.microserv.bbq.domain.flow.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
 /**
- * 流程配置主记录
+ * 流程配置-主记录
  *
  * @author mingjie
  * @date 2022/3/21
  */
 @Data
-public class FlowConfigEntity implements IDomainMetaData {
+@Accessors(chain = true)
+public class FlowConfigMainEntity implements IDomainMetaData {
     private String  flowId;       //唯一id
     private String  flowCode;     //编码
     private String  flowName;     //名称

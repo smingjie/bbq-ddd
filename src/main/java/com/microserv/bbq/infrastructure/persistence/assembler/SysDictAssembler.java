@@ -15,7 +15,7 @@ import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 @DomainAssembler
 public class SysDictAssembler  implements IPoDomainAssembler<DictEntity, SysDict> {
 
-    public DictTypeEntity convert2DictTypeEntity(SysDict sysDict){
+    public DictTypeEntity po2domainDictTypeEntity(SysDict sysDict){
         return sysDict==null?null:new DictTypeEntity(sysDict.getType(),sysDict.getName());
     }
 }

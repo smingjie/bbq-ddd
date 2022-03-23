@@ -52,7 +52,7 @@ public class SysUserAssembler implements IPoDomainAssembler<UserEntity, SysUser>
         return userEntity;
     }
 
-    public UserDictVObj convert2UserDictVObj(SysUser sysUser) {
+    public UserDictVObj po2domainUserDictVObj(SysUser sysUser) {
 
         String displayName = "";
         if (StrUtil.isBlank(sysUser.getUsername())) {

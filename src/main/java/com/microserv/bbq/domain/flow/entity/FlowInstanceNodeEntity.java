@@ -2,6 +2,7 @@ package com.microserv.bbq.domain.flow.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 
@@ -12,11 +13,11 @@ import java.time.LocalDateTime;
  * @date 2022/3/21
  */
 @Data
+@Accessors(chain = true)
 public class FlowInstanceNodeEntity implements IDomainMetaData {
     private String  instanceNodeId;           //节点id
     private String  instanceId;               //实例id
     private String  nodeType;                 //实例节点类型，如首节点，中间节点，尾节点
-    private Integer sequence;                 //实例节点排序
     private String  instanceNodeName;         //实例节点名称
     private String  instanceNodeLastId;       //上一个节点id,当前节点为首节点时为null
     private String  nodeNextSuccessId;        //下一个节点id（当前同意后跳转节点id），当前节点为尾节点时为null

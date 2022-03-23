@@ -1,6 +1,9 @@
 package com.microserv.bbq.domain.flow.repository;
 
 import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
 
 import java.util.List;
 
@@ -12,32 +15,32 @@ import java.util.List;
 public interface FlowConfigRepository {
 	//--查询
 
-	FlowConfigAgg.ConfigEntity selectConfigByFlowId(String flowId);
+	FlowConfigMainEntity selectFlowConfigMainByFlowId(String flowId);
 	String  selectFlowIdByFlowCode(String flowCode);
+	List<FlowConfigNodeEntity> selectFlowConfigNodesByFlowId(String flowId);
+	List<FlowConfigHandlerEntity> selectFlowConfigHandlersByFlowId(String flowId);
+	FlowConfigAgg selectFlowConfigAggByFlowId(String flowId);
 
-	List<FlowConfigAgg.NodeEntity> selectNodesByFlowId(String flowId);
-
-	List<FlowConfigAgg.HandlerEntity> selectHandlersByFlowId(String flowId);
 	//--命令
 
-	boolean insert(FlowConfigAgg.ConfigEntity entity);
-	boolean update(FlowConfigAgg.ConfigEntity entity);
-	boolean delete(FlowConfigAgg.ConfigEntity entity);
+	boolean insert(FlowConfigMainEntity entity);
+	boolean update(FlowConfigMainEntity entity);
+	boolean delete(FlowConfigMainEntity entity);
 	boolean deleteConfigByFlowId(String flowId);
 
-	boolean insertBatchNodes(List<FlowConfigAgg.NodeEntity> entities);
-	boolean insert(FlowConfigAgg.NodeEntity entity);
-	boolean update(FlowConfigAgg.NodeEntity entity);
-	boolean delete(FlowConfigAgg.NodeEntity entity);
-	boolean deleteNodesByFlowId(String flowId);
+	void insertBatchNodes(List<FlowConfigNodeEntity> entities);
+	boolean insert(FlowConfigNodeEntity entity);
+	boolean update(FlowConfigNodeEntity entity);
+	boolean delete(FlowConfigNodeEntity entity);
+	void deleteNodesByFlowId(String flowId);
 
-	boolean insertBatchHandlers(List<FlowConfigAgg.HandlerEntity> entities);
-	boolean insert(FlowConfigAgg.HandlerEntity entity);
-	boolean update(FlowConfigAgg.HandlerEntity entity);
-	boolean delete(FlowConfigAgg.HandlerEntity entity);
-	boolean deleteHandlersByFlowId(String flowId);
+	void insertBatchHandlers(List<FlowConfigHandlerEntity> entities);
+	boolean insert(FlowConfigHandlerEntity entity);
+	boolean update(FlowConfigHandlerEntity entity);
+	boolean delete(FlowConfigHandlerEntity entity);
+	void deleteHandlersByFlowId(String flowId);
 
-
+   FlowConfigAgg saveOrUpdate(FlowConfigAgg agg);
 
 
 
