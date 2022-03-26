@@ -8,6 +8,7 @@ import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
+import com.microserv.bbq.infrastructure.general.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.persistence.assembler.FlowConfigAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfig;
@@ -19,6 +20,7 @@ import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.FlowC
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -155,11 +157,33 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
         flowConfigNodeHandleMapper.deleteListByFlowId(flowId);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public FlowConfigAgg saveOrUpdate(FlowConfigAgg agg) {
-        String flowId=agg.getConfig().getFlowId();
-        // todo
-        return selectFlowConfigAggByFlowId(flowId);
+
+        try {
+            String flowId = agg.getConfig().getFlowId();
+            FlowConfigMainEntity configMainEntity = selectFlowConfigMainByFlowId(flowId);
+
+            if (configMainEntity == null) {    // 新增
+                this.insert(agg.getConfig());
+                this.insertBatchNodes(agg.getNodes());
+                this.insertBatchHandlers(agg.getHandlers());
+
+            } else {
+                this.update(agg.getConfig());
+
+                this.deleteNodesByFlowId(flowId);
+                this.insertBatchNodes(agg.getNodes());
+
+                this.deleteHandlersByFlowId(flowId);
+                this.insertBatchHandlers(agg.getHandlers());
+            }
+            return selectFlowConfigAggByFlowId(flowId);
+        } catch (Exception e) {
+            throw new PersistException("工作流部署或更新失败", e);
+        }
+
     }
 
 }
