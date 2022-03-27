@@ -1,5 +1,5 @@
 # bbq-ddd (DDD编码实践)
- 
+
 
 springboot+ddd分层示例工程
 
@@ -11,44 +11,54 @@ springboot+ddd分层示例工程
 ├─com.company.microservice
 │    │ 
 │    ├─apis   API接口层
-│    │    ├─model     视图模型,数据模型定义 vo/dto（大多数情況是一样的）
-│    │    ├─assembler    装配器，实现模型转换eg. apiModel<=> domainModel
-│    │    └─controller   控制器，对外提供（Restful）接口
+│    │    ├─model            视图模型,数据模型定义 vo/dto（大多数情況是一样的）
+│    │    ├─assembler        装配器，实现模型转换eg. apiModel<=> domainModel
+│    │    └─controller       控制器，对外提供（Restful）接口
 │    │ 
-│    ├─application   应用层
-│    │    ├─service  应用服务，非核心服务
-│    │    ├─task     任务定义，协调领域模型 
-│    │    └─***      others
+│    ├─application           应用层
+│    │    ├─service          应用服务，非核心服务，跨领域的协作
+│    │    ├─task             任务定义，协调领域模型 
+│    │    └─***              others
 │    │ 
 │    ├─domain   领域层
-│    │    ├─common       公共代码抽取，限于领域层有效  
-│    │    ├─events       领域事件，聚合之间通信通过领域事件来触发
-│    │    ├─model        领域模型 
-│    │    │    ├─dict    领域划分的模块，可理解为子域划分
-│    │    │    │    ├─DictVo.java       领域值对象
-│    │    │    │    ├─DictEntity.java   领域实体，充血的领域模型，如本身的CRUD操作在此处
-│    │    │    │    ├─DictAgg.java      领域聚合，通常表现为实体的聚合，需要有聚合根
-│    │    │    │    └─DictService.java  领域服务，不能归类到上述模型，如分页条件查询等可写在此处
-│    │    │    ├─xxx
-│    │    │    │    ├─xxxEntity.java      
-│    │    │    │    ├─bbbAgg.java     
-│    │    │    │    └─cccAgg.java        
-│    │    ├─service      领域服务类，一些不能归属某个具体领域模型的行为
-│    │    ├─repository   仓储接口
-│    │    └─factory      工厂类，负责复杂领域对象创建，封装细节 
+│    │    ├─common           公共代码抽取，限于领域层有效  
+│    │    ├─module-xxx       模块2-xxx，领域划分的模块，可理解为子域划分
+│    │    │    ├─agg         领域聚合，通常表现为实体的聚合，需要有聚合根
+│    │    │    ├─entity      领域实体，有唯一标识的充血模型，如本身的CRUD操作在此处     
+│    │    │    ├─valueobject 领域值对象，无唯一标识    
+│    │    │    ├─repostiory  领域仓储，负责定义持久化 
+│    │    │    ├─factory     领域工厂，负责复杂领域对象创建，封装细节   
+│    │    │    ├─service     领域服务，不能归类到具体模型，如多条件查询等可写在此处  
+│    │    │    ├─event       领域事件    
+│    │    ├─module-dict      模块-字典子域
+│    │    │    ├─agg         领域聚合
+│    │    │    │    ├─DictTypeAgg.java
+│    │    │    ├─entity      领域实体    
+│    │    │    │    ├─DictTypeEntity.java 
+│    │    │    │    ├─DictEntity.java 
+│    │    │    ├─valueobject 领域值对象    
+│    │    │    │    ├─DictVObj.java 
+│    │    │    │    ├─DictTypeVobj.java 
+│    │    │    ├─repostiory  领域仓储接口
+│    │    │    │    ├─Dictrepository.java
+│    │    │    ├─service     领域服务  
+│    │    │    ├─event       领域事件     
+│    │    │    └─factory     领域工厂  
 │    │ 
 │    ├─infrastructure  基础设施层
-│    │    ├─persistent   持久化机制
-│    │    │    ├─po           持久化对象 
-│    │    │    └─repository   仓储类，持久化接口&实现，可与ORM映射框架结合
-│    │    ├─general      通用技术支持，向其他层输出通用服务
-│    │    │    ├─config       配置类
-│    │    │    ├─toolkit      工具类  
-│    │    │    └─common       基础公共模块等
+│    │    ├─persistence      持久化机制
+│    │    │    ├─assembler   模型装配器
+│    │    │    ├─po          持久化对象  
+│    │    │    └─repository  仓储类，持久化接口&实现，可与ORM映射框架结合
+│    │    ├─general          通用技术支持，向其他层输出通用服务
+│    │    │    ├─config      配置类
+│    │    │    ├─toolkit     工具类  
+│    │    │    ├─extension   扩展定义  
+│    │    │    └─common      基础公共模块等
 │    │ 
 │    ├─reference  引用层，扩展外部接口包装引用，防止穿插到Domain层腐化领域模型等 
-│    │    ├─ 忽略技术实现，此处的RPC、Http等调用，Domain层一般通过DomainEvent关联 
-│    
+│    │    └─ 忽略技术实现，此处的RPC、Http等调用，Domain层一般通过DomainEvent关联 
+│    │ 
 │    └─resources  
 │        ├─statics  静态资源
 │        ├─template 系统页面 
@@ -78,6 +88,16 @@ springboot+ddd分层示例工程
   一个问题：为何Repository接口分析要归属在领域模型分析中？
 
   我们系统数据不可能一直内存中持有，内存空间不是无限的（如果内存空间无限大，那我们完全不用考虑存储持久化，当然是个伪命题），不可避免的要进行转移到一些数据存储介质中（数据库，磁盘文件等），所以我们在分析领域模型中，仓储接口也应当算到我们的领域模型内，DDD划分的是业务维度，所以这里也只分析了接口，对其存储持久化实现并不关注。
+
+## 扩展定义注解和接口声明
+
+在使用DDD中自定义了标记的注解，分别是
+
+`@DomainAggregate`,`@DomainAggregateRoot`,`@DomainEntity`,`@DomainValueObject`,`@DomainService`,`ApplicationService`,`DomainRepository`,`@DomainEvent`,`@DomainAssembler`等 `@DDDAnnotation`注解,详见代码的reference.general.extension.annotation.ddd.**。
+
+其中有些注解继承了spring的 `@Component`,将会自动注册为spring bean，有些注解为了表示；
+
+引入了 Assembler装配器，通过组合模式解耦继承关系，在api层和持久化层都有Assembler相应的实现。
 
 ## 领域模型注入仓储类的问题
 
@@ -177,4 +197,4 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 - 数据字典子域`dict`
 - 用户角色权限通用子域 `user-role-menu`
 - 工作流配置设计`flow-config`
- 
+
