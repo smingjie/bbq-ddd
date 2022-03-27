@@ -13,6 +13,7 @@ import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.util.CollectionUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -59,34 +60,14 @@ public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
         return this;
     }
 
-    public FlowConfigAgg getByCode(String flowCode) {
-        if (Objects.nonNull(flowCode)) {
-            getById(flowConfigRepo.selectFlowIdByFlowCode(flowCode));
-        }
-
-        return this;
+    public FlowConfigAgg2 transform2FlowConfigAgg2() {
+        return FlowConfigAgg2.valueOf(this);
     }
 
-    public FlowConfigAgg getById(String flowId) {
-        if (Objects.nonNull(flowId)) {
-            FlowConfigAgg configAgg = flowConfigRepo.selectFlowConfigAggByFlowId(flowId);
-            if (configAgg != null) {
-                ModelUtils.convert(configAgg, this);
-            }
-        }
-
-        return this;
-    }
-
-
-    /**
-     * 重组并列数据
-     */
     public static FlowConfigAgg valueOf(@NotNull FlowConfigAgg2 agg2) {
         if (agg2 == null) {
             return null;
         }
-
         FlowConfigMainEntity configEntity = ModelUtils.convert(agg2, FlowConfigMainEntity.class);
         List<FlowConfigNodeEntity> nodeEntities = new ArrayList<>();
         List<FlowConfigHandlerEntity> handlerEntities = new ArrayList<>();
@@ -95,20 +76,34 @@ public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
             configEntity.setFlowId(SequenceUtils.uuid32());
         }
 
-        if ((agg2.getNodes() != null) && !agg2.getNodes().isEmpty()) {
+        if (!CollectionUtils.isEmpty(agg2.getNodes())) {
             agg2.getNodes().forEach(o -> {
-                nodeEntities.add(ModelUtils.convert(o, FlowConfigNodeEntity.class).setFlowId(agg2.getFlowId()));
+                nodeEntities.add(ModelUtils.convert(o, FlowConfigNodeEntity.class).setFlowId(configEntity.getFlowId()));
 
-                if ((o.getHandlers() != null) && !o.getHandlers().isEmpty()) {
+                if (!CollectionUtils.isEmpty(o.getHandlers())) {
                     handlerEntities.addAll(o.getHandlers()
                             .stream()
-                            .map(e -> ModelUtils.convert(e, FlowConfigHandlerEntity.class))
+                            .map(e -> ModelUtils.convert(e, FlowConfigHandlerEntity.class).setNodeId(o.getNodeId()))
                             .collect(Collectors.toList()));
                 }
             });
         }
 
         return new FlowConfigAgg(configEntity, nodeEntities, handlerEntities);
+    }
+
+    public static FlowConfigAgg getByFlowCode(String flowCode) {
+        if (Objects.isNull(flowCode)) {
+            return null;
+        }
+        return flowConfigRepo.selectFlowConfigAggByFlowCode(flowCode);
+    }
+
+    public static FlowConfigAgg getByFlowId(String flowId) {
+        if (Objects.isNull(flowId)) {
+            return null;
+        }
+        return flowConfigRepo.selectFlowConfigAggByFlowId(flowId);
     }
 
 }

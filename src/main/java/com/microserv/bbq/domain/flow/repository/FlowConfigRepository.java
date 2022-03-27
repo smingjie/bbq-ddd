@@ -20,7 +20,7 @@ public interface FlowConfigRepository {
 	List<FlowConfigNodeEntity> selectFlowConfigNodesByFlowId(String flowId);
 	List<FlowConfigHandlerEntity> selectFlowConfigHandlersByFlowId(String flowId);
 	FlowConfigAgg selectFlowConfigAggByFlowId(String flowId);
-
+	FlowConfigAgg selectFlowConfigAggByFlowCode(String flowCode);
 	//--命令
 
 	boolean insert(FlowConfigMainEntity entity);

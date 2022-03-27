@@ -80,7 +80,16 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
 
     @Override
     public FlowConfigAgg selectFlowConfigAggByFlowId(String flowId) {
-        return null;
+        FlowConfigMainEntity configMain = selectFlowConfigMainByFlowId(flowId);
+        List<FlowConfigNodeEntity> configNodes = selectFlowConfigNodesByFlowId(flowId);
+        List<FlowConfigHandlerEntity> configHandlers = selectFlowConfigHandlersByFlowId(flowId);
+        return new FlowConfigAgg(configMain, configNodes, configHandlers);
+    }
+
+    @Override
+    public FlowConfigAgg selectFlowConfigAggByFlowCode(String flowCode) {
+        String flowId = selectFlowIdByFlowCode(flowCode);
+        return selectFlowConfigAggByFlowId(flowId);
     }
 
     @Override
@@ -181,6 +190,7 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
             }
             return selectFlowConfigAggByFlowId(flowId);
         } catch (Exception e) {
+            log.error("工作流部署更新失败，原因是", e);
             throw new PersistException("工作流部署或更新失败", e);
         }
 

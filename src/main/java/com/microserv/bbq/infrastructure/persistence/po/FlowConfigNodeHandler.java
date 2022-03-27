@@ -28,7 +28,7 @@ public class FlowConfigNodeHandler extends AbstractBasePO {
 
     @ApiModelProperty(value = "节点处理者id")
     @TableId("handler_id")
-    private String id;
+    private String handlerId;
 
     @ApiModelProperty(value = "配置节点id")
     @TableField("node_id")

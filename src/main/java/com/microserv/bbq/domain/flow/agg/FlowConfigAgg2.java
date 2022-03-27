@@ -1,5 +1,6 @@
 package com.microserv.bbq.domain.flow.agg;
 
+import cn.hutool.core.lang.Assert;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
 import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
@@ -37,6 +38,19 @@ public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2> {
     private String businessCall; //回调状态更新地址
     List<NodeEntity> nodes;    // 节点集合
 
+    @Override
+    public FlowConfigAgg2 saveOrUpdate() {
+        return this
+                .transform2FlowConfigAgg()
+                .saveOrUpdate()
+                .transform2FlowConfigAgg2();
+    }
+
+    public FlowConfigAgg transform2FlowConfigAgg() {
+        Assert.notNull(this.flowId, "flowId不能为空");
+        return FlowConfigAgg.valueOf(this);
+    }
+
     public static FlowConfigAgg2 valueOf(@NotNull FlowConfigAgg agg) {
         if (agg == null) {
             return null;
@@ -51,28 +65,21 @@ public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2> {
         return agg2;
     }
 
-    @Override
-    public FlowConfigAgg2 saveOrUpdate() {
-        FlowConfigAgg agg = FlowConfigAgg.valueOf(this);
-        agg.saveOrUpdate();
-        return FlowConfigAgg2.valueOf(agg);
+    public static FlowConfigAgg2 getByCode(String flowCode) {
+        if (Objects.isNull(flowCode)) {
+            return null;
+        }
+        FlowConfigAgg configAgg = new FlowConfigAgg().getByFlowCode(flowCode);
+        return FlowConfigAgg2.valueOf(configAgg);
     }
 
-    public FlowConfigAgg2 getByCode(String flowCode) {
-        if (Objects.nonNull(flowCode)) {
-            FlowConfigAgg configAgg = new FlowConfigAgg().getByCode(flowCode);
-            return FlowConfigAgg2.valueOf(configAgg);
+    public static FlowConfigAgg2 getById(String flowId) {
+        if (Objects.isNull(flowId)) {
+            return null;
         }
+        FlowConfigAgg configAgg = FlowConfigAgg.getByFlowId(flowId);
+        return FlowConfigAgg2.valueOf(configAgg);
 
-        return null;
-    }
-
-    public FlowConfigAgg2 getById(String flowId) {
-        if (Objects.nonNull(flowId)) {
-            FlowConfigAgg configAgg = new FlowConfigAgg().getById(flowId);
-            return FlowConfigAgg2.valueOf(configAgg);
-        }
-        return null;
     }
 
 
