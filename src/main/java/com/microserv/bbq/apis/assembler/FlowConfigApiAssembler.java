@@ -27,12 +27,15 @@ public class FlowConfigApiAssembler implements IApiDomainAssembler<FlowConfigMai
         ModelUtils.convert(configCreateParam, agg2);
         if (StringUtils.isEmpty(configCreateParam.getFlowId())) {
             agg2.setFlowId(SequenceUtils.timestampNo(CONFIG_FLOW_ID_PREFIX));
-
         }
         if (!CollectionUtils.isEmpty(agg2.getNodes())) {
             for (FlowConfigAgg2.NodeEntity nodeEntity : agg2.getNodes()) {
                 if (!CollectionUtils.isEmpty(nodeEntity.getHandlers())) {
-                    nodeEntity.getHandlers().forEach(handler -> handler.setHandlerId(SequenceUtils.timestampNo(CONFIG_HANDLER_ID_PREFIX)));
+                    nodeEntity.getHandlers().forEach(handler -> {
+                        if (StringUtils.isEmpty(handler.getHandlerId())) {
+                            handler.setHandlerId(SequenceUtils.timestampNo(CONFIG_HANDLER_ID_PREFIX));
+                        }
+                    });
                 }
             }
         }

@@ -1,8 +1,8 @@
-package com.microserv.bbq.domain.rbac;
+package com.microserv.bbq.domain.rbac.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
-import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
+import com.microserv.bbq.domain.rbac.repository.RbacRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class MenuEntity implements IDomainCRUD<MenuEntity> {
 
-	private static UserRoleMenuRepository userRoleMenuRepo = RepositoryFactory.get(UserRoleMenuRepository.class);
+	private static RbacRepository rbacRepository = RepositoryFactory.get(RbacRepository.class);
 	//field
 	private String menuId;
 	private String parentId;
@@ -37,20 +37,20 @@ public class MenuEntity implements IDomainCRUD<MenuEntity> {
 
 	@Override
 	public boolean delete() {
-		return userRoleMenuRepo.delete(this);
+		return rbacRepository.delete(this);
 	}
 
 	@Override
 	public MenuEntity get() {
-		return userRoleMenuRepo.selectMenuById(this.menuId);
+		return rbacRepository.selectMenuById(this.menuId);
 	}
 
 	@Override
 	public MenuEntity saveOrUpdate() {
 		if (this.menuId == null) {
-			userRoleMenuRepo.insert(this.setMenuId(SequenceUtils.uuid32()));
+			rbacRepository.insert(this.setMenuId(SequenceUtils.uuid32()));
 		} else {
-			userRoleMenuRepo.update(this);
+			rbacRepository.update(this);
 		}
 		return this;
 	}

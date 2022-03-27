@@ -1,7 +1,9 @@
-package com.microserv.bbq.domain.rbac;
+package com.microserv.bbq.domain.rbac.agg;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
-import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
+import com.microserv.bbq.domain.rbac.entity.MenuEntity;
+import com.microserv.bbq.domain.rbac.entity.RoleEntity;
+import com.microserv.bbq.domain.rbac.repository.RbacRepository;
 import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Data;
@@ -20,8 +22,8 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class UserRoleMenuAgg extends UserEntity {
-	private static UserRoleMenuRepository userRoleMenuRepo = RepositoryFactory.get(UserRoleMenuRepository.class);
-	List<MenuTreeItem> menuList;
+	private static RbacRepository rbacRepository = RepositoryFactory.get(RbacRepository.class);
+	List<MenuTreeItemEntity> menuList;
 	List<RoleEntity> roleList;
 
 	/**
@@ -29,14 +31,14 @@ public class UserRoleMenuAgg extends UserEntity {
 	 *
 	 * @param menuList 所有菜单项
 	 */
-	private List<MenuTreeItem> createMenuTree(List<MenuEntity> menuList) {
+	private List<MenuTreeItemEntity> createMenuTree(List<MenuEntity> menuList) {
 
 		// 先筛选出父元素
 		List<MenuEntity> fatMenus = menuList.stream().filter(MenuEntity::isRootMenu).collect(Collectors.toList());
 
 		// 遍历集合
-		List<MenuTreeItem> menuTree = fatMenus.stream()
-				.map(o -> new MenuTreeItem(o).fetchSubMenuItems(menuList))
+		List<MenuTreeItemEntity> menuTree = fatMenus.stream()
+				.map(o -> new MenuTreeItemEntity(o).fetchSubMenuItems(menuList))
 				.collect(Collectors.toList());
 
 		return menuTree.isEmpty() ? null : menuTree;
@@ -44,14 +46,14 @@ public class UserRoleMenuAgg extends UserEntity {
 
 
 	public UserRoleMenuAgg getMenuTreeByUserId(String userId) {
-		List<MenuEntity> allMenus = userRoleMenuRepo.selectMenuListByUserId(userId);
+		List<MenuEntity> allMenus = rbacRepository.selectMenuListByUserId(userId);
 
 		this.menuList = createMenuTree(allMenus);
 		return this;
 	}
 
 	public UserRoleMenuAgg getRoleListByUserId(String userId) {
-		this.roleList = userRoleMenuRepo.selectRoleListByUserId(userId);
+		this.roleList = rbacRepository.selectRoleListByUserId(userId);
 		return this;
 	}
 
@@ -62,21 +64,21 @@ public class UserRoleMenuAgg extends UserEntity {
 	@Accessors(chain = true)
 	@NoArgsConstructor
 	@EqualsAndHashCode(callSuper = true)
-	public static class MenuTreeItem extends MenuEntity {
-		private List<MenuTreeItem> children;
+	public static class MenuTreeItemEntity extends MenuEntity {
+		private List<MenuTreeItemEntity> children;
 
-		public MenuTreeItem(MenuEntity menuEntity) {
+		public MenuTreeItemEntity(MenuEntity menuEntity) {
 			ModelUtils.convert(menuEntity, this);
 		}
 
-		public MenuTreeItem fetchSubMenuItems(List<MenuEntity> menuEntityList) {
+		public MenuTreeItemEntity fetchSubMenuItems(List<MenuEntity> menuEntityList) {
 			if ((menuEntityList == null) || menuEntityList.isEmpty()) {
 				return null;
 			}
 
-			List<MenuTreeItem> subMenus = menuEntityList.stream()
+			List<MenuTreeItemEntity> subMenus = menuEntityList.stream()
 					.filter(o -> o.isSubMenuOf(this.getMenuId()))
-					.map(e -> new MenuTreeItem(e).fetchSubMenuItems(menuEntityList))
+					.map(e -> new MenuTreeItemEntity(e).fetchSubMenuItems(menuEntityList))
 					.collect(Collectors.toList());
 			return setChildren(subMenus.isEmpty() ? null : subMenus);
 		}

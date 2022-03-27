@@ -1,8 +1,8 @@
 package com.microserv.bbq.apis.controller;
 
 
-import com.microserv.bbq.domain.rbac.RoleEntity;
-import com.microserv.bbq.domain.rbac.UserRoleMenuAgg;
+import com.microserv.bbq.domain.rbac.entity.RoleEntity;
+import com.microserv.bbq.domain.rbac.agg.UserRoleMenuAgg;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +22,7 @@ import java.util.List;
 public class UserRoleMenuController {
 	@ApiOperation(value = "获取用户的菜单集合")
 	@GetMapping("/user/{userId}/menus")
-	public List<UserRoleMenuAgg.MenuTreeItem> getMenuTreeByUserId(@PathVariable String userId) {
+	public List<UserRoleMenuAgg.MenuTreeItemEntity> getMenuTreeByUserId(@PathVariable String userId) {
 		return new UserRoleMenuAgg().getMenuTreeByUserId(userId).getMenuList();
 	}
 

@@ -1,8 +1,8 @@
-package com.microserv.bbq.domain.rbac;
+package com.microserv.bbq.domain.rbac.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
-import com.microserv.bbq.domain.rbac.repository.UserRoleMenuRepository;
+import com.microserv.bbq.domain.rbac.repository.RbacRepository;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class RoleEntity implements IDomainCRUD<RoleEntity> {
-	private static UserRoleMenuRepository userRoleMenuRepo = RepositoryFactory.get(UserRoleMenuRepository.class);
+	private static RbacRepository rbacRepository = RepositoryFactory.get(RbacRepository.class);
 	private String roleId;
 	private String roleCode;
 	private String roleName;
@@ -24,20 +24,20 @@ public class RoleEntity implements IDomainCRUD<RoleEntity> {
 
 	@Override
 	public boolean delete() {
-		return userRoleMenuRepo.delete(this);
+		return rbacRepository.delete(this);
 	}
 
 	@Override
 	public RoleEntity get() {
-		return userRoleMenuRepo.selectRoleById(this.roleId);
+		return rbacRepository.selectRoleById(this.roleId);
 	}
 
 	@Override
 	public RoleEntity saveOrUpdate() {
 		if (this.roleId == null) {
-			userRoleMenuRepo.insert(this.setRoleId(SequenceUtils.uuid32()));
+			rbacRepository.insert(this.setRoleId(SequenceUtils.uuid32()));
 		} else {
-			userRoleMenuRepo.update(this);
+			rbacRepository.update(this);
 		}
 		return this;
 	}
