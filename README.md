@@ -95,7 +95,7 @@ springboot+ddd分层示例工程
 
 `@DomainAggregate`,`@DomainAggregateRoot`,`@DomainEntity`,`@DomainValueObject`,`@DomainService`,`ApplicationService`,`DomainRepository`,`@DomainEvent`,`@DomainAssembler`等 `@DDDAnnotation`注解,详见代码的reference.general.extension.annotation.ddd.**。
 
-其中有些注解继承了spring的 `@Component`,将会自动注册为spring bean，有些注解为了表示；
+其中有些注解继承了spring的 `@Component`,将会自动注册为spring bean，有些注解为了标记；
 
 引入了 Assembler装配器，通过组合模式解耦继承关系，在api层和持久化层都有Assembler相应的实现。
 
@@ -197,4 +197,6 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 - 数据字典子域`dict`
 - 用户角色权限通用子域 `user-role-menu`
 - 工作流配置设计`flow-config`
+
+例程已完成，详见代码
 
