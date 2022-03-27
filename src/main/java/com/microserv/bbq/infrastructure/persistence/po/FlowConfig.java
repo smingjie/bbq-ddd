@@ -41,9 +41,11 @@ public class FlowConfig extends AbstractBasePO {
     @ApiModelProperty(value = "工作流配置版本，1.0")
     @TableField("version")
     private String version;
+
     @ApiModelProperty(value = "是否启用")
     @TableField("enabled")
     private Boolean enabled;
+
     @ApiModelProperty(value = "业务模块的类别")
     @TableField("business_type")
     private String businessType;
