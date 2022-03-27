@@ -39,9 +39,7 @@ public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
     private List<FlowConfigNodeEntity> nodes;       //配置节点
     private List<FlowConfigHandlerEntity> handlers; //配置节点处理人
 
-    public FlowConfigAgg(FlowConfigMainEntity config,
-                         List<FlowConfigNodeEntity> nodes,
-                         List<FlowConfigHandlerEntity> handlers) {
+    public FlowConfigAgg(FlowConfigMainEntity config, List<FlowConfigNodeEntity> nodes, List<FlowConfigHandlerEntity> handlers) {
         this.config = config;
         this.nodes = nodes;
         this.handlers = handlers;

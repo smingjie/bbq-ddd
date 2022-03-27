@@ -1,6 +1,7 @@
 package com.microserv.bbq.domain.flow.agg;
 
 import cn.hutool.core.lang.Assert;
+import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
 import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
@@ -13,6 +14,7 @@ import lombok.experimental.Accessors;
 import org.springframework.util.CollectionUtils;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,16 +29,20 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Accessors(chain = true)
 @DomainAggregate
-public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2> {
+public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2>, IDomainMetaData {
     @DomainAggregateRoot
-    private String flowId;       //唯一id
-    private String flowCode;     //编码
-    private String flowName;     //名称
-    private String version;      //版本
+    private String flowId;        //唯一id
+    private String flowCode;      //编码
+    private String flowName;      //名称
+    private String version;       //版本
     private Boolean enabled;      //启用状态
-    private String businessType; //业务类别
-    private String businessCall; //回调状态更新地址
-    List<NodeEntity> nodes;    // 节点集合
+    private String businessType;  //业务类别
+    private String businessCall;  //回调状态更新地址
+    List<NodeEntity> nodes;       // 节点集合
+    private String createBy;
+    private LocalDateTime createTime;
+    private String updateBy;
+    private LocalDateTime updateTime;
 
     @Override
     public FlowConfigAgg2 saveOrUpdate() {

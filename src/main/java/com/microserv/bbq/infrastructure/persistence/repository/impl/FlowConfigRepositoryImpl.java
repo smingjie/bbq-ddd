@@ -107,8 +107,9 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
         return flowConfigMapper.deleteById(entity.getFlowId()) > 0;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteConfigByFlowId(String flowId) {
+    public boolean deleteConfigMainByFlowId(String flowId) {
         return flowConfigMapper.deleteById(flowId) > 0;
     }
 
@@ -134,7 +135,7 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     }
 
     @Override
-    public void deleteNodesByFlowId(String flowId) {
+    public void deleteConfigNodesByFlowId(String flowId) {
         Wrapper<FlowConfigNode> wrapper = Wrappers.lambdaQuery(FlowConfigNode.class)
                 .eq(FlowConfigNode::getFlowId, flowId);
         flowConfigNodeMapper.delete(wrapper);
@@ -162,7 +163,7 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     }
 
     @Override
-    public void deleteHandlersByFlowId(String flowId) {
+    public void deleteConfigHandlersByFlowId(String flowId) {
         flowConfigNodeHandleMapper.deleteListByFlowId(flowId);
     }
 
@@ -182,10 +183,10 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
             } else {
                 this.update(agg.getConfig());
 
-                this.deleteNodesByFlowId(flowId);
+                this.deleteConfigNodesByFlowId(flowId);
                 this.insertBatchNodes(agg.getNodes());
 
-                this.deleteHandlersByFlowId(flowId);
+                this.deleteConfigHandlersByFlowId(flowId);
                 this.insertBatchHandlers(agg.getHandlers());
             }
             return selectFlowConfigAggByFlowId(flowId);

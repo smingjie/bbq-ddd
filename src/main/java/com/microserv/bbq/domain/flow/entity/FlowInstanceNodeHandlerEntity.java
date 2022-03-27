@@ -1,6 +1,7 @@
 package com.microserv.bbq.domain.flow.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
+@DomainEntity
 public class FlowInstanceNodeHandlerEntity implements IDomainMetaData {
 
     private String handlerId;       //节点处理人id

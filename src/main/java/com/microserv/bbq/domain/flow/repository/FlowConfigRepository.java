@@ -21,24 +21,25 @@ public interface FlowConfigRepository {
 	List<FlowConfigHandlerEntity> selectFlowConfigHandlersByFlowId(String flowId);
 	FlowConfigAgg selectFlowConfigAggByFlowId(String flowId);
 	FlowConfigAgg selectFlowConfigAggByFlowCode(String flowCode);
+
 	//--命令
 
 	boolean insert(FlowConfigMainEntity entity);
 	boolean update(FlowConfigMainEntity entity);
 	boolean delete(FlowConfigMainEntity entity);
-	boolean deleteConfigByFlowId(String flowId);
+	boolean deleteConfigMainByFlowId(String flowId);
 
 	void insertBatchNodes(List<FlowConfigNodeEntity> entities);
 	boolean insert(FlowConfigNodeEntity entity);
 	boolean update(FlowConfigNodeEntity entity);
 	boolean delete(FlowConfigNodeEntity entity);
-	void deleteNodesByFlowId(String flowId);
+	void deleteConfigNodesByFlowId(String flowId);
 
 	void insertBatchHandlers(List<FlowConfigHandlerEntity> entities);
 	boolean insert(FlowConfigHandlerEntity entity);
 	boolean update(FlowConfigHandlerEntity entity);
 	boolean delete(FlowConfigHandlerEntity entity);
-	void deleteHandlersByFlowId(String flowId);
+	void deleteConfigHandlersByFlowId(String flowId);
 
    FlowConfigAgg saveOrUpdate(FlowConfigAgg agg);
 
