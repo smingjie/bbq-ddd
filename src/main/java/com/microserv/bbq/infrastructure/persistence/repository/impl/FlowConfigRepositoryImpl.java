@@ -9,7 +9,6 @@ import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.exception.PersistException;
-import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.persistence.assembler.FlowConfigAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfig;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNode;
@@ -51,7 +50,7 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     @Override
     public FlowConfigMainEntity selectFlowConfigMainByFlowId(String flowId) {
         FlowConfig flowConfig = flowConfigMapper.selectById(flowId);
-        return flowConfigAssembler.po2domain(flowConfig, FlowConfigMainEntity.class);
+        return flowConfigAssembler.po2domain(flowConfig);
     }
 
     @Override
@@ -94,12 +93,14 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
 
     @Override
     public boolean insert(FlowConfigMainEntity entity) {
-        return flowConfigMapper.insert(ModelUtils.convert(entity, FlowConfig.class)) > 0;
+        FlowConfig flowConfigForCreate = flowConfigAssembler.domain2po(entity);
+        return flowConfigMapper.insert(flowConfigForCreate) > 0;
     }
 
     @Override
     public boolean update(FlowConfigMainEntity entity) {
-        return flowConfigMapper.updateById(ModelUtils.convert(entity, FlowConfig.class)) > 0;
+        FlowConfig flowConfigForUpdate = flowConfigAssembler.domain2po(entity);
+        return flowConfigMapper.updateById(flowConfigForUpdate) > 0;
     }
 
     @Override
@@ -113,20 +114,22 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
         return flowConfigMapper.deleteById(flowId) > 0;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void insertBatchNodes(List<FlowConfigNodeEntity> entities) {
-        List<FlowConfigNode> list = ModelUtils.convertList(entities, FlowConfigNode.class);
-        list.forEach(flowConfigNodeMapper::insert);
+        entities.forEach(this::insert);
     }
 
     @Override
     public boolean insert(FlowConfigNodeEntity entity) {
-        return flowConfigNodeMapper.insert(ModelUtils.convert(entity, FlowConfigNode.class)) > 0;
+        FlowConfigNode node = flowConfigAssembler.domain2po(entity);
+        return flowConfigNodeMapper.insert(node) > 0;
     }
 
     @Override
     public boolean update(FlowConfigNodeEntity entity) {
-        return flowConfigNodeMapper.updateById(ModelUtils.convert(entity, FlowConfigNode.class)) > 0;
+        FlowConfigNode node = flowConfigAssembler.domain2po(entity);
+        return flowConfigNodeMapper.updateById(node) > 0;
     }
 
     @Override
@@ -141,20 +144,22 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
         flowConfigNodeMapper.delete(wrapper);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void insertBatchHandlers(List<FlowConfigHandlerEntity> entities) {
-        List<FlowConfigNodeHandler> list = ModelUtils.convertList(entities, FlowConfigNodeHandler.class);
-        list.forEach(flowConfigNodeHandleMapper::insert);
+        entities.forEach(this::insert);
     }
 
     @Override
     public boolean insert(FlowConfigHandlerEntity entity) {
-        return flowConfigNodeHandleMapper.insert(ModelUtils.convert(entity, FlowConfigNodeHandler.class)) > 0;
+        FlowConfigNodeHandler handler = flowConfigAssembler.domain2po(entity);
+        return flowConfigNodeHandleMapper.insert(handler) > 0;
     }
 
     @Override
     public boolean update(FlowConfigHandlerEntity entity) {
-        return flowConfigNodeHandleMapper.updateById(ModelUtils.convert(entity, FlowConfigNodeHandler.class)) > 0;
+        FlowConfigNodeHandler handler = flowConfigAssembler.domain2po(entity);
+        return flowConfigNodeHandleMapper.updateById(handler) > 0;
     }
 
     @Override

@@ -42,16 +42,16 @@ public class DictRepositoryImpl implements DictRepository {
     @Override
     public DictEntity selectById(String id) {
         SysDict po = sysDictMapper.selectById(id);
-        return sysDictAssembler.po2domain(po, DictEntity.class);
+        return sysDictAssembler.po2domain(po);
     }
 
     @Override
     public DictEntity selectByTypeAndCode(String type, String code) {
-        SysDict dbo = ChainWrappers.lambdaQueryChain(sysDictMapper)
+        SysDict po = ChainWrappers.lambdaQueryChain(sysDictMapper)
                 .eq(SysDict::getType, type)
                 .eq(SysDict::getCode, code)
                 .one();
-        return sysDictAssembler.po2domain(dbo, DictEntity.class);
+        return sysDictAssembler.po2domain(po);
     }
 
     @Override
@@ -59,20 +59,22 @@ public class DictRepositoryImpl implements DictRepository {
         List<SysDict> poList = ChainWrappers.lambdaQueryChain(sysDictMapper)
                 .like(SysDict::getValue, valueLike)
                 .list();
-        return sysDictAssembler.po2domain(poList, DictEntity.class);
+        return poList.stream().map(sysDictAssembler::po2domain).collect(Collectors.toList());
     }
 
     @Override
     public List<DictTypeEntity> searchByTypeName(String typeNameLike) {
         List<SysDict> poList = ChainWrappers.lambdaQueryChain(sysDictMapper)
-                .select(SysDict::getType,SysDict::getName)
+                .select(SysDict::getType, SysDict::getName)
                 .like(SysDict::getName, typeNameLike)
                 .list();
-        if(CollectionUtils.isEmpty(poList)){
+        if (CollectionUtils.isEmpty(poList)) {
             return Collections.emptyList();
         }
-        return poList.stream().map(sysDictAssembler::po2domainDictTypeEntity)
-                .distinct().collect(Collectors.toList())       ;
+        return poList.stream()
+                .map(sysDictAssembler::po2domainDictTypeEntity)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -80,7 +82,7 @@ public class DictRepositoryImpl implements DictRepository {
         List<SysDict> poList = ChainWrappers.lambdaQueryChain(sysDictMapper)
                 .eq(SysDict::getType, type)
                 .list();
-        return sysDictAssembler.po2domain(poList, DictEntity.class);
+        return poList.stream().map(sysDictAssembler::po2domain).collect(Collectors.toList());
     }
 
     @Override
@@ -89,7 +91,7 @@ public class DictRepositoryImpl implements DictRepository {
             throw new PersistException("保存插入实体时，字典实体不能为空");
         }
 
-        SysDict sysDict = sysDictAssembler.domain2po(item, SysDict.class);
+        SysDict sysDict = sysDictAssembler.domain2po(item);
         return sysDictMapper.insert(sysDict) > 0;
 
     }
@@ -105,7 +107,7 @@ public class DictRepositoryImpl implements DictRepository {
         }
 
         // 2 模型转换
-        SysDict updatePO = sysDictAssembler.domain2po(item, SysDict.class);
+        SysDict updatePO = sysDictAssembler.domain2po(item);
         updatePO.setCreateBy(SecurityContext.tryGetLoginUserId());
         updatePO.setUpdateTime(LocalDateTime.now());
 
@@ -125,7 +127,7 @@ public class DictRepositoryImpl implements DictRepository {
     @Override
     public boolean delete(DictEntity item) {
         // 先转换
-        SysDict dbo = sysDictAssembler.domain2po(item, SysDict.class);
+        SysDict dbo = sysDictAssembler.domain2po(item);
 
         if (Objects.isNull(dbo)) {
             return false;

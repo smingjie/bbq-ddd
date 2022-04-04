@@ -15,35 +15,30 @@ import com.microserv.bbq.infrastructure.persistence.po.SysUser;
  * @date 2022/3/20
  */
 @DomainAssembler
-public class SysUserAssembler implements IPoDomainAssembler<UserEntity, SysUser> {
+public class SysUserAssembler implements IPoDomainAssembler {
 
     /**
      * 领域模型 => 数据持久化模型
      *
-     * @param domain  领域对象
-     * @param poClass 目标持久化模型类名
+     * @param domain 领域对象
      * @return 目标持久化对象
      */
-    @Override
-    public SysUser domain2po(UserEntity domain, Class<SysUser> poClass) {
+    public SysUser domain2po(UserEntity domain) {
 
-        SysUser sysUser = ModelUtils.convert(domain, poClass);
+        SysUser sysUser = ModelUtils.convert(domain, SysUser.class);
         if (sysUser != null) {
             sysUser.setStatus(domain.getEnabled());
         }
         return sysUser;
     }
 
-
     /**
      * 数据持久化模型  =>  领域模型
      *
-     * @param sysUser     持久化对象
-     * @param domainClass 目标领域模型类名
+     * @param sysUser 持久化对象
      * @return 目标领域对象
      */
-    @Override
-    public UserEntity po2domain(SysUser sysUser, Class<UserEntity> domainClass) {
+    public UserEntity po2domain(SysUser sysUser) {
 
         UserEntity userEntity = ModelUtils.convert(sysUser, UserEntity.class);
         if (sysUser != null) {
