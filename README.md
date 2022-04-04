@@ -16,7 +16,7 @@ springboot+ddd分层示例工程
 │    │    └─controller       控制器，对外提供（Restful）接口
 │    │ 
 │    ├─application           应用层
-│    │    ├─service          应用服务，非核心服务，跨领域的协作
+│    │    ├─service          应用服务，非核心服务，跨领域的协作、复杂分页查询等
 │    │    ├─task             任务定义，协调领域模型 
 │    │    └─***              others
 │    │ 
