@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 
 /**
- * 测试控制器
+ * 默认控制器
  *
  * @author jockeys
  * @since 2020/4/11
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Slf4j
 @RestController
 @RequestMapping("/test")
-public class TestController {
+public class IndexController {
     @ApiOperation(value = "健康检查")
     @GetMapping("/health")
     public String getHealthStatus() {

@@ -18,6 +18,8 @@ import java.util.List;
 
 
 /**
+ * 字典域 控制器
+ *
  * @author jockeys
  * @since 2020/4/12
  */
