@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.flow.agg;
+package com.microserv.bbq.domain.flow.aggregrate;
 
 import cn.hutool.core.lang.Assert;
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;

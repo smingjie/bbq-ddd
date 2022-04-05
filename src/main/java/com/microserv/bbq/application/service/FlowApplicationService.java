@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @ApplicationService
-public class FlowAppService {
+public class FlowApplicationService {
     public PageResult getConfigListByPage(PageQueryParam queryParam) {
         log.info("返回分页查询结果");
         return PageResult.valueOf(queryParam);

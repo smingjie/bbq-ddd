@@ -4,7 +4,7 @@ package com.microserv.bbq.apis.controller;
 import com.microserv.bbq.apis.apimodel.user.UserCreateParam;
 import com.microserv.bbq.apis.apimodel.user.UserLoginParam;
 import com.microserv.bbq.apis.assembler.UserApiAssembler;
-import com.microserv.bbq.application.service.UserAppService;
+import com.microserv.bbq.application.service.UserApplicationService;
 import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.domain.user.service.UserDomainService;
 import com.microserv.bbq.infrastructure.share.page.PageResult;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserDomainService userDomainService;
     private final UserApiAssembler userApiAssembler;
-    private final UserAppService userAppService;
+    private final UserApplicationService userAppService;
 
     @ApiOperation(value = "获取用户的基本信息")
     @GetMapping("/users/{userId}/info")

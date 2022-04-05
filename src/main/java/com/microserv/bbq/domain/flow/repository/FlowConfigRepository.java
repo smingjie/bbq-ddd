@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.flow.repository;
 
-import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.aggregrate.FlowConfigAgg;
 import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;

@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.flow.agg;
+package com.microserv.bbq.domain.flow.aggregrate;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;

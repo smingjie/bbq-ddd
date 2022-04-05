@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.controller;
 
 
 import com.microserv.bbq.domain.rbac.entity.RoleEntity;
-import com.microserv.bbq.domain.rbac.agg.UserRoleMenuAgg;
+import com.microserv.bbq.domain.rbac.aggregrate.UserRoleMenuAgg;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

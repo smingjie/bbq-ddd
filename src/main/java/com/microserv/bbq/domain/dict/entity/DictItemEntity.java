@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.dict.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
-import com.microserv.bbq.domain.dict.valueobject.DictValueVObj;
+import com.microserv.bbq.domain.dict.vobj.DictValueVObj;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

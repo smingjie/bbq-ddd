@@ -3,7 +3,7 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
-import com.microserv.bbq.domain.flow.agg.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.aggregrate.FlowConfigAgg;
 import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;

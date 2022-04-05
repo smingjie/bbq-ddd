@@ -54,4 +54,5 @@ public class MenuEntity implements IDomainCRUD<MenuEntity> {
 		}
 		return this;
 	}
+
 }

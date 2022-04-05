@@ -1,6 +1,6 @@
 package com.microserv.bbq.application.service;
 
-import com.microserv.bbq.application.repository.UserAppRepository;
+import com.microserv.bbq.application.repository.UserApplicationRepository;
 import com.microserv.bbq.infrastructure.general.exception.BusinessException;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.ApplicationService;
 import com.microserv.bbq.infrastructure.share.page.PageResult;
@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @ApplicationService
 @RequiredArgsConstructor
-public class UserAppService {
-    private final UserAppRepository userAppRepository;
+public class UserApplicationService {
+    private final UserApplicationRepository userAppRepository;
 
     /**
      * 分页查询，跨多个领域可直接越过领域层通过基础设施层

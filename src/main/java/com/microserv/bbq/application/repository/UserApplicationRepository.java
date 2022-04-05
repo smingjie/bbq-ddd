@@ -10,6 +10,6 @@ import com.microserv.bbq.infrastructure.share.user.UserWithRoleItemCO;
  * @author mingjie
  * @date 2022/4/5
  */
-public interface UserAppRepository {
+public interface UserApplicationRepository {
     PageResult<UserWithRoleItemCO> listUserByPage(UserSearchParam param);
 }

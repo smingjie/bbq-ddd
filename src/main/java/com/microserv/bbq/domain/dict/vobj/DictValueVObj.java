@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.dict.valueobject;
+package com.microserv.bbq.domain.dict.vobj;
 
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainValueObject;
 import lombok.Data;

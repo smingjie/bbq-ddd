@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.flow.valueobject;
+package com.microserv.bbq.domain.flow.vobj;
 
 import java.io.Serializable;
 

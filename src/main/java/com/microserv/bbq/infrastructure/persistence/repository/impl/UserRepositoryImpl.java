@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
-import com.microserv.bbq.application.repository.UserAppRepository;
+import com.microserv.bbq.application.repository.UserApplicationRepository;
 import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.domain.user.repository.UserRepository;
 import com.microserv.bbq.domain.user.vobj.UserDictVObj;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @DomainRepository
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepository, UserAppRepository {
+public class UserRepositoryImpl implements UserRepository, UserApplicationRepository {
     private final SysUserMapper sysUserMapper;         // 用户Mapper
     private final SysUserAssembler sysUserAssembler;   // 用户Assembler
 

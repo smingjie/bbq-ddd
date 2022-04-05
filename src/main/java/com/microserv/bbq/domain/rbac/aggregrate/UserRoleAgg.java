@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.rbac.agg;
+package com.microserv.bbq.domain.rbac.aggregrate;
 
 import com.microserv.bbq.domain.rbac.entity.RoleEntity;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAggregate;
