@@ -4,8 +4,12 @@ package com.microserv.bbq.apis.controller;
 import com.microserv.bbq.apis.apimodel.user.UserCreateParam;
 import com.microserv.bbq.apis.apimodel.user.UserLoginParam;
 import com.microserv.bbq.apis.assembler.UserApiAssembler;
+import com.microserv.bbq.application.service.UserAppService;
 import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.domain.user.service.UserDomainService;
+import com.microserv.bbq.infrastructure.share.page.PageResult;
+import com.microserv.bbq.infrastructure.share.user.UserWithRoleItemCO;
+import com.microserv.bbq.infrastructure.share.user.UserSearchParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserDomainService userDomainService;
     private final UserApiAssembler userApiAssembler;
+    private final UserAppService userAppService;
 
     @ApiOperation(value = "获取用户的基本信息")
     @GetMapping("/users/{userId}/info")
@@ -41,14 +46,17 @@ public class UserController {
     @ApiOperation(value = "用户创建")
     @PostMapping("/users/one")
     public UserEntity login(@Validated @RequestBody UserCreateParam param) {
-        // 模型转换
-        UserEntity entity = userApiAssembler.trans2Domain(param, UserEntity.class);
-
-        // 执行保存
-        entity.saveOrUpdate();
-
-        // 返回数据库查到的最新的结果
-        return entity;
+        UserEntity entity = userApiAssembler.trans2Domain(param, UserEntity.class);  // 模型转换
+        entity.saveOrUpdate();        // 执行保存
+        return entity;                // 返回数据库查到的最新的结果
     }
+
+    @ApiOperation(value = "筛选用户集合（带角色信息）")
+    @GetMapping("/users/list")
+    public PageResult<UserWithRoleItemCO> listUserByPage(@Validated @ModelAttribute UserSearchParam searchParam) {
+        log.info("执行筛选用户集合（带角色信息）,searchParam={}", searchParam);
+        return userAppService.listUserByPage(searchParam);
+    }
+
 }
 

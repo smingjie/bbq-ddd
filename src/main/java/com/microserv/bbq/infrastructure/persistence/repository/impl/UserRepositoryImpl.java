@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
+import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.page.PageMethod;
+import com.microserv.bbq.application.repository.UserAppRepository;
 import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.domain.user.repository.UserRepository;
 import com.microserv.bbq.domain.user.vobj.UserDictVObj;
@@ -14,6 +17,9 @@ import com.microserv.bbq.infrastructure.general.security.SecurityContext;
 import com.microserv.bbq.infrastructure.persistence.assembler.SysUserAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.SysUser;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysUserMapper;
+import com.microserv.bbq.infrastructure.share.page.PageResult;
+import com.microserv.bbq.infrastructure.share.user.UserSearchParam;
+import com.microserv.bbq.infrastructure.share.user.UserWithRoleItemCO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +38,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @DomainRepository
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl implements UserRepository, UserAppRepository {
     private final SysUserMapper sysUserMapper;         // 用户Mapper
     private final SysUserAssembler sysUserAssembler;   // 用户Assembler
 
@@ -121,5 +127,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
 
+    @Override
+    public PageResult<UserWithRoleItemCO> listUserByPage(UserSearchParam param) {
+        PageInfo<UserWithRoleItemCO> page = PageMethod
+                .startPage(param.getCurrent(), param.getPageSize())
+                .doSelectPageInfo(() -> sysUserMapper.selectListBySearchParam(param));
+
+        return PageResult.valueOf(page);
+    }
 }
 

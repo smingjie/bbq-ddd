@@ -2,6 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.assembler;
 
 import com.microserv.bbq.domain.rbac.entity.MenuEntity;
 import com.microserv.bbq.domain.rbac.entity.RoleEntity;
+import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAssembler;
 import com.microserv.bbq.infrastructure.general.extension.assembler.IPoDomainAssembler;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.persistence.po.SysMenu;
@@ -13,6 +14,7 @@ import com.microserv.bbq.infrastructure.persistence.po.SysRole;
  * @author mingjie
  * @date 2022/4/4
  */
+@DomainAssembler
 public class RbacAssembler implements IPoDomainAssembler {
 
     public MenuEntity po2domain(SysMenu po) {

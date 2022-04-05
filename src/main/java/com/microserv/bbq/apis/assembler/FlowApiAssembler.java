@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
  * @date 2022/3/23
  */
 @DomainAssembler
-public class FlowConfigApiAssembler implements IApiDomainAssembler<FlowConfigMainEntity> {
+public class FlowApiAssembler implements IApiDomainAssembler<FlowConfigMainEntity> {
     private static final String CONFIG_FLOW_ID_PREFIX = "cfg";
     private static final String CONFIG_HANDLER_ID_PREFIX = "handler";
 

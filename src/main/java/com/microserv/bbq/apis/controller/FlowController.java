@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.controller;
 
 
 import com.microserv.bbq.apis.apimodel.flow.FlowConfigCreateParam;
-import com.microserv.bbq.apis.assembler.FlowConfigApiAssembler;
+import com.microserv.bbq.apis.assembler.FlowApiAssembler;
 import com.microserv.bbq.domain.flow.agg.FlowConfigAgg2;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * 工作流-模板配置
+ * 工作流
  *
  * @author mingjie
  * @date 2022-03-25
  */
 @RestController
 @RequiredArgsConstructor
-public class FlowConfigController {
-    private final FlowConfigApiAssembler flowConfigApiAssembler;
+public class FlowController {
+    private final FlowApiAssembler flowConfigApiAssembler;
 
     @ApiOperation(value = "根据flowId获取一个工作流的配置详情-三层嵌套")
     @GetMapping("flow-config/{flowId}/detail")

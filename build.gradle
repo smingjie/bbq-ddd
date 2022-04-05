@@ -39,11 +39,13 @@ dependencies {
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.0'
     implementation 'com.baomidou:mybatis-plus-generator:3.4.0'
     implementation 'org.apache.velocity:velocity-engine-core:2.2' // for mybatis-plus generate code
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.1'
 
     // util
     implementation 'com.alibaba:fastjson:1.2.70'
     implementation 'cn.hutool:hutool-all:5.4.2'
     implementation 'ma.glasnost.orika:orika-core:1.5.4' //must
+
 
     // lombok
     implementation 'org.projectlombok:lombok'
