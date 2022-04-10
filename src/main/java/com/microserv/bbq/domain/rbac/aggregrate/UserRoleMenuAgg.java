@@ -57,6 +57,8 @@ public class UserRoleMenuAgg extends UserEntity {
 		return this;
 	}
 
+
+
 	/**
 	 * 菜单树的记录
 	 */

@@ -24,23 +24,21 @@ public class FlowController {
 
     @ApiOperation(value = "根据flowId获取一个工作流的配置详情-三层嵌套")
     @GetMapping("flow-config/{flowId}/detail")
-    public FlowConfigAgg2 getFlowConfigById(@NotNull(message = "flowId不能为空") @PathVariable String flowId) {
-        return FlowConfigAgg2.getById(flowId);
+    public FlowConfigAgg2 getFlowConfigByFlowId(@NotNull(message = "flowId不能为空") @PathVariable String flowId) {
+        return FlowConfigAgg2.getInstanceByFlowId(flowId);
     }
 
     @ApiOperation(value = "根据flowCode获取一个工作流的配置详情-三层嵌套")
     @GetMapping("flow-config/detail")
-    public FlowConfigAgg2 getFlowConfigByCode(@NotNull(message = "flowCode不能为空") @RequestParam String flowCode) {
-        return FlowConfigAgg2.getByCode(flowCode);
+    public FlowConfigAgg2 getFlowConfigByFlowCode(@NotNull(message = "flowCode不能为空") @RequestParam String flowCode) {
+        return FlowConfigAgg2.getInstanceByFlowCode(flowCode);
     }
 
     @ApiOperation(value = "部署一个工作流-三层嵌套")
     @PostMapping("flow-config")
     public FlowConfigAgg2 deployFlowConfig(@Validated @RequestBody FlowConfigCreateParam flowConfig) {
-        // 模型转换
-        FlowConfigAgg2 agg2 = flowConfigApiAssembler.transform2FlowConfigAgg2(flowConfig);
-        // 执行保存
-        return agg2.saveOrUpdate();
+        FlowConfigAgg2 agg2 = flowConfigApiAssembler.transform2FlowConfigAgg2(flowConfig);   // 模型转换
+        return agg2.saveOrUpdate();  // 执行保存
     }
 }
 

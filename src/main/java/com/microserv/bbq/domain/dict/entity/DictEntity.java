@@ -81,14 +81,13 @@ public class DictEntity implements IDomainCRUD<DictEntity>, IDomainMetaData {
      * @return
      */
     @Override
-    public DictEntity get() {
+    public DictEntity fetch() {
         DictEntity entity = null;
 
         if (StrUtil.isNotBlank(this.id)) {
-            entity = dictRepository.selectById(this.id);
-        }
-        if (StrUtil.isAllNotBlank(this.type, this.code)) {
-            entity = dictRepository.selectByTypeAndCode(this.type, this.code);
+            entity = getInstance(this.id);
+        } else if (StrUtil.isAllNotBlank(this.type, this.code)) {
+            entity = getInstance(this.type, this.code);
         }
 
         if (entity != null) {
@@ -97,5 +96,16 @@ public class DictEntity implements IDomainCRUD<DictEntity>, IDomainMetaData {
 
         return this;
     }
+
+
+    public static DictEntity getInstance(String type, String code) {
+        return dictRepository.selectByTypeAndCode(type, code);
+    }
+
+
+    public static DictEntity getInstance(String id) {
+        return dictRepository.selectById(id);
+    }
+
 }
 

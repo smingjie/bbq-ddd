@@ -8,5 +8,5 @@ package com.microserv.bbq.domain.common.interfaces;
  * @since 2022/3/19
  */
 public interface IDomainQuery<DO> {
-    DO get();
+    DO fetch();
 }

@@ -7,6 +7,7 @@ import com.microserv.bbq.domain.dict.entity.DictItemEntity;
 import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainAggregate;
+import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -34,13 +35,8 @@ public class DictTypeAgg extends DictTypeEntity {
 
     private DictTypeAgg fetch() {
         if (Objects.nonNull(this.getType())) {
-            List<DictEntity> dictEntities = RepositoryFactory.get(DictRepository.class).selectByType(this.getType());
-            if (!CollectionUtils.isEmpty(dictEntities)) {
-                this.setName(dictEntities.get(0).getName());
-                this.setItemList(dictEntities.stream().map(DictItemEntity::new).collect(Collectors.toList()));
-            }
-
-            return this;
+            DictTypeAgg agg = getInstance(this.getType());
+            ModelUtils.convert(agg, this);
         }
 
         return this;
@@ -52,8 +48,16 @@ public class DictTypeAgg extends DictTypeEntity {
      * @param type 字典类型
      * @return 字典类型聚合结果
      */
-    public static DictTypeAgg newInstanceByType(String type) {
-        return new DictTypeAgg(type).fetch();
+    public static DictTypeAgg getInstance(String type) {
+        DictTypeAgg agg = new DictTypeAgg(type);
+        if (Objects.nonNull(type)) {
+            List<DictEntity> dictEntities = RepositoryFactory.get(DictRepository.class).selectByType(type);
+            if (!CollectionUtils.isEmpty(dictEntities)) {
+                agg.setName(dictEntities.get(0).getName());
+                agg.setItemList(dictEntities.stream().map(DictItemEntity::new).collect(Collectors.toList()));
+            }
+        }
+        return agg;
     }
 }
 

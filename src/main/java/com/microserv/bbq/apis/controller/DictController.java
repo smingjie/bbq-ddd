@@ -33,7 +33,7 @@ public class DictController {
     @ApiOperation(value = "获取一个指定类型的字典集合")
     @GetMapping("/dict/agg")
     public DictAggVO getDictByType(@RequestParam String type) {
-        DictTypeAgg agg = DictTypeAgg.newInstanceByType(type);
+        DictTypeAgg agg = DictTypeAgg.getInstance(type);
         return new DictAggVO(agg);
     }
 
@@ -46,13 +46,13 @@ public class DictController {
     @ApiOperation(value = "获取一个字典记录详情，根据类型和键")
     @GetMapping("/dict/one")
     public DictEntity getDictDetailByTypeAndCode(@RequestParam String type, @RequestParam String code) {
-        return new DictEntity(type, code).get();
+        return DictEntity.getInstance(type, code);
     }
 
     @ApiOperation(value = "获取一个字典记录详情，根据id")
     @GetMapping("/dict/{id}")
     public DictEntity getDictDetailById(@PathVariable String id) {
-        return new DictEntity(id).get();
+        return DictEntity.getInstance(id);
     }
 
     @ApiOperation(value = "新增一个字典记录")

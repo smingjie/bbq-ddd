@@ -41,7 +41,7 @@ public class MenuEntity implements IDomainCRUD<MenuEntity> {
 	}
 
 	@Override
-	public MenuEntity get() {
+	public MenuEntity fetch() {
 		return rbacRepository.selectMenuById(this.menuId);
 	}
 

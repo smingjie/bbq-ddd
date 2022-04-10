@@ -28,7 +28,7 @@ public class RoleEntity implements IDomainCRUD<RoleEntity> {
 	}
 
 	@Override
-	public RoleEntity get() {
+	public RoleEntity fetch() {
 		return rbacRepository.selectRoleById(this.roleId);
 	}
 

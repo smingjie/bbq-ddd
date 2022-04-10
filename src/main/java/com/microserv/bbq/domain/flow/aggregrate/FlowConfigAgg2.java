@@ -71,19 +71,19 @@ public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2>, IDom
         return agg2;
     }
 
-    public static FlowConfigAgg2 getByCode(String flowCode) {
+    public static FlowConfigAgg2 getInstanceByFlowCode(String flowCode) {
         if (Objects.isNull(flowCode)) {
             return null;
         }
-        FlowConfigAgg configAgg = new FlowConfigAgg().getByFlowCode(flowCode);
+        FlowConfigAgg configAgg = FlowConfigAgg.getInstanceByFlowCode(flowCode);
         return FlowConfigAgg2.valueOf(configAgg);
     }
 
-    public static FlowConfigAgg2 getById(String flowId) {
+    public static FlowConfigAgg2 getInstanceByFlowId(String flowId) {
         if (Objects.isNull(flowId)) {
             return null;
         }
-        FlowConfigAgg configAgg = FlowConfigAgg.getByFlowId(flowId);
+        FlowConfigAgg configAgg = FlowConfigAgg.getInstanceByFlowId(flowId);
         return FlowConfigAgg2.valueOf(configAgg);
 
     }

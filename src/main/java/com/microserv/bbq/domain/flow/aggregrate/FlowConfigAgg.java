@@ -90,14 +90,14 @@ public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
         return new FlowConfigAgg(configEntity, nodeEntities, handlerEntities);
     }
 
-    public static FlowConfigAgg getByFlowCode(String flowCode) {
+    public static FlowConfigAgg getInstanceByFlowCode(String flowCode) {
         if (Objects.isNull(flowCode)) {
             return null;
         }
         return flowConfigRepo.selectFlowConfigAggByFlowCode(flowCode);
     }
 
-    public static FlowConfigAgg getByFlowId(String flowId) {
+    public static FlowConfigAgg getInstanceByFlowId(String flowId) {
         if (Objects.isNull(flowId)) {
             return null;
         }

@@ -34,7 +34,7 @@ public class UserController {
     @GetMapping("/users/{userId}/info")
     public UserEntity getUserInfoByUserId(@PathVariable String userId) {
         log.info("执行用户信息查询,userId={}", userId);
-        return new UserEntity(userId).get();
+        return UserEntity.getInstanceByUserId(userId);
     }
 
     @ApiOperation(value = "用户登录")
@@ -47,8 +47,7 @@ public class UserController {
     @PostMapping("/users/one")
     public UserEntity login(@Validated @RequestBody UserCreateParam param) {
         UserEntity entity = userApiAssembler.trans2Domain(param, UserEntity.class);  // 模型转换
-        entity.saveOrUpdate();        // 执行保存
-        return entity;                // 返回数据库查到的最新的结果
+        return entity.saveOrUpdate();        // 执行保存,并返回数据库查到的最新的结果
     }
 
     @ApiOperation(value = "筛选用户集合（带角色信息）")

@@ -64,14 +64,14 @@ public class UserEntity implements IDomainCRUD<UserEntity>, IDomainMetaData {
     }
 
     @Override
-    public UserEntity get() {
+    public UserEntity fetch() {
         if (StrUtil.isAllBlank(this.userId, this.username)) {
             throw new BusinessException("获取实体时，用户id和用户名不能同时为空");
         }
 
         UserEntity item = Objects.nonNull(this.userId)
-                ? userRepository.selectById(this.userId)
-                : userRepository.selectByUsername(this.username);
+                ? getInstanceByUserId(this.userId)
+                : getInstanceByUsername(this.username);
 
         if (Objects.nonNull(item)) {
             ModelUtils.convert(item, this);
@@ -89,6 +89,15 @@ public class UserEntity implements IDomainCRUD<UserEntity>, IDomainMetaData {
         }
         return String.join("/", this.name, this.username);
     }
+
+    public static UserEntity getInstanceByUserId(String userId) {
+        return userRepository.selectById(userId);
+    }
+
+    public static UserEntity getInstanceByUsername(String username) {
+        return userRepository.selectByUsername(username);
+    }
+
 
 }
 
