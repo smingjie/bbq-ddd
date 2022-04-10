@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.general.exception;
 
-import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
+import com.microserv.bbq.infrastructure.general.constant.ErrorCode;
 
 /**
  * 自定义顶级异常 BusinessException
@@ -19,7 +19,7 @@ public class BusinessException extends RuntimeException {
     /**
      * 错误枚举-初始化
      */
-    public BusinessException(ErrorCodeEnum errorCode) {
+    public BusinessException(ErrorCode errorCode) {
         this(errorCode.getMessage());
         this.code = errorCode.getCode();
     }

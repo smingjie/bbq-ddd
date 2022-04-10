@@ -12,7 +12,7 @@ import java.text.MessageFormat;
  * @since 2020/4/6
  */
 @Getter
-public enum ErrorCodeEnum {
+public enum ErrorCodeEnum implements ErrorCode {
     /**
      * 400
      */
