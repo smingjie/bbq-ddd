@@ -8,7 +8,7 @@ import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
-import com.microserv.bbq.infrastructure.general.exception.PersistException;
+import com.microserv.bbq.infrastructure.general.commonshare.exception.PersistException;
 import com.microserv.bbq.infrastructure.persistence.assembler.FlowConfigAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfig;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNode;

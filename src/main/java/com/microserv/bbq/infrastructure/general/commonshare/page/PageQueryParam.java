@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.share.page;
+package com.microserv.bbq.infrastructure.general.commonshare.page;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

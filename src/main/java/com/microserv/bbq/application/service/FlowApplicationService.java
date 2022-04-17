@@ -1,8 +1,8 @@
 package com.microserv.bbq.application.service;
 
-import com.microserv.bbq.infrastructure.share.page.PageQueryParam;
+import com.microserv.bbq.infrastructure.general.commonshare.page.PageQueryParam;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.ApplicationService;
-import com.microserv.bbq.infrastructure.share.page.PageResult;
+import com.microserv.bbq.infrastructure.general.commonshare.page.PageResult;
 import lombok.extern.slf4j.Slf4j;
 
 /**

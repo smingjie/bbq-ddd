@@ -1,6 +1,6 @@
-package com.microserv.bbq.infrastructure.share.user;
+package com.microserv.bbq.infrastructure.businessshare.user;
 
-import com.microserv.bbq.infrastructure.share.page.PageQueryParam;
+import com.microserv.bbq.infrastructure.general.commonshare.page.PageQueryParam;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

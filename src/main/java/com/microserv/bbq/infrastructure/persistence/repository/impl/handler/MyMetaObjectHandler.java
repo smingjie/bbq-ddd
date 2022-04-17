@@ -2,7 +2,7 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl.handler;
 
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.microserv.bbq.infrastructure.general.security.SecurityContext;
+import com.microserv.bbq.infrastructure.general.commonshare.security.SecurityContext;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;

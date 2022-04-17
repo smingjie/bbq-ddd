@@ -1,7 +1,7 @@
-package com.microserv.bbq.infrastructure.general.security;
+package com.microserv.bbq.infrastructure.general.commonshare.security;
 
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
-import com.microserv.bbq.infrastructure.general.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.commonshare.exception.BusinessException;
 
 /**
  * 用户鉴权信息-上下文

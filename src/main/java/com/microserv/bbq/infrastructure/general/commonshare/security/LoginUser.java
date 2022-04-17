@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.general.security;
+package com.microserv.bbq.infrastructure.general.commonshare.security;
 
 import lombok.Data;
 

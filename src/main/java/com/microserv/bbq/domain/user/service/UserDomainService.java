@@ -4,7 +4,7 @@ import com.microserv.bbq.domain.user.entity.UserEntity;
 import com.microserv.bbq.domain.user.repository.UserRepository;
 import com.microserv.bbq.domain.user.vobj.UserDictVObj;
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
-import com.microserv.bbq.infrastructure.general.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.commonshare.exception.BusinessException;
 import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.DomainService;
 import lombok.RequiredArgsConstructor;
 

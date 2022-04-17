@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.general.exception;
+package com.microserv.bbq.infrastructure.general.commonshare.exception;
 
 import com.microserv.bbq.infrastructure.general.constant.ErrorCode;
 

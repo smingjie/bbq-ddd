@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.general.response;
+package com.microserv.bbq.infrastructure.general.commonshare.response;
 
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
 import lombok.Getter;

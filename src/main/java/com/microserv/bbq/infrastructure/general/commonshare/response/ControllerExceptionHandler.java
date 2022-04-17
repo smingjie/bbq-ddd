@@ -1,7 +1,7 @@
-package com.microserv.bbq.infrastructure.general.response;
+package com.microserv.bbq.infrastructure.general.commonshare.response;
 
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
-import com.microserv.bbq.infrastructure.general.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.commonshare.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

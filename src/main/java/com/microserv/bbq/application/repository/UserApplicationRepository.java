@@ -1,8 +1,8 @@
 package com.microserv.bbq.application.repository;
 
-import com.microserv.bbq.infrastructure.share.page.PageResult;
-import com.microserv.bbq.infrastructure.share.user.UserSearchParam;
-import com.microserv.bbq.infrastructure.share.user.UserWithRoleItemCO;
+import com.microserv.bbq.infrastructure.general.commonshare.page.PageResult;
+import com.microserv.bbq.infrastructure.businessshare.user.UserSearchParam;
+import com.microserv.bbq.infrastructure.businessshare.user.UserWithRoleItemCO;
 
 /**
  * 用户应用层仓储接口

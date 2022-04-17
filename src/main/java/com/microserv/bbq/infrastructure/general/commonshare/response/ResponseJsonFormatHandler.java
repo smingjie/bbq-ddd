@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.general.response;
+package com.microserv.bbq.infrastructure.general.commonshare.response;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;

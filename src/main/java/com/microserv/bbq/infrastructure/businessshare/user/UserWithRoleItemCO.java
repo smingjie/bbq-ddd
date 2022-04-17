@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.share.user;
+package com.microserv.bbq.infrastructure.businessshare.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

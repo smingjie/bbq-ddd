@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.share.common;
+package com.microserv.bbq.infrastructure.general.commonshare.dict;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
