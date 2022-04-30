@@ -2,19 +2,19 @@ package com.microserv.bbq.infrastructure.persistence.converter;
 
 import com.microserv.bbq.domain.dict.model.entity.DictEntity;
 import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAssembler;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
+import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 
 /**
- * 字典装配器：专门负责模型转换
+ * 字典模型转换器
  *
  * @author mingjie
  * @date 2022/3/20
  */
-@DomainAssembler
-public class SysDictAssembler implements IPoDomainConverter {
+@DomainConverter
+public class SysDictConverter implements IPoDomainConverter {
 
     public SysDict domain2po(DictEntity domain) {
         return ModelUtils.convert(domain, SysDict.class);

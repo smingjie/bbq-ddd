@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.persistence.repository.impl;
 
-import com.microserv.bbq.infrastructure.persistence.converter.RbacAssembler;
+import com.microserv.bbq.infrastructure.persistence.converter.RbacConverter;
 import com.microserv.bbq.infrastructure.persistence.po.SysMenu;
 import com.microserv.bbq.infrastructure.persistence.po.SysRole;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysMenuMapper;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class RbacRepositoryImpl implements RbacRepository {
     private final SysMenuMapper menuMapper;
     private final SysRoleMapper roleMapper;
-    private final RbacAssembler rbacAssembler;
+    private final RbacConverter rbacAssembler;
 
     @Override
     public List<MenuEntity> selectMenuListByUserId(String userId) {

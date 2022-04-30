@@ -11,7 +11,7 @@ import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
 import com.microserv.bbq.infrastructure.general.common.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.common.security.SecurityContext;
-import com.microserv.bbq.infrastructure.persistence.converter.SysDictAssembler;
+import com.microserv.bbq.infrastructure.persistence.converter.SysDictConverter;
 import com.microserv.bbq.infrastructure.persistence.po.SysDict;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysDictMapper;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor(onConstructor = @_(@Autowired))
 public class DictRepositoryImpl implements DictRepository {
     private final SysDictMapper sysDictMapper;
-    private final SysDictAssembler sysDictAssembler;
+    private final SysDictConverter sysDictAssembler;
 
     //-- 仓储实现
     @Override

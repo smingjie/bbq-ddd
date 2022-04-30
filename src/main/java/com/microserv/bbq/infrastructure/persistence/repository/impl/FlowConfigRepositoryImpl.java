@@ -9,7 +9,7 @@ import com.microserv.bbq.domain.flow.model.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.common.exception.PersistException;
-import com.microserv.bbq.infrastructure.persistence.converter.FlowConfigAssembler;
+import com.microserv.bbq.infrastructure.persistence.converter.FlowConfigConverter;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfig;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNode;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNodeHandler;
@@ -38,7 +38,7 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     private final FlowConfigMapper flowConfigMapper;
     private final FlowConfigNodeMapper flowConfigNodeMapper;
     private final FlowConfigNodeHandlerMapper flowConfigNodeHandleMapper;
-    private final FlowConfigAssembler flowConfigAssembler;
+    private final FlowConfigConverter flowConfigAssembler;
 
     List<FlowConfigNode> selectConfigNodes(String flowId) {
         return ChainWrappers.lambdaQueryChain(flowConfigNodeMapper)

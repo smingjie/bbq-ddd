@@ -14,7 +14,7 @@ import com.microserv.bbq.domain.user.model.UserDictVObj;
 import com.microserv.bbq.infrastructure.general.common.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainRepository;
 import com.microserv.bbq.infrastructure.general.common.security.SecurityContext;
-import com.microserv.bbq.infrastructure.persistence.converter.SysUserAssembler;
+import com.microserv.bbq.infrastructure.persistence.converter.SysUserConverter;
 import com.microserv.bbq.infrastructure.persistence.po.SysUser;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysUserMapper;
 import com.microserv.bbq.infrastructure.general.common.page.PageResult;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository, UserApplicationRepository {
     private final SysUserMapper sysUserMapper;         // 用户Mapper
-    private final SysUserAssembler sysUserAssembler;   // 用户Assembler
+    private final SysUserConverter sysUserAssembler;   // 用户Assembler
 
     @Override
     public boolean delete(UserEntity item) {

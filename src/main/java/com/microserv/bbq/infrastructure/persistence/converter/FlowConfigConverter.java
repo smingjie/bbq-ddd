@@ -3,21 +3,21 @@ package com.microserv.bbq.infrastructure.persistence.converter;
 import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.model.entity.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAssembler;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
+import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfig;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNode;
 import com.microserv.bbq.infrastructure.persistence.po.FlowConfigNodeHandler;
 
 /**
- * 流程配置模块（域）-装配器
+ * 流程配置模块（域）-转换器
  *
  * @author mingjie
  * @date 2022/3/23
  */
-@DomainAssembler
-public class FlowConfigAssembler implements IPoDomainConverter {
+@DomainConverter
+public class FlowConfigConverter implements IPoDomainConverter {
 
     public FlowConfigMainEntity po2domain(FlowConfig po) {
         return ModelUtils.convert(po, FlowConfigMainEntity.class);
