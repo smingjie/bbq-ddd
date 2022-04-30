@@ -1,9 +1,9 @@
 package com.microserv.bbq.apis.controller;
 
 
-import com.microserv.bbq.apis.apimodel.flow.FlowConfigCreateParam;
-import com.microserv.bbq.apis.assembler.FlowApiAssembler;
-import com.microserv.bbq.domain.flow.aggregrate.FlowConfigAgg2;
+import com.microserv.bbq.application.model.flow.dto.FlowConfigCreateParam;
+import com.microserv.bbq.application.model.flow.assembler.FlowApiAssembler;
+import com.microserv.bbq.domain.flow.model.aggregrate.FlowConfigAgg2;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

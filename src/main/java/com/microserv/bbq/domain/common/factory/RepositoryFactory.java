@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.common.factory;
 
-import com.microserv.bbq.infrastructure.general.commonshare.exception.PersistException;
+import com.microserv.bbq.infrastructure.general.common.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
 
 import java.util.Collection;

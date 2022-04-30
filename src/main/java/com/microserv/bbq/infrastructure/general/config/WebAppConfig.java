@@ -4,7 +4,7 @@ import cn.hutool.core.date.DatePattern;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.microserv.bbq.infrastructure.general.commonshare.security.LoginUserInterceptor;
+import com.microserv.bbq.infrastructure.general.common.security.LoginUserInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

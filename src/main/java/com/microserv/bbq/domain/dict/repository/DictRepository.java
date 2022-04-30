@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.dict.repository;
 
-import com.microserv.bbq.domain.dict.entity.DictEntity;
-import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
+import com.microserv.bbq.domain.dict.model.entity.DictEntity;
+import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package com.microserv.bbq.infrastructure.persistence.repository.impl;
 
-import com.microserv.bbq.infrastructure.persistence.assembler.RbacAssembler;
+import com.microserv.bbq.infrastructure.persistence.converter.RbacAssembler;
 import com.microserv.bbq.infrastructure.persistence.po.SysMenu;
 import com.microserv.bbq.infrastructure.persistence.po.SysRole;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysMenuMapper;
 import com.microserv.bbq.infrastructure.persistence.repository.impl.mapper.SysRoleMapper;
-import com.microserv.bbq.domain.rbac.entity.MenuEntity;
-import com.microserv.bbq.domain.rbac.entity.RoleEntity;
+import com.microserv.bbq.domain.rbac.model.entity.MenuEntity;
+import com.microserv.bbq.domain.rbac.model.entity.RoleEntity;
 import com.microserv.bbq.domain.rbac.repository.RbacRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

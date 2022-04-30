@@ -1,13 +1,13 @@
 package com.microserv.bbq.apis.controller;
 
-import com.microserv.bbq.apis.apimodel.dict.DictAggVO;
-import com.microserv.bbq.apis.apimodel.dict.DictCreateParam;
-import com.microserv.bbq.apis.apimodel.dict.DictUpdateParam;
-import com.microserv.bbq.apis.assembler.DictApiAssembler;
-import com.microserv.bbq.domain.dict.entity.DictEntity;
-import com.microserv.bbq.domain.dict.entity.DictTypeEntity;
-import com.microserv.bbq.domain.dict.service.DictDomainService;
-import com.microserv.bbq.domain.dict.aggregrate.DictTypeAgg;
+import com.microserv.bbq.application.model.dict.dto.DictAggVO;
+import com.microserv.bbq.application.model.dict.dto.DictCreateParam;
+import com.microserv.bbq.application.model.dict.dto.DictUpdateParam;
+import com.microserv.bbq.application.model.dict.assembler.DictApiAssembler;
+import com.microserv.bbq.domain.dict.model.entity.DictEntity;
+import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
+import com.microserv.bbq.domain.dict.action.DictDomainService;
+import com.microserv.bbq.domain.dict.model.DictTypeAgg;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

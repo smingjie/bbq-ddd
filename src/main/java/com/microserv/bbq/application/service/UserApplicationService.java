@@ -1,11 +1,11 @@
 package com.microserv.bbq.application.service;
 
 import com.microserv.bbq.application.repository.UserApplicationRepository;
-import com.microserv.bbq.infrastructure.general.commonshare.exception.BusinessException;
-import com.microserv.bbq.infrastructure.general.extension.annotation.ddd.ApplicationService;
-import com.microserv.bbq.infrastructure.general.commonshare.page.PageResult;
-import com.microserv.bbq.infrastructure.businessshare.user.UserSearchParam;
-import com.microserv.bbq.infrastructure.businessshare.user.UserWithRoleItemCO;
+import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.ApplicationService;
+import com.microserv.bbq.infrastructure.general.common.page.PageResult;
+import com.microserv.bbq.infrastructure.general.module.user.UserSearchParam;
+import com.microserv.bbq.infrastructure.general.module.user.UserWithRoleItemCO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

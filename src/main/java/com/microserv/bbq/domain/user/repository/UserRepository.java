@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.user.repository;
 
-import com.microserv.bbq.domain.user.entity.UserEntity;
-import com.microserv.bbq.domain.user.vobj.UserDictVObj;
+import com.microserv.bbq.domain.user.model.UserEntity;
+import com.microserv.bbq.domain.user.model.UserDictVObj;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.general.toolkit;
 
-import com.microserv.bbq.infrastructure.general.commonshare.exception.BusinessException;
+import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;

@@ -2,8 +2,8 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.microserv.bbq.infrastructure.persistence.po.SysUser;
-import com.microserv.bbq.infrastructure.businessshare.user.UserSearchParam;
-import com.microserv.bbq.infrastructure.businessshare.user.UserWithRoleItemCO;
+import com.microserv.bbq.infrastructure.general.module.user.UserSearchParam;
+import com.microserv.bbq.infrastructure.general.module.user.UserWithRoleItemCO;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

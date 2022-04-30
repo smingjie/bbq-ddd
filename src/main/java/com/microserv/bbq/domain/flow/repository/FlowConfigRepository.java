@@ -1,9 +1,9 @@
 package com.microserv.bbq.domain.flow.repository;
 
-import com.microserv.bbq.domain.flow.aggregrate.FlowConfigAgg;
-import com.microserv.bbq.domain.flow.entity.FlowConfigHandlerEntity;
-import com.microserv.bbq.domain.flow.entity.FlowConfigMainEntity;
-import com.microserv.bbq.domain.flow.entity.FlowConfigNodeEntity;
+import com.microserv.bbq.domain.flow.model.aggregrate.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.model.entity.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
 
 import java.util.List;
 

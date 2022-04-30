@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.notice.repository;
 
-import com.microserv.bbq.domain.notice.agg.NoticeMsgAgg;
-import com.microserv.bbq.domain.notice.vobj.NoticeSendResultVObj;
+import com.microserv.bbq.domain.notice.model.dpo.NoticeMsgAgg;
+import com.microserv.bbq.domain.notice.model.vobj.NoticeSendResultVObj;
 
 /**
  * 消息通知-仓储接口
