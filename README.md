@@ -10,54 +10,51 @@ springboot+ddd分层示例工程
 ```java
 ├─com.company.microservice
 │    │ 
-│    ├─apis   API接口层
-│    │    ├─model            视图模型,数据模型定义 vo/dto（大多数情況是一样的）
-│    │    ├─assembler        装配器，实现模型转换eg. apiModel<=> domainModel
+│    ├─apis   API接口层 
 │    │    └─controller       控制器，对外提供（Restful）接口
 │    │ 
 │    ├─application           应用层
+│    │    ├─model            数据传输对象模型及其装配器（含校验）
+│    │    │    ├─assembler   装配器
+│    │    │    └─dto         模型定义（含校验规则）
+│    │    ├─assembler        装配器，实现模型转换eg. apiModel<=> domainModel        
 │    │    ├─service          应用服务，非核心服务，跨领域的协作、复杂分页查询等
-│    │    ├─task             任务定义，协调领域模型 
+│    │    ├─task             任务定义，协调领域模型
+│    │    ├─listener         事件监听定义
 │    │    └─***              others
 │    │ 
 │    ├─domain   领域层
-│    │    ├─common           公共代码抽取，限于领域层有效  
-│    │    ├─module-xxx       模块2-xxx，领域划分的模块，可理解为子域划分
-│    │    │    ├─agg         领域聚合，通常表现为实体的聚合，需要有聚合根
-│    │    │    ├─entity      领域实体，有唯一标识的充血模型，如本身的CRUD操作在此处     
-│    │    │    ├─valueobject 领域值对象，无唯一标识    
-│    │    │    ├─repostiory  领域仓储，负责定义持久化 
-│    │    │    ├─factory     领域工厂，负责复杂领域对象创建，封装细节   
-│    │    │    ├─service     领域服务，不能归类到具体模型，如多条件查询等可写在此处  
-│    │    │    ├─event       领域事件    
-│    │    ├─module-dict      模块-字典子域
-│    │    │    ├─agg         领域聚合
-│    │    │    │    ├─DictTypeAgg.java
-│    │    │    ├─entity      领域实体    
-│    │    │    │    ├─DictTypeEntity.java 
-│    │    │    │    ├─DictEntity.java 
-│    │    │    ├─valueobject 领域值对象    
-│    │    │    │    ├─DictVObj.java 
-│    │    │    │    ├─DictTypeVobj.java 
+│    │    ├─common           模块0-公共代码抽取，限于领域层有效  
+│    │    ├─module-xxx       模块1-xxx，领域划分的模块，可理解为子域划分     
+│    │    ├─module-user      模块2-用户子域（领域划分的模块，可理解为子域划分）
+│    │    │    ├─action      行为定义
+│    │    │    │    ├─UserDomainService.java        领域服务,用户领域服务
+│    │    │    │    ├─UserPermissionChecker.java    其他行为，用户权限检查器
+│    │    │    │    ├─WhenUserCreatedEventPublisher.java     领域事件，当用户创建完成时的事件 
+│    │    │    ├─model       领域聚合内模型 
+│    │    │    │    ├─UserEntity.java                领域实体，有唯一标识的充血模型，如本身的CRUD操作在此处
+│    │    │    │    ├─UserDictVObj.java              领域值对象，用户字典kv定义       
+│    │    │    |    ├─UserDPO.java                   领域负载对象    
 │    │    │    ├─repostiory  领域仓储接口
-│    │    │    │    ├─Dictrepository.java
-│    │    │    ├─service     领域服务  
-│    │    │    ├─event       领域事件     
+│    │    │    │    ├─UserRepository.java
+│    │    │    ├─reference   领域适配接口
+│    │    │    │    ├─UserEmailSenderFacade.java
 │    │    │    └─factory     领域工厂  
 │    │ 
 │    ├─infrastructure  基础设施层
 │    │    ├─persistence      持久化机制
-│    │    │    ├─assembler   模型装配器
-│    │    │    ├─po          持久化对象  
-│    │    │    └─repository  仓储类，持久化接口&实现，可与ORM映射框架结合
+│    │    │    ├─converter   持久化模型转换器
+│    │    │    ├─po          持久化对象定义 
+│    │    │    └─repository.impl  仓储类，持久化接口&实现，可与ORM映射框架结合
 │    │    ├─general          通用技术支持，向其他层输出通用服务
 │    │    │    ├─config      配置类
 │    │    │    ├─toolkit     工具类  
 │    │    │    ├─extension   扩展定义  
-│    │    │    └─common      基础公共模块等
-│    │ 
-│    ├─reference  引用层，扩展外部接口包装引用，防止穿插到Domain层腐化领域模型等 
-│    │    └─ 忽略技术实现，此处的RPC、Http等调用，Domain层一般通过DomainEvent关联 
+│    │    │    └─common      基础公共模块等 
+│    │    ├─reference        引用层，扩展外部接口包装引用，防止穿插到Domain层腐化领域模型等
+│    │    │    ├─dto         传输模型定义
+│    │    │    ├─converter   传输模型转换器       
+│    │    │    └─facade.impl 适配器具体实现，此处的RPC、Http等调用
 │    │ 
 │    └─resources  
 │        ├─statics  静态资源
@@ -91,9 +88,27 @@ springboot+ddd分层示例工程
 
 ## 扩展定义注解和接口声明
 
-在使用DDD中自定义了标记的注解，分别是
+在使用DDD中自定义了标记的注解( `@DDDAnnotation`)和其衍生子注解，分别是
 
-`@DomainAggregate`,`@DomainAggregateRoot`,`@DomainEntity`,`@DomainValueObject`,`@DomainService`,`ApplicationService`,`DomainRepository`,`@DomainEvent`,`@DomainAssembler`等 `@DDDAnnotation`注解,详见代码的reference.general.extension.annotation.ddd.**。
+`@DomainAggregate`,
+
+`@DomainAggregateRoot`,
+
+`@DomainEntity`,
+
+`@DomainValueObject`,
+
+`@DomainService`,
+
+`ApplicationService`,
+
+`DomainRepository`,
+
+`@DomainEvent`,
+
+`@DomainAssembler`
+
+等注解,详见代码的reference.general.extension.ddd.annotation.**。
 
 其中有些注解继承了spring的 `@Component`,将会自动注册为spring bean，有些注解为了标记；
 
@@ -195,8 +210,8 @@ DictRepo repo= RepoFactory.get(DictRepo.class);
 本例程提供单表和多表情况下的的三个子域来进行编程实践的，分别是
 
 - 数据字典子域`dict`
-- 用户角色权限通用子域 `user-role-menu`
-- 工作流配置设计`flow-config`
+- 用户角色权限通用子域 `rbac`
+- 工作流设计`flow`
 
 例程已完成，详见代码
 
