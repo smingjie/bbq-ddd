@@ -1,8 +1,8 @@
 package com.microserv.bbq.apis.controller;
 
 
-import com.microserv.bbq.application.model.user.dto.UserCreateParam;
-import com.microserv.bbq.application.model.user.dto.UserLoginParam;
+import com.microserv.bbq.application.model.user.UserCreateParam;
+import com.microserv.bbq.application.model.user.UserLoginParam;
 import com.microserv.bbq.application.model.user.assembler.UserApiAssembler;
 import com.microserv.bbq.application.service.UserApplicationService;
 import com.microserv.bbq.domain.user.model.UserEntity;

@@ -1,4 +1,4 @@
-package com.microserv.bbq.application.model.flow.dto;
+package com.microserv.bbq.application.model.flow;
 
 import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;

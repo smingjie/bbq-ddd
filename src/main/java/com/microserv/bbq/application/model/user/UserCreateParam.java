@@ -1,4 +1,4 @@
-package com.microserv.bbq.application.model.user.dto;
+package com.microserv.bbq.application.model.user;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

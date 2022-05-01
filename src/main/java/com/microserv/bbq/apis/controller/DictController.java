@@ -1,8 +1,8 @@
 package com.microserv.bbq.apis.controller;
 
-import com.microserv.bbq.application.model.dict.dto.DictAggVO;
-import com.microserv.bbq.application.model.dict.dto.DictCreateParam;
-import com.microserv.bbq.application.model.dict.dto.DictUpdateParam;
+import com.microserv.bbq.application.model.dict.DictGroupDTO;
+import com.microserv.bbq.application.model.dict.DictCreateParam;
+import com.microserv.bbq.application.model.dict.DictUpdateParam;
 import com.microserv.bbq.application.model.dict.assembler.DictApiAssembler;
 import com.microserv.bbq.domain.dict.model.entity.DictEntity;
 import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
@@ -32,9 +32,9 @@ public class DictController {
 
     @ApiOperation(value = "获取一个指定类型的字典集合")
     @GetMapping("/dict/agg")
-    public DictAggVO getDictByType(@RequestParam String type) {
+    public DictGroupDTO getDictByType(@RequestParam String type) {
         DictTypeAgg agg = DictTypeAgg.getInstance(type);
-        return new DictAggVO(agg);
+        return new DictGroupDTO(agg);
     }
 
     @ApiOperation(value = "获取所有字典类型集合")

@@ -1,4 +1,4 @@
-package com.microserv.bbq.application.model.dict.dto;
+package com.microserv.bbq.application.model.dict;
 
 import com.microserv.bbq.domain.dict.model.entity.DictEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

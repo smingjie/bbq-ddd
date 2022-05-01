@@ -1,4 +1,4 @@
-package com.microserv.bbq.application.model.dict.dto;
+package com.microserv.bbq.application.model.dict;
 
 import com.microserv.bbq.domain.dict.model.entity.DictItemEntity;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-public class DictItemVO {
+public class DictItemDTO {
     @ApiModelProperty(value = "id")
     private String id;
     @ApiModelProperty(value = "字典码")
@@ -23,7 +23,7 @@ public class DictItemVO {
     @ApiModelProperty(value = "字典值")
     private String value;
 
-    public DictItemVO(DictItemEntity e) {
+    public DictItemDTO(DictItemEntity e) {
         this.setId(e.getId()).setKey(e.getCode()).setValue(e.getValue());
     }
 }

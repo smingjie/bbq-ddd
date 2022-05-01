@@ -47,16 +47,16 @@ public class PageResult<T> implements Serializable {
         this.pageCurrent = pageCurrent;
     }
 
-    public static <T> PageResult valueOf(PageQueryParam pageQueryParam) {
+    public static <T> PageResult<T> valueOf(PageQueryParam pageQueryParam) {
         return valueOf(pageQueryParam.getPageSize(), pageQueryParam.getCurrent());
     }
 
-    public static <T> PageResult valueOf(long pageSize, long pageCurrent) {
-        return new PageResult(pageSize, pageCurrent);
+    public static <T> PageResult<T> valueOf(long pageSize, long pageCurrent) {
+        return new PageResult<>(pageSize, pageCurrent);
     }
 
-    public static <T> PageResult valueOf(IPage<T> page) {
-        return new PageResult(
+    public static <T> PageResult<T> valueOf(IPage<T> page) {
+        return new PageResult<>(
                 page.getSize(),
                 page.getCurrent(),
                 page.getPages(),
@@ -64,8 +64,8 @@ public class PageResult<T> implements Serializable {
                 page.getRecords());
     }
 
-    public static <T> PageResult valueOf(PageInfo<T> page) {
-        return new PageResult(
+    public static <T> PageResult<T> valueOf(PageInfo<T> page) {
+        return new PageResult<>(
                 page.getSize(),
                 page.getPageNum(),
                 page.getPages(),
@@ -73,8 +73,8 @@ public class PageResult<T> implements Serializable {
                 page.getList());
     }
 
-    public static <Q, T> PageResult transform(PageInfo<Q> page, Function<Q, T> function) {
-        return new PageResult(
+    public static <Q, T> PageResult<T> transform(PageInfo<Q> page, Function<Q, T> function) {
+        return new PageResult<>(
                 page.getSize(),
                 page.getPageNum(),
                 page.getPages(),
@@ -83,8 +83,8 @@ public class PageResult<T> implements Serializable {
         );
     }
 
-    public static <Q, T> PageResult transform(IPage<Q> page, Function<Q, T> function) {
-        return new PageResult(
+    public static <Q, T> PageResult<T> transform(IPage<Q> page, Function<Q, T> function) {
+        return new PageResult<>(
                 page.getSize(),
                 page.getCurrent(),
                 page.getPages(),
