@@ -89,27 +89,36 @@ task makeMainDir() {
     dependsOn 'makeJavaDir' //依赖任务makeJavaDir
     def basePath = 'src/main/java/com/microserv/'
     def paths = [
-            'bbq/apis/assembler',
-            'bbq/apis/model',
             'bbq/apis/controller',
+            'bbq/application/model.demo.assembler',
+            'bbq/application/model.demo1.assembler',
             'bbq/application/service',
+            'bbq/application/event.listener',
+            'bbq/application/event.publisher',
             'bbq/application/task',
             'bbq/domain/common',
-            'bbq/domain/event',
-            'bbq/domain/model',
-            'bbq/domain/factory',
-            'bbq/domain/service',
-            'bbq/infrastructure/persistence/po',
-            'bbq/infrastructure/persistence/mapper',
+            'bbq/domain/demo.model.entity',
+            'bbq/domain/demo.model.vobj',
+            'bbq/domain/demo.model.dpo',
+            'bbq/domain/demo.action.handler',
+            'bbq/domain/demo.action.service',
+            'bbq/domain/demo.action.event',
+            'bbq/domain/demo.repository',
+            'bbq/domain/demo.facade',
+            'bbq/domain/demo.factory',
             'bbq/infrastructure/general/common',
+            'bbq/infrastructure/general/module',
             'bbq/infrastructure/general/config',
             'bbq/infrastructure/general/constant',
-            'bbq/infrastructure/general/exception',
-            'bbq/infrastructure/general/security',
+            'bbq/infrastructure/general/extension',
             'bbq/infrastructure/general/toolkit',
-            'bbq/reference/common',
-            'bbq/reference/facade',
-            'bbq/reference/domain',
+            'bbq/infrastructure/facade/dto',
+            'bbq/infrastructure/facade/converter',
+            'bbq/infrastructure/facade/inner.impl',
+            'bbq/infrastructure/facade/outer.impl',
+            'bbq/infrastructure/persistence/po',
+            'bbq/infrastructure/persistence/converter',
+            'bbq/infrastructure/persistence/repository.impl',
     ]
 
     doLast {  //doFirst在task之前执行
@@ -121,7 +130,7 @@ task makeTestDir() {
     dependsOn 'makeJavaDir' //依赖任务makeJavaDir
     def basePath = 'src/test/java/'
     def paths = [ //定义一个数组，数组里的是目录路径
-                  'coms.microserv.bbq',
+                  'com.microserv.bbq',
     ]
 
     doLast {  //doFirst在task之前执行
