@@ -15,9 +15,8 @@ springboot+ddd分层示例工程
 │    │ 
 │    ├─application           应用层
 │    │    ├─model            数据传输对象模型及其装配器（含校验）
-│    │    │    ├─assembler   装配器
-│    │    │    └─dto         模型定义（含校验规则）
-│    │    ├─assembler        装配器，实现模型转换eg. apiModel<=> domainModel        
+│    │    │    ├─assembler   装配器,，实现模型转换eg. apiModel<=> domainModel
+│    │    │    └─dto         模型定义（含校验规则）      
 │    │    ├─service          应用服务，非核心服务，跨领域的协作、复杂分页查询等
 │    │    ├─task             任务定义，协调领域模型
 │    │    ├─listener         事件监听定义
