@@ -1,5 +1,6 @@
 package com.microserv.bbq.domain.notice.model.vobj;
 
+import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,6 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
+@DomainValueObject
 public enum NoticeTypeEnum {
 
     AUDIT("审批通知"),

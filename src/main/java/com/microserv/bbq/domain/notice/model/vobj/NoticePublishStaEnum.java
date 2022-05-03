@@ -1,5 +1,6 @@
 package com.microserv.bbq.domain.notice.model.vobj;
 
+import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,6 +12,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
+@DomainValueObject
 public enum NoticePublishStaEnum {
 
     WAIT("wait", "等待发布"),
@@ -18,4 +20,13 @@ public enum NoticePublishStaEnum {
     SUCCESS("succ", "发布成功");
     private final String sta;
     private final String desc;
+
+    public static NoticePublishStaEnum parseOf(String sta) {
+        for (NoticePublishStaEnum item : values()) {
+            if (item.sta.equals(sta)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

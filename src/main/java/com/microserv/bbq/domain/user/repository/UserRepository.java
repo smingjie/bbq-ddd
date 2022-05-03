@@ -1,7 +1,8 @@
 package com.microserv.bbq.domain.user.repository;
 
 import com.microserv.bbq.domain.user.model.UserEntity;
-import com.microserv.bbq.domain.user.model.UserDictVObj;
+import com.microserv.bbq.domain.user.model.part.UserContactVObj;
+import com.microserv.bbq.domain.user.model.part.UserDictVObj;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface UserRepository {
     UserEntity selectByUsername(String username);
 
     List<UserDictVObj> searchDictBy(String searchKey);
+
+    List<UserContactVObj> selectContactByUserIds(List<String> userIds);
 
     //--命令
     boolean insert(UserEntity item);

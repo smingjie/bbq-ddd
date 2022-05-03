@@ -1,7 +1,8 @@
 package com.microserv.bbq.infrastructure.persistence.converter;
 
 import cn.hutool.core.util.StrUtil;
-import com.microserv.bbq.domain.user.model.UserDictVObj;
+import com.microserv.bbq.domain.user.model.part.UserContactVObj;
+import com.microserv.bbq.domain.user.model.part.UserDictVObj;
 import com.microserv.bbq.domain.user.model.UserEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
@@ -59,6 +60,10 @@ public class SysUserConverter implements IPoDomainConverter {
         }
 
         return new UserDictVObj().setUserId(sysUser.getUserId()).setDisplayName(displayName);
+    }
+
+    public UserContactVObj po2domainUserContactVObj(SysUser sysUser) {
+        return new UserContactVObj().setUserId(sysUser.getUserId()).setPhone(sysUser.getMobile());
     }
 
 

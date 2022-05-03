@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.user.model;
+package com.microserv.bbq.domain.user.model.part;
 
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.Data;

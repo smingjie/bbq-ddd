@@ -1,13 +1,16 @@
 package com.microserv.bbq.domain.user.action;
 
+import com.microserv.bbq.domain.user.model.part.UserContactVObj;
 import com.microserv.bbq.domain.user.model.UserEntity;
 import com.microserv.bbq.domain.user.repository.UserRepository;
-import com.microserv.bbq.domain.user.model.UserDictVObj;
+import com.microserv.bbq.domain.user.model.part.UserDictVObj;
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
 import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -40,5 +43,12 @@ public class UserDomainService {
             throw new BusinessException(ErrorCodeEnum.USER_USERNAME_OR_PASSWORD_IS_WRONG);
         }
         return userRepository.selectByUsername(username);
+    }
+
+    public List<UserContactVObj> getContactByUserIds(List<String> userIds){
+        if(CollectionUtils.isEmpty(userIds)){
+            return Collections.emptyList();
+        }
+        return userRepository.selectContactByUserIds(userIds);
     }
 }

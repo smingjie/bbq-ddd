@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.notice.repository;
 
-import com.microserv.bbq.domain.notice.model.dpo.NoticeMsgAgg;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeSendResultVObj;
+import com.microserv.bbq.domain.notice.model.entity.NoticeMsgEntity;
+import com.microserv.bbq.domain.notice.model.entity.NoticeMsgReceiveEntity;
 
 /**
  * 消息通知-仓储接口
@@ -11,11 +11,11 @@ import com.microserv.bbq.domain.notice.model.vobj.NoticeSendResultVObj;
  */
 public interface NoticeRepository {
     // 查询
-    NoticeSendResultVObj selectSendResultByNoticeId(String noticeId);
-
-    NoticeMsgAgg selectOneByNoticeId(String noticeId);
-
+    NoticeMsgEntity findOneByMsgId(String msgId);
 
     // 命令
-    void insert(NoticeMsgAgg agg);
+    NoticeMsgEntity saveOrUpdate(NoticeMsgEntity entity);
+
+    NoticeMsgReceiveEntity save(NoticeMsgReceiveEntity entity);
+
 }

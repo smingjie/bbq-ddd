@@ -9,8 +9,9 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
 import com.microserv.bbq.application.repository.UserApplicationRepository;
 import com.microserv.bbq.domain.user.model.UserEntity;
+import com.microserv.bbq.domain.user.model.part.UserContactVObj;
 import com.microserv.bbq.domain.user.repository.UserRepository;
-import com.microserv.bbq.domain.user.model.UserDictVObj;
+import com.microserv.bbq.domain.user.model.part.UserDictVObj;
 import com.microserv.bbq.infrastructure.general.common.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainRepository;
 import com.microserv.bbq.infrastructure.general.common.security.SecurityContext;
@@ -96,6 +97,17 @@ public class UserRepositoryImpl implements UserRepository, UserApplicationReposi
         return CollectionUtils.isEmpty(userList)
                 ? Collections.emptyList() :
                 userList.stream().map(sysUserAssembler::po2domainUserDictVObj).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserContactVObj> selectContactByUserIds(List<String> userIds) {
+        List<SysUser> userList = ChainWrappers.lambdaQueryChain(sysUserMapper)
+                .select(SysUser::getUserId, SysUser::getMobile)
+                .in(SysUser::getUserId,userIds)
+                .list();
+        return CollectionUtils.isEmpty(userList)
+                ? Collections.emptyList() :
+                userList.stream().map(sysUserAssembler::po2domainUserContactVObj).collect(Collectors.toList());
     }
 
     @Override
