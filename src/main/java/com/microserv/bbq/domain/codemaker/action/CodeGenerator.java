@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.codemaker;
+package com.microserv.bbq.domain.codemaker.action;
 
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;

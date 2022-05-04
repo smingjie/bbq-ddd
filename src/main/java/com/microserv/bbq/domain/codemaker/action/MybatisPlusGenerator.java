@@ -1,7 +1,6 @@
 package com.microserv.bbq.domain.codemaker.action;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.microserv.bbq.domain.codemaker.CodeGenerator;
 
 /**
  * mybatis plus code generator
