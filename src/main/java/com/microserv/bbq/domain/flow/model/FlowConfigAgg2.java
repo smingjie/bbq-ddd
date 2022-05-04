@@ -1,10 +1,8 @@
-package com.microserv.bbq.domain.flow.model.aggregrate;
+package com.microserv.bbq.domain.flow.model;
 
 import cn.hutool.core.lang.Assert;
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregateRoot;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

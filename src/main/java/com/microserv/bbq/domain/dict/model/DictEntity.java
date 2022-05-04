@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.dict.model.entity;
+package com.microserv.bbq.domain.dict.model;
 
 import cn.hutool.core.util.StrUtil;
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;

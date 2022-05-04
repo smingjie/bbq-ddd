@@ -1,7 +1,6 @@
-package com.microserv.bbq.domain.dict.model.entity;
+package com.microserv.bbq.domain.dict.model;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
-import com.microserv.bbq.domain.dict.model.vobj.DictValueVObj;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class DictItemEntity extends DictValueVObj implements IDomainMetaData {
+public class DictItemEntity extends DictValue implements IDomainMetaData {
     private String id;          // 唯一id
     private String remark;      // 备注
     private LocalDateTime createTime;

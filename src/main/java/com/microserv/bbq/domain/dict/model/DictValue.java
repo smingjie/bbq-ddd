@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.dict.model.vobj;
+package com.microserv.bbq.domain.dict.model;
 
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @DomainValueObject
-public class DictValueVObj {
+public class DictValue {
     private String code;        // 字典键
     private String value;       // 字典值
     private Integer orderNum;   // 排序

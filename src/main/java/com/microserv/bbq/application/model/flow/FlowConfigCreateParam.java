@@ -1,7 +1,7 @@
 package com.microserv.bbq.application.model.flow;
 
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigNodeEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

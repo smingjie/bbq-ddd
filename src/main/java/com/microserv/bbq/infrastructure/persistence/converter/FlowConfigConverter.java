@@ -1,8 +1,8 @@
 package com.microserv.bbq.infrastructure.persistence.converter;
 
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigMainEntity;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigNodeEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

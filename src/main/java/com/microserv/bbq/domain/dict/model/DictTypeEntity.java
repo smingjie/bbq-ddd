@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.dict.model.entity;
+package com.microserv.bbq.domain.dict.model;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

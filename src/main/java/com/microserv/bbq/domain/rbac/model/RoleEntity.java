@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.rbac.model.entity;
+package com.microserv.bbq.domain.rbac.model;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainCRUD;
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;

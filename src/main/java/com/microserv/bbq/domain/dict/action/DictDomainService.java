@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.dict.action;
 
-import com.microserv.bbq.domain.dict.model.entity.DictEntity;
-import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
+import com.microserv.bbq.domain.dict.model.DictEntity;
+import com.microserv.bbq.domain.dict.model.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainService;
 import lombok.RequiredArgsConstructor;

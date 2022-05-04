@@ -3,7 +3,7 @@ package com.microserv.bbq.apis.controller;
 
 import com.microserv.bbq.application.model.flow.FlowConfigCreateParam;
 import com.microserv.bbq.application.model.flow.assembler.FlowApiAssembler;
-import com.microserv.bbq.domain.flow.model.aggregrate.FlowConfigAgg2;
+import com.microserv.bbq.domain.flow.model.FlowConfigAgg2;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

@@ -1,10 +1,7 @@
-package com.microserv.bbq.domain.flow.model.aggregrate;
+package com.microserv.bbq.domain.flow.model;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigHandlerEntity;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigMainEntity;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregateRoot;

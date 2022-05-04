@@ -1,8 +1,8 @@
 package com.microserv.bbq.application.model.flow.assembler;
 
 import com.microserv.bbq.application.model.flow.FlowConfigCreateParam;
-import com.microserv.bbq.domain.flow.model.aggregrate.FlowConfigAgg2;
-import com.microserv.bbq.domain.flow.model.entity.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigAgg2;
+import com.microserv.bbq.domain.flow.model.FlowConfigMainEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAssembler;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IApiDomainAssembler;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

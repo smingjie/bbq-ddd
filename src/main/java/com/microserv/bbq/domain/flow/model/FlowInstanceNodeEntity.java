@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.flow.model.entity;
+package com.microserv.bbq.domain.flow.model;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainEntity;

@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.converter;
 
-import com.microserv.bbq.domain.dict.model.entity.DictEntity;
-import com.microserv.bbq.domain.dict.model.entity.DictTypeEntity;
+import com.microserv.bbq.domain.dict.model.DictEntity;
+import com.microserv.bbq.domain.dict.model.DictTypeEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

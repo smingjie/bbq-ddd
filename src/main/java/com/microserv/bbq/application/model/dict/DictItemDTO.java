@@ -1,6 +1,6 @@
 package com.microserv.bbq.application.model.dict;
 
-import com.microserv.bbq.domain.dict.model.entity.DictItemEntity;
+import com.microserv.bbq.domain.dict.model.DictItemEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.rbac.model.vobj;
+package com.microserv.bbq.domain.rbac.model;
 
 import lombok.Getter;
 

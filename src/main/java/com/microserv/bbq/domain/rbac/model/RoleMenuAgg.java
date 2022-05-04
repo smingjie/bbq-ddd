@@ -1,7 +1,5 @@
 package com.microserv.bbq.domain.rbac.model;
 
-import com.microserv.bbq.domain.rbac.model.entity.MenuEntity;
-import com.microserv.bbq.domain.rbac.model.vobj.RoleTypeEnum;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregateRoot;
 import lombok.Data;

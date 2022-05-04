@@ -1,8 +1,6 @@
 package com.microserv.bbq.domain.rbac.model;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
-import com.microserv.bbq.domain.rbac.model.entity.MenuEntity;
-import com.microserv.bbq.domain.rbac.model.entity.RoleEntity;
 import com.microserv.bbq.domain.rbac.repository.RbacRepository;
 import com.microserv.bbq.domain.user.model.UserEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;

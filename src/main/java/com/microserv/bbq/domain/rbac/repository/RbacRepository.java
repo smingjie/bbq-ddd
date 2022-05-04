@@ -1,7 +1,7 @@
 package com.microserv.bbq.domain.rbac.repository;
 
-import com.microserv.bbq.domain.rbac.model.entity.MenuEntity;
-import com.microserv.bbq.domain.rbac.model.entity.RoleEntity;
+import com.microserv.bbq.domain.rbac.model.MenuEntity;
+import com.microserv.bbq.domain.rbac.model.RoleEntity;
 
 import java.util.List;
 

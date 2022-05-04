@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.flow.model.vobj;
+package com.microserv.bbq.domain.flow.model;
 
 import java.io.Serializable;
 

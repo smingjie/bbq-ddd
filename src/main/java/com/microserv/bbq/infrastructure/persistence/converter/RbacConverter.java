@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.persistence.converter;
 
-import com.microserv.bbq.domain.rbac.model.entity.MenuEntity;
-import com.microserv.bbq.domain.rbac.model.entity.RoleEntity;
+import com.microserv.bbq.domain.rbac.model.MenuEntity;
+import com.microserv.bbq.domain.rbac.model.RoleEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
