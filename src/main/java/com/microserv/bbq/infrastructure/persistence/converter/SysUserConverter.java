@@ -1,8 +1,8 @@
 package com.microserv.bbq.infrastructure.persistence.converter;
 
 import cn.hutool.core.util.StrUtil;
-import com.microserv.bbq.domain.user.model.part.UserContactVObj;
-import com.microserv.bbq.domain.user.model.part.UserDictVObj;
+import com.microserv.bbq.domain.user.model.UserContact;
+import com.microserv.bbq.domain.user.model.UserDict;
 import com.microserv.bbq.domain.user.model.UserEntity;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
@@ -48,7 +48,7 @@ public class SysUserConverter implements IPoDomainConverter {
         return userEntity;
     }
 
-    public UserDictVObj po2domainUserDictVObj(SysUser sysUser) {
+    public UserDict po2domainUserDictVObj(SysUser sysUser) {
 
         String displayName = "";
         if (StrUtil.isBlank(sysUser.getUsername())) {
@@ -59,11 +59,11 @@ public class SysUserConverter implements IPoDomainConverter {
             displayName = String.join("/", sysUser.getName(), sysUser.getUsername());
         }
 
-        return new UserDictVObj().setUserId(sysUser.getUserId()).setDisplayName(displayName);
+        return new UserDict().setUserId(sysUser.getUserId()).setDisplayName(displayName);
     }
 
-    public UserContactVObj po2domainUserContactVObj(SysUser sysUser) {
-        return new UserContactVObj().setUserId(sysUser.getUserId()).setPhone(sysUser.getMobile());
+    public UserContact po2domainUserContactVObj(SysUser sysUser) {
+        return new UserContact().setUserId(sysUser.getUserId()).setPhone(sysUser.getMobile());
     }
 
 

@@ -3,7 +3,7 @@ package com.microserv.bbq.domain.notice.model;
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import com.microserv.bbq.domain.notice.reference.NoticeSenderFacade;
 import com.microserv.bbq.domain.notice.repository.NoticeRepository;
-import com.microserv.bbq.domain.user.model.part.UserContactVObj;
+import com.microserv.bbq.domain.user.model.UserContact;
 import com.microserv.bbq.domain.user.repository.UserRepository;
 import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainEntity;
@@ -60,9 +60,7 @@ public class NoticeMsgEntity implements IDomainMetaData {
     }
 
 
-    public static NoticeMsgEntityBuilder builder(String msgId, NoticeTypeEnum msgType, String msgContent) {
-        return new NoticeMsgEntityBuilder(msgId, msgType, msgContent);
-    }
+
 
     public List<NoticeMsgReceiveEntity> getReceiveResult() {
         return noticeRepository.findNoticeMsgReceiveListByMsgId(this.msgId);
@@ -98,7 +96,7 @@ public class NoticeMsgEntity implements IDomainMetaData {
         AssertUtils.notEmpty(receivers, "接受用户不能为空");
         List<NoticeMsgReceiveEntity> receiveRecords = new ArrayList<>();
         try {
-            List<UserContactVObj> contacts = userRepository.selectContactByUserIds(this.receivers);
+            List<UserContact> contacts = userRepository.selectContactByUserIds(this.receivers);
             AssertUtils.notEmpty(contacts, "未查找到任何用户的联系方式");
             contacts.forEach(uc -> {
 
@@ -158,7 +156,9 @@ public class NoticeMsgEntity implements IDomainMetaData {
         private List<String> receivers = Collections.singletonList(DEFAULT_USER);
         private List<NoticeWayEnum> ways = Arrays.asList(NoticeWayEnum.values());
         private NoticePublishStaEnum status = NoticePublishStaEnum.WAIT;
-
+        public static NoticeMsgEntityBuilder builder(String msgId, NoticeTypeEnum msgType, String msgContent) {
+            return new NoticeMsgEntityBuilder(msgId, msgType, msgContent);
+        }
 
         private NoticeMsgEntityBuilder(String msgId, NoticeTypeEnum msgType, String msgContent) {
             super(msgId);

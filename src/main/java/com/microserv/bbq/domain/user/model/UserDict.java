@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.user.model.part;
+package com.microserv.bbq.domain.user.model;
 
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @DomainValueObject
-public class UserDictVObj implements Serializable {
+public class UserDict implements Serializable {
     private String userId;
     private String displayName;
 }

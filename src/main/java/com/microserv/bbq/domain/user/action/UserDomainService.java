@@ -1,9 +1,9 @@
 package com.microserv.bbq.domain.user.action;
 
-import com.microserv.bbq.domain.user.model.part.UserContactVObj;
+import com.microserv.bbq.domain.user.model.UserContact;
 import com.microserv.bbq.domain.user.model.UserEntity;
 import com.microserv.bbq.domain.user.repository.UserRepository;
-import com.microserv.bbq.domain.user.model.part.UserDictVObj;
+import com.microserv.bbq.domain.user.model.UserDict;
 import com.microserv.bbq.infrastructure.general.constant.ErrorCodeEnum;
 import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainService;
@@ -30,7 +30,7 @@ public class UserDomainService {
      * @param searchKey 模糊值（username，name，手机号等）
      * @return 满足条件的集合
      */
-    List<UserDictVObj> getUserDictBy(String searchKey) {
+    List<UserDict> getUserDictBy(String searchKey) {
         return userRepository.searchDictBy(searchKey);
     }
 
@@ -45,7 +45,7 @@ public class UserDomainService {
         return userRepository.selectByUsername(username);
     }
 
-    public List<UserContactVObj> getContactByUserIds(List<String> userIds) {
+    public List<UserContact> getContactByUserIds(List<String> userIds) {
         if (CollectionUtils.isEmpty(userIds)) {
             return Collections.emptyList();
         }

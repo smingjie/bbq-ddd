@@ -9,9 +9,9 @@ import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.page.PageMethod;
 import com.microserv.bbq.application.repository.UserApplicationRepository;
 import com.microserv.bbq.domain.user.model.UserEntity;
-import com.microserv.bbq.domain.user.model.part.UserContactVObj;
+import com.microserv.bbq.domain.user.model.UserContact;
 import com.microserv.bbq.domain.user.repository.UserRepository;
-import com.microserv.bbq.domain.user.model.part.UserDictVObj;
+import com.microserv.bbq.domain.user.model.UserDict;
 import com.microserv.bbq.infrastructure.general.common.exception.PersistException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainRepository;
 import com.microserv.bbq.infrastructure.general.common.security.SecurityContext;
@@ -101,7 +101,7 @@ public class UserRepositoryImpl implements UserRepository, UserApplicationReposi
     }
 
     @Override
-    public List<UserDictVObj> searchDictBy(String searchKey) {
+    public List<UserDict> searchDictBy(String searchKey) {
         List<SysUser> userList = ChainWrappers.lambdaQueryChain(sysUserMapper)
                 .select(SysUser::getUserId, SysUser::getUsername, SysUser::getName)
                 .like(SysUser::getUsername, searchKey)
@@ -114,7 +114,7 @@ public class UserRepositoryImpl implements UserRepository, UserApplicationReposi
     }
 
     @Override
-    public List<UserContactVObj> selectContactByUserIds(List<String> userIds) {
+    public List<UserContact> selectContactByUserIds(List<String> userIds) {
         List<SysUser> userList = ChainWrappers.lambdaQueryChain(sysUserMapper)
                 .select(SysUser::getUserId, SysUser::getMobile)
                 .in(SysUser::getUserId, userIds)
