@@ -1,14 +1,12 @@
 package com.microserv.bbq.domain.notice.model.entity;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
-import com.microserv.bbq.domain.notice.model.vobj.NoticePublishStaEnum;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeTypeEnum;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeWayEnum;
+import com.microserv.bbq.domain.notice.model.vobj.*;
 import com.microserv.bbq.domain.notice.reference.NoticeSenderFacade;
 import com.microserv.bbq.domain.notice.repository.NoticeRepository;
 import com.microserv.bbq.domain.user.model.part.UserContactVObj;
 import com.microserv.bbq.domain.user.repository.UserRepository;
+import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.AssertUtils;
@@ -20,6 +18,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class NoticeMsgEntity implements IDomainMetaData {
     private static final NoticeSenderFacade noticeSenderFacade = ApplicationUtils.getBean(NoticeSenderFacade.class);
     private static final NoticeRepository noticeRepository = ApplicationUtils.getBean(NoticeRepository.class);
     private static final UserRepository userRepository = ApplicationUtils.getBean(UserRepository.class);
-
+    private static final ApplicationEventPublisher applicationEventPublisher = ApplicationUtils.getBean(ApplicationEventPublisher.class);
 
     public static NoticeMsgEntity getInstanceByMsgId(String msgId) {
         return noticeRepository.findOneByMsgId(msgId);
@@ -67,6 +66,25 @@ public class NoticeMsgEntity implements IDomainMetaData {
     }
 
     /**
+     * 发布消息通知
+     */
+    public void doPublish() {
+        doPublishBefore();
+        applicationEventPublisher.publishEvent(new NoticeMsgEventObject(msgId));
+    }
+
+    private void doPublishBefore() {
+        NoticeMsgEntity noticeMsgDb = getInstanceByMsgId(this.msgId);
+        if (noticeMsgDb == null) {
+            this.saveOrUpdate();
+        } else if (NoticePublishStaEnum.SUCCESS.equals(noticeMsgDb.getStatus())) {
+            throw new BusinessException("消息通知已发布成功，不可重复操作");
+        } else if (NoticePublishStaEnum.FAIL.equals(noticeMsgDb.getStatus())) {
+            throw new BusinessException("消息通知发布失败，请执行补偿操作");
+        }
+    }
+
+    /**
      * 执行消息发送动作
      *
      * @return 接收结果集合
@@ -75,34 +93,39 @@ public class NoticeMsgEntity implements IDomainMetaData {
         AssertUtils.hasText(msgId, "消息id不能为空");
         AssertUtils.notEmpty(ways, "通知方式不能为空");
         AssertUtils.notEmpty(receivers, "接受用户不能为空");
-
         List<NoticeMsgReceiveEntity> receiveRecords = new ArrayList<>();
-        List<UserContactVObj> contacts = userRepository.selectContactByUserIds(this.receivers);
-        AssertUtils.notEmpty(contacts, "未查找到任何用户的联系方式");
-        contacts.forEach(uc -> {
+        try {
+            List<UserContactVObj> contacts = userRepository.selectContactByUserIds(this.receivers);
+            AssertUtils.notEmpty(contacts, "未查找到任何用户的联系方式");
+            contacts.forEach(uc -> {
 
-            List<NoticeReceiveInfo> receiveInfoList = new ArrayList<>();
-            if (this.supportPhone() && uc.isEnablePhone()) {
-                NoticePhoneSendParam param = NoticePhoneSendParam.valueOf(uc.getPhone(), this.msgContent);
-                receiveInfoList.add(noticeSenderFacade.doSending(param));
-            }
-            if (this.supportEmail() && uc.isEnableEmail()) {
-                NoticeEmailSendParam param = NoticeEmailSendParam.valueOf(uc.getEmail(), this.msgTitle, this.msgContent);
-                receiveInfoList.add(noticeSenderFacade.doSending(param));
-            }
+                List<NoticeReceiveInfo> receiveInfoList = new ArrayList<>();
+                if (this.supportPhone() && uc.isEnablePhone()) {
+                    NoticePhoneSendParam param = NoticePhoneSendParam.valueOf(uc.getPhone(), this.msgContent);
+                    receiveInfoList.add(noticeSenderFacade.doSending(param));
+                }
+                if (this.supportEmail() && uc.isEnableEmail()) {
+                    NoticeEmailSendParam param = NoticeEmailSendParam.valueOf(uc.getEmail(), this.msgTitle, this.msgContent);
+                    receiveInfoList.add(noticeSenderFacade.doSending(param));
+                }
 
 
-            NoticeMsgReceiveEntity receiveRecord = noticeRepository.save(new NoticeMsgReceiveEntity()
-                    .setId(SequenceUtils.uuid32())
-                    .setMsgId(this.getMsgId())
-                    .setReceiverId(uc.getUserId())
-                    .setRecvInfo(receiveInfoList)
-                    .setSuccess(receiveInfoList.stream().anyMatch(NoticeReceiveInfo::isSendOk))
-            );
-            if (receiveRecord != null) {
-                receiveRecords.add(receiveRecord);
-            }
-        });
+                NoticeMsgReceiveEntity receiveRecord = noticeRepository.save(new NoticeMsgReceiveEntity()
+                        .setId(SequenceUtils.uuid32())
+                        .setMsgId(this.getMsgId())
+                        .setReceiverId(uc.getUserId())
+                        .setRecvInfo(receiveInfoList)
+                        .setSuccess(receiveInfoList.stream().anyMatch(NoticeReceiveInfo::isSendOk))
+                );
+                if (receiveRecord != null) {
+                    receiveRecords.add(receiveRecord);
+                    this.setStatus(NoticePublishStaEnum.SUCCESS);
+                }
+            });
+        } catch (Exception e) {
+            this.setStatus(NoticePublishStaEnum.FAIL);
+        }
+        this.saveOrUpdate();
         return receiveRecords;
     }
 

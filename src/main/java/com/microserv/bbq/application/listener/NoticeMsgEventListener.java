@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class NoticeEventListener implements ApplicationListener<NoticeMsgEventObject> {
+public class NoticeMsgEventListener implements ApplicationListener<NoticeMsgEventObject> {
 
 
     @Override

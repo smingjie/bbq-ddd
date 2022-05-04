@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationEvent;
 public class NoticeMsgEventObject extends ApplicationEvent {
 
 
-    private NoticeMsgEventObject(String msgId) {
+    public NoticeMsgEventObject(String msgId) {
         super(msgId);
     }
 
