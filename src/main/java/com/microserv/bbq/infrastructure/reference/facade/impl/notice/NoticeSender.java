@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.reference.facade.impl.notice;
 
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
+import com.microserv.bbq.domain.notice.model.NoticeReceiveInfo;
 import com.microserv.bbq.infrastructure.reference.dto.notice.NoticeSendParam;
 
 /**

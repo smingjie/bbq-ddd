@@ -1,9 +1,9 @@
 package com.microserv.bbq.application.listener;
 
-import com.microserv.bbq.domain.notice.model.entity.NoticeMsgEntity;
-import com.microserv.bbq.domain.notice.model.entity.NoticeMsgReceiveEntity;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeMsgEventObject;
-import com.microserv.bbq.domain.notice.model.vobj.NoticePublishStaEnum;
+import com.microserv.bbq.domain.notice.model.NoticeMsgEntity;
+import com.microserv.bbq.domain.notice.model.NoticeMsgReceiveEntity;
+import com.microserv.bbq.domain.notice.model.NoticeMsgEventObject;
+import com.microserv.bbq.domain.notice.model.NoticePublishStaEnum;
 import com.microserv.bbq.infrastructure.general.common.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;

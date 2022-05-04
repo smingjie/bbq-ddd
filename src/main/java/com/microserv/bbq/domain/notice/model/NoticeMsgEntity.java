@@ -1,7 +1,6 @@
-package com.microserv.bbq.domain.notice.model.entity;
+package com.microserv.bbq.domain.notice.model;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
-import com.microserv.bbq.domain.notice.model.vobj.*;
 import com.microserv.bbq.domain.notice.reference.NoticeSenderFacade;
 import com.microserv.bbq.domain.notice.repository.NoticeRepository;
 import com.microserv.bbq.domain.user.model.part.UserContactVObj;
@@ -57,12 +56,16 @@ public class NoticeMsgEntity implements IDomainMetaData {
     private static final ApplicationEventPublisher applicationEventPublisher = ApplicationUtils.getBean(ApplicationEventPublisher.class);
 
     public static NoticeMsgEntity getInstanceByMsgId(String msgId) {
-        return noticeRepository.findOneByMsgId(msgId);
+        return noticeRepository.findNoticeMsgByMsgId(msgId);
     }
 
 
     public static NoticeMsgEntityBuilder builder(String msgId, NoticeTypeEnum msgType, String msgContent) {
         return new NoticeMsgEntityBuilder(msgId, msgType, msgContent);
+    }
+
+    public List<NoticeMsgReceiveEntity> getReceiveResult() {
+        return noticeRepository.findNoticeMsgReceiveListByMsgId(this.msgId);
     }
 
     /**
@@ -102,11 +105,11 @@ public class NoticeMsgEntity implements IDomainMetaData {
                 List<NoticeReceiveInfo> receiveInfoList = new ArrayList<>();
                 if (this.supportPhone() && uc.isEnablePhone()) {
                     NoticePhoneSendParam param = NoticePhoneSendParam.valueOf(uc.getPhone(), this.msgContent);
-                    receiveInfoList.add(noticeSenderFacade.doSending(param));
+                    receiveInfoList.add(noticeSenderFacade.doSend(param));
                 }
                 if (this.supportEmail() && uc.isEnableEmail()) {
                     NoticeEmailSendParam param = NoticeEmailSendParam.valueOf(uc.getEmail(), this.msgTitle, this.msgContent);
-                    receiveInfoList.add(noticeSenderFacade.doSending(param));
+                    receiveInfoList.add(noticeSenderFacade.doSend(param));
                 }
 
 
@@ -187,15 +190,16 @@ public class NoticeMsgEntity implements IDomainMetaData {
         }
 
         public NoticeMsgEntity build() {
-            return new NoticeMsgEntity()
+            NoticeMsgEntity msgEntity = new NoticeMsgEntity()
                     .setMsgId(msgId)
                     .setMsgType(msgType)
                     .setMsgTitle(msgTitle)
                     .setMsgContent(msgContent)
                     .setWays(ways)
                     .setReceivers(receivers)
-                    .setStatus(status)
-                    ;
+                    .setStatus(status);
+
+            return msgEntity.saveOrUpdate();
         }
     }
 

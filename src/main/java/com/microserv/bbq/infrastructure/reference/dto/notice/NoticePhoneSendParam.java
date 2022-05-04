@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.reference.dto.notice;
 
-import com.microserv.bbq.domain.notice.model.vobj.NoticeWayEnum;
+import com.microserv.bbq.domain.notice.model.NoticeWayEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;

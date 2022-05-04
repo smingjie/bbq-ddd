@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.notice.action.event;
+package com.microserv.bbq.domain.notice.action;
 
 /**
  * 消息事件处理器

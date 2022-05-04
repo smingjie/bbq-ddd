@@ -1,8 +1,9 @@
-package com.microserv.bbq.domain.notice.model.entity;
+package com.microserv.bbq.domain.notice.model;
 
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
+import com.microserv.bbq.domain.notice.repository.NoticeRepository;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainEntity;
+import com.microserv.bbq.infrastructure.general.toolkit.ApplicationUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -30,4 +31,14 @@ public class NoticeMsgReceiveEntity implements IDomainMetaData {
     private String createBy;
     private LocalDateTime updateTime;
     private String updateBy;
+
+    private static final NoticeRepository noticeRepository = ApplicationUtils.getBean(NoticeRepository.class);
+
+    public static NoticeMsgReceiveEntity getInstanceById(String id) {
+        return noticeRepository.findNoticeMsgReceiveById(id);
+    }
+
+    public static NoticeMsgReceiveEntity getInstanceById(String msgId, String receiverId) {
+        return noticeRepository.findNoticeMsgReceiveByMsgIdAndReceiverId(msgId, receiverId);
+    }
 }

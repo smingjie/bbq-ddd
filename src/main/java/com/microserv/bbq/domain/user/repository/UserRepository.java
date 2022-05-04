@@ -20,6 +20,8 @@ public interface UserRepository {
 
     UserEntity selectByUsername(String username);
 
+    String selectDisplayNameByUserId(String userId);
+
     List<UserDictVObj> searchDictBy(String searchKey);
 
     List<UserContactVObj> selectContactByUserIds(List<String> userIds);

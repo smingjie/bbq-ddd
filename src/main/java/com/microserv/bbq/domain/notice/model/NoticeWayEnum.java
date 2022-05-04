@@ -1,11 +1,11 @@
-package com.microserv.bbq.domain.notice.model.vobj;
+package com.microserv.bbq.domain.notice.model;
 
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 消息通知类型
+ * ~
  *
  * @author mingjie
  * @date 2022/4/5
@@ -13,11 +13,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @DomainValueObject
-public enum NoticeTypeEnum {
+public enum NoticeWayEnum {
 
-    AUDIT("审批通知"),
-    SECURITY("安全通知"),
-    SELF("个人通知");
+    PHONE("手机短信"),
+    EMAIL("邮件");
 
-    private final String description;
+    private final String desc;
 }

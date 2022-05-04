@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.reference.facade.impl.notice;
 
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
+import com.microserv.bbq.domain.notice.model.NoticeReceiveInfo;
 import com.microserv.bbq.domain.notice.reference.NoticeSenderFacade;
 import com.microserv.bbq.infrastructure.reference.dto.notice.NoticeSendParam;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class NoticeSenderFacadeImpl implements NoticeSenderFacade {
      * @return 投递结果
      */
     @Override
-    public NoticeReceiveInfo doSending(NoticeSendParam sendParam) {
+    public NoticeReceiveInfo doSend(NoticeSendParam sendParam) {
         for (NoticeSender noticeSender : noticeSenders) {
             if (noticeSender.support(sendParam)) {
                 return noticeSender.send(sendParam);

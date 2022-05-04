@@ -87,6 +87,20 @@ public class UserRepositoryImpl implements UserRepository, UserApplicationReposi
     }
 
     @Override
+    public String selectDisplayNameByUserId(String userId) {
+        if (StrUtil.isBlank(userId)) {
+            return userId;
+        }
+        SysUser sysUser = ChainWrappers.lambdaQueryChain(sysUserMapper)
+                .select(SysUser::getName, SysUser::getUsername)
+                .eq(SysUser::getUserId, userId)
+                .one();
+        return sysUser == null
+                ? userId
+                : String.join("/", sysUser.getName(), sysUser.getUsername());
+    }
+
+    @Override
     public List<UserDictVObj> searchDictBy(String searchKey) {
         List<SysUser> userList = ChainWrappers.lambdaQueryChain(sysUserMapper)
                 .select(SysUser::getUserId, SysUser::getUsername, SysUser::getName)
@@ -103,7 +117,7 @@ public class UserRepositoryImpl implements UserRepository, UserApplicationReposi
     public List<UserContactVObj> selectContactByUserIds(List<String> userIds) {
         List<SysUser> userList = ChainWrappers.lambdaQueryChain(sysUserMapper)
                 .select(SysUser::getUserId, SysUser::getMobile)
-                .in(SysUser::getUserId,userIds)
+                .in(SysUser::getUserId, userIds)
                 .list();
         return CollectionUtils.isEmpty(userList)
                 ? Collections.emptyList() :

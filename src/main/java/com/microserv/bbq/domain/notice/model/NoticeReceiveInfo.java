@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.notice.model.vobj;
+package com.microserv.bbq.domain.notice.model;
 
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainValueObject;
 import lombok.Data;

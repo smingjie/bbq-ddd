@@ -1,7 +1,7 @@
 package com.microserv.bbq.infrastructure.reference.facade.impl.notice;
 
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeWayEnum;
+import com.microserv.bbq.domain.notice.model.NoticeReceiveInfo;
+import com.microserv.bbq.domain.notice.model.NoticeWayEnum;
 import com.microserv.bbq.infrastructure.reference.dto.notice.NoticeEmailSendParam;
 import com.microserv.bbq.infrastructure.reference.dto.notice.NoticeSendParam;
 import lombok.extern.slf4j.Slf4j;

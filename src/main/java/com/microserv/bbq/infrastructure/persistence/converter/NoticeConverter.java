@@ -1,12 +1,12 @@
 package com.microserv.bbq.infrastructure.persistence.converter;
 
 import com.alibaba.fastjson.JSON;
-import com.microserv.bbq.domain.notice.model.entity.NoticeMsgEntity;
-import com.microserv.bbq.domain.notice.model.entity.NoticeMsgReceiveEntity;
-import com.microserv.bbq.domain.notice.model.vobj.NoticePublishStaEnum;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeTypeEnum;
-import com.microserv.bbq.domain.notice.model.vobj.NoticeWayEnum;
+import com.microserv.bbq.domain.notice.model.NoticeMsgEntity;
+import com.microserv.bbq.domain.notice.model.NoticeMsgReceiveEntity;
+import com.microserv.bbq.domain.notice.model.NoticePublishStaEnum;
+import com.microserv.bbq.domain.notice.model.NoticeReceiveInfo;
+import com.microserv.bbq.domain.notice.model.NoticeTypeEnum;
+import com.microserv.bbq.domain.notice.model.NoticeWayEnum;
 import com.microserv.bbq.infrastructure.general.extension.ddd.IPoDomainConverter;
 import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainConverter;
 import com.microserv.bbq.infrastructure.persistence.po.NoticeMsg;
@@ -27,6 +27,9 @@ public class NoticeConverter implements IPoDomainConverter {
 
 
     public NoticeMsgEntity convert(NoticeMsg po) {
+        if (po == null) {
+            return null;
+        }
         NoticeMsgEntity noticeMsgEntity = new NoticeMsgEntity();
         noticeMsgEntity.setMsgId(po.getMsgId());
         noticeMsgEntity.setMsgType(NoticeTypeEnum.valueOf(po.getType()));
@@ -43,6 +46,9 @@ public class NoticeConverter implements IPoDomainConverter {
     }
 
     public NoticeMsg convert(NoticeMsgEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         NoticeMsg noticeMsgDb = new NoticeMsg();
         noticeMsgDb.setMsgId(entity.getMsgId());
         noticeMsgDb.setType(entity.getMsgType().name());
@@ -60,6 +66,9 @@ public class NoticeConverter implements IPoDomainConverter {
 
 
     public NoticeReceiveRecord convert(NoticeMsgReceiveEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         NoticeReceiveRecord noticeReceiveRecord = new NoticeReceiveRecord();
         noticeReceiveRecord.setId(entity.getId());
         noticeReceiveRecord.setMsgId(entity.getMsgId());
@@ -75,6 +84,9 @@ public class NoticeConverter implements IPoDomainConverter {
 
 
     public NoticeMsgReceiveEntity convert(NoticeReceiveRecord po) {
+        if (po == null) {
+            return null;
+        }
         NoticeMsgReceiveEntity noticeMsgReceiveEntity = new NoticeMsgReceiveEntity();
         noticeMsgReceiveEntity.setId(po.getId());
         noticeMsgReceiveEntity.setMsgId(po.getMsgId());

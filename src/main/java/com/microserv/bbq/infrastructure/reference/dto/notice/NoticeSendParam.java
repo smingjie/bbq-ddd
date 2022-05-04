@@ -1,6 +1,6 @@
 package com.microserv.bbq.infrastructure.reference.dto.notice;
 
-import com.microserv.bbq.domain.notice.model.vobj.NoticeWayEnum;
+import com.microserv.bbq.domain.notice.model.NoticeWayEnum;
 
 /**
  * 消息通知发送参数

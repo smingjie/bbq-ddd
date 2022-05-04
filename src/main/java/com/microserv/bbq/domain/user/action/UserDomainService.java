@@ -45,8 +45,8 @@ public class UserDomainService {
         return userRepository.selectByUsername(username);
     }
 
-    public List<UserContactVObj> getContactByUserIds(List<String> userIds){
-        if(CollectionUtils.isEmpty(userIds)){
+    public List<UserContactVObj> getContactByUserIds(List<String> userIds) {
+        if (CollectionUtils.isEmpty(userIds)) {
             return Collections.emptyList();
         }
         return userRepository.selectContactByUserIds(userIds);

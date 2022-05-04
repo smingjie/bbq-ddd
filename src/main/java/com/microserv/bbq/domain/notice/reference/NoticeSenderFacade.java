@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.notice.reference;
 
-import com.microserv.bbq.domain.notice.model.vobj.NoticeReceiveInfo;
+import com.microserv.bbq.domain.notice.model.NoticeReceiveInfo;
 import com.microserv.bbq.infrastructure.reference.dto.notice.NoticeSendParam;
 
 /**
@@ -17,5 +17,5 @@ public interface NoticeSenderFacade {
      * @param sendParam 发送消息参数
      * @return 投递结果
      */
-    NoticeReceiveInfo doSending(NoticeSendParam sendParam);
+    NoticeReceiveInfo doSend(NoticeSendParam sendParam);
 }
