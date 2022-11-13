@@ -32,7 +32,6 @@ dependencies {
 //    testImplementation('org.springframework.boot:spring-boot-starter-test') {
 //        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 //    }
-
     // db and orm(mybatis-plus)
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -42,7 +41,7 @@ dependencies {
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.1'
 
     // util
-    implementation 'com.alibaba:fastjson:1.2.70'
+    implementation 'com.alibaba:fastjson:1.2.83'
     implementation 'cn.hutool:hutool-all:5.4.2'
     implementation 'ma.glasnost.orika:orika-core:1.5.4' //must
 

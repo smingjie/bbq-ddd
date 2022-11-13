@@ -3,7 +3,7 @@ package com.microserv.bbq.infrastructure.persistence.repository.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.ChainWrappers;
-import com.microserv.bbq.domain.flow.model.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.model.dpo.FlowConfigDPO;
 import com.microserv.bbq.domain.flow.model.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.model.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.model.FlowConfigNodeEntity;
@@ -78,15 +78,15 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
     }
 
     @Override
-    public FlowConfigAgg selectFlowConfigAggByFlowId(String flowId) {
+    public FlowConfigDPO selectFlowConfigAggByFlowId(String flowId) {
         FlowConfigMainEntity configMain = selectFlowConfigMainByFlowId(flowId);
         List<FlowConfigNodeEntity> configNodes = selectFlowConfigNodesByFlowId(flowId);
         List<FlowConfigHandlerEntity> configHandlers = selectFlowConfigHandlersByFlowId(flowId);
-        return new FlowConfigAgg(configMain, configNodes, configHandlers);
+        return new FlowConfigDPO(configMain, configNodes, configHandlers);
     }
 
     @Override
-    public FlowConfigAgg selectFlowConfigAggByFlowCode(String flowCode) {
+    public FlowConfigDPO selectFlowConfigAggByFlowCode(String flowCode) {
         String flowId = selectFlowIdByFlowCode(flowCode);
         return selectFlowConfigAggByFlowId(flowId);
     }
@@ -174,7 +174,7 @@ public class FlowConfigRepositoryImpl implements FlowConfigRepository {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public FlowConfigAgg saveOrUpdate(FlowConfigAgg agg) {
+    public FlowConfigDPO saveOrUpdate(FlowConfigDPO agg) {
 
         try {
             String flowId = agg.getConfig().getFlowId();

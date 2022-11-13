@@ -1,10 +1,11 @@
-package com.microserv.bbq.domain.flow.model;
+package com.microserv.bbq.domain.flow.model.dpo;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
+import com.microserv.bbq.domain.flow.model.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigMainEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigNodeEntity;
 import com.microserv.bbq.domain.flow.repository.FlowConfigRepository;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregateRoot;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import com.microserv.bbq.infrastructure.general.toolkit.SequenceUtils;
 import lombok.Data;
@@ -27,39 +28,37 @@ import java.util.stream.Collectors;
 @Data
 @Accessors(chain = true)
 @NoArgsConstructor
-@DomainAggregate
-public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
+public class FlowConfigDPO implements IDomainSaveOrUpdate<FlowConfigDPO> {
     private static FlowConfigRepository flowConfigRepo = RepositoryFactory.get(FlowConfigRepository.class);
 
-    @DomainAggregateRoot
     private FlowConfigMainEntity config;            //配置信息主记录
     private List<FlowConfigNodeEntity> nodes;       //配置节点
     private List<FlowConfigHandlerEntity> handlers; //配置节点处理人
 
-    public FlowConfigAgg(FlowConfigMainEntity config, List<FlowConfigNodeEntity> nodes, List<FlowConfigHandlerEntity> handlers) {
+    public FlowConfigDPO(FlowConfigMainEntity config, List<FlowConfigNodeEntity> nodes, List<FlowConfigHandlerEntity> handlers) {
         this.config = config;
         this.nodes = nodes;
         this.handlers = handlers;
     }
 
     @Override
-    public FlowConfigAgg saveOrUpdate() {
+    public FlowConfigDPO saveOrUpdate() {
         if (this.config == null) {
             return null;
         }
         // 事务控制放在持久化层
-        FlowConfigAgg configAgg = flowConfigRepo.saveOrUpdate(this);
+        FlowConfigDPO configAgg = flowConfigRepo.saveOrUpdate(this);
         if (configAgg != null) {
             ModelUtils.convert(configAgg, this);
         }
         return this;
     }
 
-    public FlowConfigAgg2 transform2FlowConfigAgg2() {
-        return FlowConfigAgg2.valueOf(this);
+    public FlowConfigDPO2 transform2FlowConfigAgg2() {
+        return FlowConfigDPO2.valueOf(this);
     }
 
-    public static FlowConfigAgg valueOf(@NotNull FlowConfigAgg2 agg2) {
+    public static FlowConfigDPO valueOf(@NotNull FlowConfigDPO2 agg2) {
         if (agg2 == null) {
             return null;
         }
@@ -84,17 +83,17 @@ public class FlowConfigAgg implements IDomainSaveOrUpdate<FlowConfigAgg> {
             });
         }
 
-        return new FlowConfigAgg(configEntity, nodeEntities, handlerEntities);
+        return new FlowConfigDPO(configEntity, nodeEntities, handlerEntities);
     }
 
-    public static FlowConfigAgg getInstanceByFlowCode(String flowCode) {
+    public static FlowConfigDPO getInstanceByFlowCode(String flowCode) {
         if (Objects.isNull(flowCode)) {
             return null;
         }
         return flowConfigRepo.selectFlowConfigAggByFlowCode(flowCode);
     }
 
-    public static FlowConfigAgg getInstanceByFlowId(String flowId) {
+    public static FlowConfigDPO getInstanceByFlowId(String flowId) {
         if (Objects.isNull(flowId)) {
             return null;
         }

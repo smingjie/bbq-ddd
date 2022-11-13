@@ -1,6 +1,6 @@
 package com.microserv.bbq.domain.flow.repository;
 
-import com.microserv.bbq.domain.flow.model.FlowConfigAgg;
+import com.microserv.bbq.domain.flow.model.dpo.FlowConfigDPO;
 import com.microserv.bbq.domain.flow.model.FlowConfigHandlerEntity;
 import com.microserv.bbq.domain.flow.model.FlowConfigMainEntity;
 import com.microserv.bbq.domain.flow.model.FlowConfigNodeEntity;
@@ -19,8 +19,8 @@ public interface FlowConfigRepository {
 	String  selectFlowIdByFlowCode(String flowCode);
 	List<FlowConfigNodeEntity> selectFlowConfigNodesByFlowId(String flowId);
 	List<FlowConfigHandlerEntity> selectFlowConfigHandlersByFlowId(String flowId);
-	FlowConfigAgg selectFlowConfigAggByFlowId(String flowId);
-	FlowConfigAgg selectFlowConfigAggByFlowCode(String flowCode);
+	FlowConfigDPO selectFlowConfigAggByFlowId(String flowId);
+	FlowConfigDPO selectFlowConfigAggByFlowCode(String flowCode);
 
 	//--命令
 
@@ -41,7 +41,7 @@ public interface FlowConfigRepository {
 	boolean delete(FlowConfigHandlerEntity entity);
 	void deleteConfigHandlersByFlowId(String flowId);
 
-   FlowConfigAgg saveOrUpdate(FlowConfigAgg agg);
+   FlowConfigDPO saveOrUpdate(FlowConfigDPO agg);
 
 
 

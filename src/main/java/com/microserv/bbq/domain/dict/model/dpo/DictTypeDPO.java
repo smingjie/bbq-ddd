@@ -1,9 +1,11 @@
-package com.microserv.bbq.domain.dict.model;
+package com.microserv.bbq.domain.dict.model.dpo;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.dict.model.DictEntity;
+import com.microserv.bbq.domain.dict.model.DictItemEntity;
+import com.microserv.bbq.domain.dict.model.DictTypeEntity;
 import com.microserv.bbq.domain.dict.repository.DictRepository;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +16,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * 领域模型--聚合 ,聚合根取字典类型
+ * 领域负载对象-字典类型和其对应的字典值集合
  *
  * @author jockeys
  * @since 2020/4/6
@@ -22,17 +24,16 @@ import java.util.stream.Collectors;
 @Setter
 @Getter
 @Accessors(chain = true)
-@DomainAggregate
-public class DictTypeAgg extends DictTypeEntity {
+public class DictTypeDPO extends DictTypeEntity {
     private List<DictItemEntity> itemList;
 
-    public DictTypeAgg(String type) {
+    public DictTypeDPO(String type) {
         super(type);
     }
 
-    private DictTypeAgg fetch() {
+    private DictTypeDPO fetch() {
         if (Objects.nonNull(this.getType())) {
-            DictTypeAgg agg = getInstance(this.getType());
+            DictTypeDPO agg = getInstance(this.getType());
             ModelUtils.convert(agg, this);
         }
 
@@ -45,8 +46,8 @@ public class DictTypeAgg extends DictTypeEntity {
      * @param type 字典类型
      * @return 字典类型聚合结果
      */
-    public static DictTypeAgg getInstance(String type) {
-        DictTypeAgg agg = new DictTypeAgg(type);
+    public static DictTypeDPO getInstance(String type) {
+        DictTypeDPO agg = new DictTypeDPO(type);
         if (Objects.nonNull(type)) {
             List<DictEntity> dictEntities = RepositoryFactory.get(DictRepository.class).selectByType(type);
             if (!CollectionUtils.isEmpty(dictEntities)) {

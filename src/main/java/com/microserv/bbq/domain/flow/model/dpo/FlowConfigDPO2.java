@@ -1,10 +1,10 @@
-package com.microserv.bbq.domain.flow.model;
+package com.microserv.bbq.domain.flow.model.dpo;
 
 import cn.hutool.core.lang.Assert;
 import com.microserv.bbq.domain.common.interfaces.IDomainMetaData;
 import com.microserv.bbq.domain.common.interfaces.IDomainSaveOrUpdate;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregateRoot;
+import com.microserv.bbq.domain.flow.model.FlowConfigHandlerEntity;
+import com.microserv.bbq.domain.flow.model.FlowConfigNodeEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,9 +26,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-@DomainAggregate
-public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2>, IDomainMetaData {
-    @DomainAggregateRoot
+public class FlowConfigDPO2 implements IDomainSaveOrUpdate<FlowConfigDPO2>, IDomainMetaData {
     private String flowId;        //唯一id
     private String flowCode;      //编码
     private String flowName;      //名称
@@ -43,23 +41,23 @@ public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2>, IDom
     private LocalDateTime updateTime;
 
     @Override
-    public FlowConfigAgg2 saveOrUpdate() {
+    public FlowConfigDPO2 saveOrUpdate() {
         return this
                 .transform2FlowConfigAgg()
                 .saveOrUpdate()
                 .transform2FlowConfigAgg2();
     }
 
-    public FlowConfigAgg transform2FlowConfigAgg() {
+    public FlowConfigDPO transform2FlowConfigAgg() {
         Assert.notNull(this.flowId, "flowId不能为空");
-        return FlowConfigAgg.valueOf(this);
+        return FlowConfigDPO.valueOf(this);
     }
 
-    public static FlowConfigAgg2 valueOf(@NotNull FlowConfigAgg agg) {
+    public static FlowConfigDPO2 valueOf(@NotNull FlowConfigDPO agg) {
         if (agg == null) {
             return null;
         }
-        FlowConfigAgg2 agg2 = ModelUtils.convert(agg.getConfig(), FlowConfigAgg2.class);
+        FlowConfigDPO2 agg2 = ModelUtils.convert(agg.getConfig(), FlowConfigDPO2.class);
         if (!CollectionUtils.isEmpty(agg.getNodes())) {
             List<NodeEntity> nodes = agg.getNodes().stream()
                     .map(o -> NodeEntity.valueOf(o, agg.getHandlers()))
@@ -69,20 +67,20 @@ public class FlowConfigAgg2 implements IDomainSaveOrUpdate<FlowConfigAgg2>, IDom
         return agg2;
     }
 
-    public static FlowConfigAgg2 getInstanceByFlowCode(String flowCode) {
+    public static FlowConfigDPO2 getInstanceByFlowCode(String flowCode) {
         if (Objects.isNull(flowCode)) {
             return null;
         }
-        FlowConfigAgg configAgg = FlowConfigAgg.getInstanceByFlowCode(flowCode);
-        return FlowConfigAgg2.valueOf(configAgg);
+        FlowConfigDPO configAgg = FlowConfigDPO.getInstanceByFlowCode(flowCode);
+        return FlowConfigDPO2.valueOf(configAgg);
     }
 
-    public static FlowConfigAgg2 getInstanceByFlowId(String flowId) {
+    public static FlowConfigDPO2 getInstanceByFlowId(String flowId) {
         if (Objects.isNull(flowId)) {
             return null;
         }
-        FlowConfigAgg configAgg = FlowConfigAgg.getInstanceByFlowId(flowId);
-        return FlowConfigAgg2.valueOf(configAgg);
+        FlowConfigDPO configAgg = FlowConfigDPO.getInstanceByFlowId(flowId);
+        return FlowConfigDPO2.valueOf(configAgg);
 
     }
 

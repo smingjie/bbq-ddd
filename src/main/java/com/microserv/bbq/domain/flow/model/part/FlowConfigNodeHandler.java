@@ -1,4 +1,4 @@
-package com.microserv.bbq.domain.flow.model;
+package com.microserv.bbq.domain.flow.model.part;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author mingjie
  * @date 2022/3/23
  */
-public class FlowConfigNodeHandlerVObj implements Serializable {
+public class FlowConfigNodeHandler implements Serializable {
     private String userId;
     private String userName;
 }

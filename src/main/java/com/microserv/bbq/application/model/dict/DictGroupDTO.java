@@ -1,6 +1,6 @@
 package com.microserv.bbq.application.model.dict;
 
-import com.microserv.bbq.domain.dict.model.DictTypeAgg;
+import com.microserv.bbq.domain.dict.model.dpo.DictTypeDPO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class DictGroupDTO implements Serializable {
     @ApiModelProperty(value = "根据聚合根聚合的字典集合，记录包括id,key,value")
     private List<DictItemDTO> items;
 
-    public DictGroupDTO(DictTypeAgg agg) {
+    public DictGroupDTO(DictTypeDPO agg) {
         Objects.requireNonNull(agg);
         this.type = agg.getType();
         this.name = agg.getName();

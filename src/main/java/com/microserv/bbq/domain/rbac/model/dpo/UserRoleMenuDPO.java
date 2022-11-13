@@ -1,6 +1,8 @@
-package com.microserv.bbq.domain.rbac.model;
+package com.microserv.bbq.domain.rbac.model.dpo;
 
 import com.microserv.bbq.domain.common.factory.RepositoryFactory;
+import com.microserv.bbq.domain.rbac.model.MenuEntity;
+import com.microserv.bbq.domain.rbac.model.RoleEntity;
 import com.microserv.bbq.domain.rbac.repository.RbacRepository;
 import com.microserv.bbq.domain.user.model.UserEntity;
 import com.microserv.bbq.infrastructure.general.toolkit.ModelUtils;
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class UserRoleMenuAgg extends UserEntity {
+public class UserRoleMenuDPO extends UserEntity {
 	private static RbacRepository rbacRepository = RepositoryFactory.get(RbacRepository.class);
 	List<MenuTreeItemEntity> menuList;
 	List<RoleEntity> roleList;
@@ -43,14 +45,14 @@ public class UserRoleMenuAgg extends UserEntity {
 	}
 
 
-	public UserRoleMenuAgg getMenuTreeByUserId(String userId) {
+	public UserRoleMenuDPO getMenuTreeByUserId(String userId) {
 		List<MenuEntity> allMenus = rbacRepository.selectMenuListByUserId(userId);
 
 		this.menuList = createMenuTree(allMenus);
 		return this;
 	}
 
-	public UserRoleMenuAgg getRoleListByUserId(String userId) {
+	public UserRoleMenuDPO getRoleListByUserId(String userId) {
 		this.roleList = rbacRepository.selectRoleListByUserId(userId);
 		return this;
 	}

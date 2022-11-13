@@ -1,7 +1,7 @@
-package com.microserv.bbq.domain.rbac.model;
+package com.microserv.bbq.domain.rbac.model.dpo;
 
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregate;
-import com.microserv.bbq.infrastructure.general.extension.ddd.annotation.DomainAggregateRoot;
+import com.microserv.bbq.domain.rbac.model.MenuEntity;
+import com.microserv.bbq.domain.rbac.model.RoleTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,9 +16,7 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-@DomainAggregate
-public class RoleMenuAgg implements Serializable {
-    @DomainAggregateRoot
+public class RoleMenuDPO implements Serializable {
     private String roleId;
     private String roleName;
     private RoleTypeEnum roleType;

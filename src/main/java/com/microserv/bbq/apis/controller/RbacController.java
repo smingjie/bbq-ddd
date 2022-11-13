@@ -2,7 +2,7 @@ package com.microserv.bbq.apis.controller;
 
 
 import com.microserv.bbq.domain.rbac.model.RoleEntity;
-import com.microserv.bbq.domain.rbac.model.UserRoleMenuAgg;
+import com.microserv.bbq.domain.rbac.model.dpo.UserRoleMenuDPO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +20,14 @@ import java.util.List;
 public class RbacController {
     @ApiOperation(value = "获取用户的菜单集合")
     @GetMapping("/user/{userId}/menus")
-    public List<UserRoleMenuAgg.MenuTreeItemEntity> getMenuTreeByUserId(@PathVariable String userId) {
-        return new UserRoleMenuAgg().getMenuTreeByUserId(userId).getMenuList();
+    public List<UserRoleMenuDPO.MenuTreeItemEntity> getMenuTreeByUserId(@PathVariable String userId) {
+        return new UserRoleMenuDPO().getMenuTreeByUserId(userId).getMenuList();
     }
 
     @ApiOperation(value = "获取用户的角色集合")
     @GetMapping("/user/{userId}/roles")
     public List<RoleEntity> getDictByType(@PathVariable String userId) {
-        return new UserRoleMenuAgg().getRoleListByUserId(userId).getRoleList();
+        return new UserRoleMenuDPO().getRoleListByUserId(userId).getRoleList();
     }
 }
 

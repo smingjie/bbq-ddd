@@ -1,4 +1,4 @@
-package com.microserv.bbq.infrastructure.general.config.properties;
+package com.microserv.bbq.infrastructure.general.configproperties;
 
 /**
  * ~

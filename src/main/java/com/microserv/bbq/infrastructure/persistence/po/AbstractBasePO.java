@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Accessors(chain = true)
-public abstract class AbstractBasePO {
+public abstract class AbstractBasePO implements Serializable {
 
     @ApiModelProperty(value = "创建人")
     @TableField(fill = FieldFill.INSERT)

@@ -7,7 +7,7 @@ import com.microserv.bbq.application.model.dict.assembler.DictApiAssembler;
 import com.microserv.bbq.domain.dict.model.DictEntity;
 import com.microserv.bbq.domain.dict.model.DictTypeEntity;
 import com.microserv.bbq.domain.dict.action.DictDomainService;
-import com.microserv.bbq.domain.dict.model.DictTypeAgg;
+import com.microserv.bbq.domain.dict.model.dpo.DictTypeDPO;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class DictController {
     @ApiOperation(value = "获取一个指定类型的字典集合")
     @GetMapping("/dict/agg")
     public DictGroupDTO getDictByType(@RequestParam String type) {
-        DictTypeAgg agg = DictTypeAgg.getInstance(type);
+        DictTypeDPO agg = DictTypeDPO.getInstance(type);
         return new DictGroupDTO(agg);
     }
 

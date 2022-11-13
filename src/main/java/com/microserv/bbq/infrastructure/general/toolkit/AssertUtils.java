@@ -68,16 +68,4 @@ public final class AssertUtils {
         }
     }
 
-    /**
-     * 断言是否为假，如果为 {@code true} 抛出 {@code BusinessException} 异常<br>
-     *
-     * @param expression 布尔值
-     * @param errMsg     错误提示信息
-     * @throws BusinessException if expression is {@code false}
-     */
-    public static void isFalse(boolean expression, String errMsg) throws BusinessException {
-        if (expression) {
-            throw new BusinessException(errMsg);
-        }
-    }
 }

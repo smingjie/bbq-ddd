@@ -10,6 +10,8 @@ import org.springframework.util.CollectionUtils;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -100,5 +102,40 @@ public class PageResult<T> implements Serializable {
         return collection.stream().map(function).collect(Collectors.toList());
     }
 
+    public static <Q, T> PageResult<T> transformAsync(IPage<Q> page, Function<Q, T> function, Executor executor) {
+        return new PageResult<>(
+                page.getSize(),
+                page.getCurrent(),
+                page.getPages(),
+                page.getTotal(),
+                transformAsync(page.getRecords(), function, executor)
+        );
+    }
+
+    public static <Q, T> PageResult<T> transformAsync(IPage<Q> page, Function<Q, T> function) {
+        return transformAsync(page, function, null);
+
+    }
+
+    public static <Q, T> Collection<T> transformAsync(Collection<Q> collection, Function<Q, T> function, Executor executor) {
+        if (CollectionUtils.isEmpty(collection)) {
+            return Collections.emptyList();
+        }
+        return collection.stream()
+                .map(e -> {
+                            CompletableFuture<T> future = null;
+                            if (executor != null) {
+                                future = CompletableFuture.supplyAsync(() -> function.apply(e), executor);
+                            } else {
+                                future = CompletableFuture.supplyAsync(() -> function.apply(e));
+                            }
+                            return future;
+                        }
+                )
+                .collect(Collectors.toList())
+                .stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList());
+    }
 
 }

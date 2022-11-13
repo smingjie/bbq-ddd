@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @since 2020/2/2
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class OpenConstant {
+public class GlobalConstant {
     /**
      * 超级管理员
      */
